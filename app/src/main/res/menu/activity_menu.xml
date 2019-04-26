@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/music"
+        android:icon="@drawable/ic_music_note_red_24dp"
+        android:title=""
+        app:showAsAction="ifRoom">
+
+        <menu>
+            <item
+                android:id="@+id/mute"
+                android:icon="@drawable/ic_volume_off_lightblue_24dp"
+                android:title="Mute sound"></item>
+
+            <item
+                android:id="@+id/unMute"
+                android:icon="@drawable/ic_volume_up_lightblue_24dp"
+                android:title="Allow sound"></item>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/addMovie"
+        android:icon="@drawable/ic_add_red_24dp"
+        android:title=""
+        app:showAsAction="ifRoom">
+
+        <menu>
+            <item
+                android:id="@+id/addManually"
+                android:icon="@drawable/ic_create_lightblue_24dp"
+                android:title="Add manually"></item>
+
+            <item
+                android:id="@+id/addFromInternet"
+                android:icon="@drawable/ic_search_lightblue_24dp"
+                android:title="Add from Internet"></item>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/options"
+        android:icon="@drawable/ic_dehaze_red_24dp"
+        android:title=""
+        app:showAsAction="ifRoom">
+
+        <menu>
+
+            <item
+                android:id="@+id/credits"
+                android:icon="@drawable/ic_copyright_lightblue_24dp"
+                android:title="Credits"></item>
+
+            <item
+                android:id="@+id/accounts"
+                android:icon="@drawable/ic_supervisor_account_lightblue_24dp"
+                android:title="My accounts"></item>
+
+            <item
+                android:id="@+id/deleteAllData"
+                android:icon="@drawable/ic_delete_forever_lightblue_24dp"
+                android:title="Delete all data"></item>
+
+            <item
+                android:id="@+id/shareIntentApp"
+                android:icon="@drawable/ic_share_lightblue_24dp"
+                android:title="Share the app"></item>
+
+            <item
+                android:id="@+id/exit"
+                android:icon="@drawable/ic_exit_to_app_lightblue_24dp"
+                android:title="Exit"></item>
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/film"
+    android:orientation="vertical"
+    tools:context=".LoginPackage.FingerPrint">
+
+    <TextView
+        android:id="@+id/headingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="30dp"
+        android:text="@string/textView1_finger"
+        android:textColor="@color/colorLightBlue2"
+        android:textSize="34sp" />
+
+    <ImageView
+        android:id="@+id/fingerprintImage"
+        android:layout_width="82dp"
+        android:layout_height="82dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_fingerprint_lightblue_24dp" />
+
+    <TextView
+        android:id="@+id/paraLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="30dp"
+        android:text="@string/textView2_finger"
+        android:textAlignment="center"
+        android:textColor="@color/colorLightBlue2"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/button22"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/button1_finger"
+        android:textColor="@color/colorLightBlue" />
+</LinearLayout>
