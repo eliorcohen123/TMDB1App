@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="eliorcohen.com.tmdbapp"
-    android:versionCode="16"
+    android:versionCode="18"
     android:versionName="1.0.0">
 
     <uses-feature
@@ -14,11 +14,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-
 
     <permission
         android:name="eliorcohen.com.tmdbapp.READ_MOVIES"

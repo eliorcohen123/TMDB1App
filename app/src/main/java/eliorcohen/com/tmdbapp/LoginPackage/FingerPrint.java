@@ -37,7 +37,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.MainActivity;
+import eliorcohen.com.tmdbapp.MainAndOtherPackage.SplashActivity;
 import eliorcohen.com.tmdbapp.R;
 
 public class FingerPrint extends AppCompatActivity {
@@ -170,7 +170,7 @@ public class FingerPrint extends AppCompatActivity {
             this.update("Error: " + helpString, false);
         }
 
-        // After the access of the FingerPrint this activity pass to MainActivity
+        // After the access of the FingerPrint this activity pass to SplashActivity
         @Override
         public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
             this.update("You can now access the app.", true);
@@ -178,7 +178,7 @@ public class FingerPrint extends AppCompatActivity {
             MediaPlayer sFinger = MediaPlayer.create(FingerPrint.this, R.raw.good_access_sound);
             sFinger.start();  // Play sound
 
-            Intent intentFinger = new Intent(FingerPrint.this, MainActivity.class);
+            Intent intentFinger = new Intent(FingerPrint.this, SplashActivity.class);
             startActivity(intentFinger);
         }
 
