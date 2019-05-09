@@ -126,7 +126,7 @@
     <string name="button1_Register">Already a member? Login</string>
     <string name="textView1_Register2">Register</string>
     <string name="button1_Register2">Already a member? Login</string>
-    <string name="button1_users">CANCEL</string>
-    <string name="button1_users2">CANCEL</string>
+    <string name="button1_users">Cancel</string>
+    <string name="button1_users2">Cancel</string>
     <string name="default_notification_channel_id">1</string>
 </resources>
