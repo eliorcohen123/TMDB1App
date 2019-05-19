@@ -40,7 +40,7 @@
     <string name="button1_editMovie">Confirm Edit</string>
     <string name="textView4_editMovie">Edit Movie</string>
     <string name="button3_editMovie">Show</string>
-    <string name="textView5_editMovie">Watched movie?(Saved separately)</string>
+    <string name="textView5_editMovie">Watched movie?</string>
     <string name="radioButton1_editMovie">Yes</string>
     <string name="radioButton2_editMovie">No</string>
     <string name="textView1_editMovie2">Title:(*)</string>
@@ -49,7 +49,7 @@
     <string name="button1_editMovie2">Confirm Edit</string>
     <string name="textView4_editMovie2">Edit Movie</string>
     <string name="button3_editMovie2">Show</string>
-    <string name="textView5_editMovie2">Watched movie?(Saved separately)</string>
+    <string name="textView5_editMovie2">Watched movie?</string>
     <string name="radioButton1_editMovie2">Yes</string>
     <string name="radioButton2_editMovie2">No</string>
     <string name="textView1_itemRow">Overview:</string>
@@ -61,13 +61,13 @@
     <string name="textView3_dataMovie">URL:</string>
     <string name="textView4_dataMovie">Info Movie</string>
     <string name="button2_dataMovie">OK</string>
-    <string name="textView5_dataMovie">Watched movie?(Saved separately)</string>
+    <string name="textView5_dataMovie">Watched movie?</string>
     <string name="textView1_dataMovie2">Title:(*)</string>
     <string name="textView2_dataMovie2">Overview:</string>
     <string name="textView3_dataMovie2">URL:</string>
     <string name="button1_dataMovie2">OK</string>
     <string name="textView4_dataMovie2">Info Movie</string>
-    <string name="textView5_dataMovie2">Watched movie?(Saved separately)</string>
+    <string name="textView5_dataMovie2">Watched movie?</string>
     <string name="button3_fromInternet">Show</string>
     <string name="button3_fromInternet2">Show</string>
     <string name="textView1_credits">All rights reserved to the creator of the application \n - \n Elior Cohen \n\n Email: \n eliorjobcohen@gmail.com</string>
