@@ -7,11 +7,13 @@
 
     <TextView
         android:id="@+id/textViewSubject"
-        android:layout_width="650dp"
-        android:layout_height="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="30dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_edittext"
         android:ems="10"
@@ -27,11 +29,13 @@
 
     <TextView
         android:id="@+id/textViewBody"
-        android:layout_width="650dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="30dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_edittext"
         android:ems="10"
@@ -47,11 +51,13 @@
 
     <TextView
         android:id="@+id/textViewURL"
-        android:layout_width="650dp"
-        android:layout_height="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="30dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_edittext"
         android:ems="10"

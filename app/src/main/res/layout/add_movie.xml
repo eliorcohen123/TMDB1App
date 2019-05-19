@@ -26,11 +26,13 @@
 
     <EditText
         android:id="@+id/editTextSubject"
-        android:layout_width="380dp"
-        android:layout_height="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_edittext"
         android:ems="10"
@@ -46,11 +48,13 @@
 
     <EditText
         android:id="@+id/editTextBody"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_edittext"
         android:ems="10"
@@ -66,11 +70,13 @@
 
     <EditText
         android:id="@+id/editTextURL"
-        android:layout_width="380dp"
-        android:layout_height="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_edittext"
         android:ems="10"
