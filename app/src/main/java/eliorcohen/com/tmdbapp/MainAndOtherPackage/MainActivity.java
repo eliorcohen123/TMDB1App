@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!isConnected(MainActivity.this)) buildDialog(MainActivity.this).show();
 
-        mListView = findViewById(R.id.list);  // ID of the ListView of MainActivity
+        mListView = findViewById(R.id.listViewMain);  // ID of the ListView of MainActivity
         swipeRefreshLayout = findViewById(R.id.swipe_container);  // ID of the SwipeRefreshLayout of MainActivity
 
         mMovieDBHelper = new MovieDBHelper(this);  // Put the SQLiteHelper in MainActivity

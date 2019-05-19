@@ -4,11 +4,7 @@
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/film"
-    android:paddingLeft="20dp"
-    android:paddingTop="20dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="20dp"
+    android:background="@drawable/background"
     tools:context=".LoginPackage.LoginActivity"
     tools:ignore="MissingDefaultResource">
 
@@ -21,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:text="@string/textView1_Register2"
             android:textColor="@color/colorLightBlue2"
             android:textSize="50sp" />
@@ -40,7 +37,7 @@
                 android:id="@+id/textInputEditTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_myedittext"
+                android:background="@drawable/custom_edittext"
                 android:hint="@string/hint_name"
                 android:inputType="text"
                 android:maxLines="1"
@@ -57,7 +54,7 @@
                 android:id="@+id/textInputEditTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_myedittext"
+                android:background="@drawable/custom_edittext"
                 android:hint="@string/hint_email"
                 android:inputType="text"
                 android:maxLines="1"
@@ -74,7 +71,7 @@
                 android:id="@+id/textInputEditTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_myedittext"
+                android:background="@drawable/custom_edittext"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
@@ -91,7 +88,7 @@
                 android:id="@+id/textInputEditTextConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_myedittext"
+                android:background="@drawable/custom_edittext"
                 android:hint="@string/hint_confirm_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
@@ -100,11 +97,13 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/appCompatButtonRegister"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:background="@drawable/custom_button"
-            android:text="@string/text_register" />
+            android:text="@string/text_register"
+            android:textColor="@color/colorWhite" />
 
         <LinearLayout
             android:id="@+id/container"

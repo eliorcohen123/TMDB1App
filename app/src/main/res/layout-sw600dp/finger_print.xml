@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/film"
+    android:background="@drawable/background"
     android:orientation="vertical"
     tools:context=".LoginPackage.FingerPrint">
 
@@ -44,5 +44,5 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/custom_button"
         android:text="@string/button1_finger"
-        android:textColor="@color/colorLightBlue" />
+        android:textColor="@color/colorWhite" />
 </LinearLayout>

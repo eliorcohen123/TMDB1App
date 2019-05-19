@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/film"
+    android:background="@drawable/background"
     android:orientation="vertical">
 
     <LinearLayout
@@ -29,7 +29,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button21"
+            android:id="@+id/textViewOK"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -37,6 +37,6 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/custom_button"
             android:text="@string/button1_credits"
-            android:textColor="@color/colorLightBlue" />
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
 </ScrollView>

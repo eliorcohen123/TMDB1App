@@ -41,7 +41,7 @@ public class SearchMovieFromInternet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_movie_internet);
 
-        mListViewInternet = findViewById(R.id.list2);  // ID of the ListView of MainActivity
+        mListViewInternet = findViewById(R.id.listViewInt);  // ID of the ListView of MainActivity
 
         mSearchMovieFromInternet = this;  // Put SearchMovieFromInternet in SearchMovieFromInternet
 

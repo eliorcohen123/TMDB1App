@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/film">
+    android:background="@drawable/background">
 
-    <Button
-        android:id="@+id/button18"
-        android:layout_width="75dp"
+    <TextView
+        android:id="@+id/textViewOK"
+        android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
@@ -16,76 +16,77 @@
         android:background="@drawable/custom_button"
         android:gravity="center"
         android:text="@string/button1_fromInternet2"
-        android:textColor="@color/colorLightBlue"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.978" />
 
     <EditText
-        android:id="@+id/editText8"
-        android:layout_width="500dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/editTextSubject"
+        android:layout_width="650dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/custom_myedittext"
+        android:background="@drawable/custom_edittext"
         android:ems="10"
         android:gravity="top"
         android:inputType="text"
         android:textColor="@color/colorLightBlue2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.233" />
+        app:layout_constraintVertical_bias="0.237" />
 
     <EditText
-        android:id="@+id/editText9"
-        android:layout_width="500dp"
+        android:id="@+id/editTextBody"
+        android:layout_width="650dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/custom_myedittext"
+        android:background="@drawable/custom_edittext"
         android:ems="10"
         android:gravity="top"
         android:inputType="textMultiLine"
         android:textColor="@color/colorLightBlue2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintVertical_bias="0.498" />
 
     <EditText
-        android:id="@+id/editText10"
-        android:layout_width="500dp"
-        android:layout_height="50dp"
+        android:id="@+id/editTextURL"
+        android:layout_width="650dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/custom_myedittext"
+        android:background="@drawable/custom_edittext"
         android:ems="10"
         android:gravity="top"
-        android:inputType="textMultiLine"
+        android:inputType="text"
         android:textColor="@color/colorLightBlue2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.849" />
+        app:layout_constraintVertical_bias="0.823" />
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="84dp"
+        android:layout_width="84sp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -93,52 +94,52 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="@string/textView1_fromInternet2"
-        android:textColor="@color/colorOrange"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231" />
+        app:layout_constraintVertical_bias="0.159" />
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="84dp"
+        android:layout_width="84sp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/textView2_fromInternet2"
-        android:textColor="@color/colorOrange"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintVertical_bias="0.338" />
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="84dp"
+        android:layout_width="84sp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/textView3_fromInternet2"
-        android:textColor="@color/colorOrange"
+        android:text="@string/textView3_addMovie2"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.772" />
+        app:layout_constraintVertical_bias="0.77" />
 
-    <Button
-        android:id="@+id/button17"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/textViewShow"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -148,13 +149,13 @@
         android:background="@drawable/custom_button"
         android:gravity="center"
         android:text="@string/button3_fromInternet2"
-        android:textColor="@color/colorLightBlue"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.885" />
+        app:layout_constraintVertical_bias="0.95" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -174,23 +175,23 @@
         app:layout_constraintVertical_bias="0.863" />
 
     <Button
-        android:id="@+id/button19"
-        android:layout_width="75dp"
-        android:layout_height="30dp"
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/ic_arrow_back_white_24dp"
         android:gravity="center"
-        android:text="@string/button2_fromInternet2"
         android:textColor="@color/colorLightBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView11"
@@ -203,11 +204,12 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="@string/textView4_fromInternet2"
-        android:textColor="@color/colorBrown"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.044" />
 </android.support.constraint.ConstraintLayout>

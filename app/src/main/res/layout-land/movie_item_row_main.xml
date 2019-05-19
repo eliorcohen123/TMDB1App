@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relative1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/black"
+    android:layout_height="140dp"
+    android:background="@drawable/timg"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
@@ -45,15 +45,15 @@
                 android:id="@+id/title1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBrown"
+                android:textColor="@color/colorLightBlue2"
                 android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/overview2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/textView1_itemRow"
-                android:textColor="@color/design_default_color_primary" />
+                android:text="@string/textView1_itemRowInternet2"
+                android:textColor="@color/colorBrown" />
 
             <TextView
                 android:id="@+id/overview1"

@@ -17,6 +17,7 @@ import eliorcohen.com.tmdbapp.R;
 public class DeleteAllData extends AppCompatActivity {
 
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private Button buttonDeleteAll, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,8 @@ public class DeleteAllData extends AppCompatActivity {
         mMovieDBHelper = new MovieDBHelper(this);  // Put the SQLiteHelper in DeleteAllData
 
         // Button are delete all the data of the app
-        Button button1 = findViewById(R.id.button3);
-        button1.setOnClickListener(new View.OnClickListener() {
+        buttonDeleteAll = findViewById(R.id.buttonDeleteAll);
+        buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MediaPlayer sDeleteAll = MediaPlayer.create(DeleteAllData.this, R.raw.delete_all_sound);
@@ -48,8 +49,8 @@ public class DeleteAllData extends AppCompatActivity {
         });
 
         // Button are back to the previous activity
-        Button button2 = findViewById(R.id.button4);
-        button2.setOnClickListener(new View.OnClickListener() {
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MediaPlayer sCancel = MediaPlayer.create(DeleteAllData.this, R.raw.cancel_and_move_sound);

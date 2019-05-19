@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -22,18 +23,25 @@ import eliorcohen.com.tmdbapp.R;
 public class EditMovie extends AppCompatActivity {
 
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private int id;
+    private MovieModel item;
+    private RadioGroup rg1;
+    private RadioButton rb1, rb2;
+    private EditText subject, body, URL;
+    private Button btnBack;
+    private TextView TextViewShow, TextViewOK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_movie);
 
-        final int id = getIntent().getExtras().getInt(getString(R.string.movie_id)); // GetSerializable for the ID
-        final MovieModel item = (MovieModel) getIntent().getExtras().getSerializable(getString(R.string.movie_edit)); // GetSerializable for the texts
+        id = getIntent().getExtras().getInt(getString(R.string.movie_id)); // GetSerializable for the ID
+        item = (MovieModel) getIntent().getExtras().getSerializable(getString(R.string.movie_edit)); // GetSerializable for the texts
 
-        final RadioGroup rg1 = findViewById(R.id.radioGroup1);  // ID of the RadioGroup1 of EditMovie
-        final RadioButton rb1 = findViewById(R.id.radioButton1);  // ID of the RadioButton1 of EditMovie
-        final RadioButton rb2 = findViewById(R.id.radioButton2);  // ID of the RadioButton2 of EditMovie
+        rg1 = findViewById(R.id.radioGroup);  // ID of the RadioGroup of EditMovie
+        rb1 = findViewById(R.id.radioButton1);  // ID of the RadioButton1 of EditMovie
+        rb2 = findViewById(R.id.radioButton2);  // ID of the RadioButton2 of EditMovie
 
         // Checked if the RadioButton equal to 1 or 2
         assert item != null;
@@ -67,17 +75,17 @@ public class EditMovie extends AppCompatActivity {
             }
         });
 
-        final EditText subject = findViewById(R.id.editText5);  // ID of the subject
-        final EditText body = findViewById(R.id.editText6);  // ID of the body
-        final EditText URL = findViewById(R.id.editText7);  // ID of the URL
+        subject = findViewById(R.id.editTextSubject);  // ID of the subject
+        body = findViewById(R.id.editTextBody);  // ID of the body
+        URL = findViewById(R.id.editTextURL);  // ID of the URL
 
         subject.setText(item.getTitle());  // GetSerializable of subject
         body.setText(item.getOverview());  // GetSerializable of body
         URL.setText(item.getPoster_path());  // GetSerializable of URL
 
         // Button that does the following:
-        Button button1 = findViewById(R.id.button8);
-        button1.setOnClickListener(new View.OnClickListener() {
+        TextViewOK = findViewById(R.id.textViewOK);
+        TextViewOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = subject.getText().toString();  // GetText of the subject
@@ -111,20 +119,21 @@ public class EditMovie extends AppCompatActivity {
         imageView.setVisibility(View.INVISIBLE); //Set the ImageView Invisible
 
         // Button to show the ImageView
-        Button button2 = findViewById(R.id.button11);
-        button2.setOnClickListener(new View.OnClickListener() {
+        TextViewShow = findViewById(R.id.textViewShow);
+        TextViewShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MediaPlayer sShowImage = MediaPlayer.create(EditMovie.this, R.raw.show_image_sound);
                 sShowImage.start();  // Play sound
 
+                URL.setVisibility(View.INVISIBLE);
                 imageView.setVisibility(View.VISIBLE);
             }
         });
 
         // Button are back to the previous activity
-        Button button4 = findViewById(R.id.button9);
-        button4.setOnClickListener(new View.OnClickListener() {
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MediaPlayer sCancel = MediaPlayer.create(EditMovie.this, R.raw.cancel_and_move_sound);

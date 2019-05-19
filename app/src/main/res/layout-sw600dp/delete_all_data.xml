@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/film">
+    android:background="@drawable/background">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonDeleteAll"
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -17,7 +17,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_button"
         android:text="@string/button1_deleteData"
-        android:textColor="@color/colorLightBlue"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.771"
@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.364" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnBack"
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -37,7 +37,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_button"
         android:text="@string/button2_deleteData"
-        android:textColor="@color/colorLightBlue"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.214"
@@ -57,7 +57,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="@string/textView1_deleteData"
-        android:textColor="@color/colorBrown"
+        android:textColor="@color/colorWhite"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -3,13 +3,13 @@
 
     <item
         android:id="@+id/edit"
-        android:title="Edit"></item>
+        android:title="Edit" />
 
     <item
         android:id="@+id/shareIntent"
-        android:title="Share"></item>
+        android:title="Share" />
 
     <item
         android:id="@+id/delete"
-        android:title="delete"></item>
+        android:title="delete" />
 </menu>

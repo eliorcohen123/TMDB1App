@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/film"
+    android:background="@drawable/background"
     tools:context=".MainAndOtherPackage.MainActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -12,8 +12,8 @@
         android:layout_height="wrap_content">
 
         <ListView
-            android:id="@+id/list"
-            style="@style/AppTheme2"
+            android:id="@+id/listViewMain"
+            style="@style/MyAppTheme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp"

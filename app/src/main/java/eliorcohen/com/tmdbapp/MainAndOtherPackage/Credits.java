@@ -10,14 +10,16 @@ import eliorcohen.com.tmdbapp.R;
 
 public class Credits extends AppCompatActivity {
 
+    private Button buttonOK;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credits);
 
         // Button are back to the previous activity
-        Button button1 = findViewById(R.id.button21);
-        button1.setOnClickListener(new View.OnClickListener() {
+        buttonOK = findViewById(R.id.textViewOK);
+        buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MediaPlayer sCancel = MediaPlayer.create(Credits.this, R.raw.cancel_and_move_sound);

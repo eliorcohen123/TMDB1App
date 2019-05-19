@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/film">
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/textView16"
@@ -17,7 +17,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="@string/textView1_deleteMovie2"
-        android:textColor="@color/colorBrown"
+        android:textColor="@color/colorWhite"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.039" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/btnBack"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -36,7 +36,7 @@
         android:background="@drawable/custom_button"
         android:gravity="center"
         android:text="@string/button1_deleteMovie2"
-        android:textColor="@color/colorLightBlue"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

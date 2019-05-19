@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="eliorcohen.com.tmdbapp"
-    android:versionCode="18"
+    android:versionCode="19"
     android:versionName="1.0.0">
 
     <uses-feature
@@ -28,7 +28,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/movie_icon"
         android:supportsRtl="false"
-        android:theme="@style/AppTheme2">
+        android:theme="@style/MyAppTheme">
         <activity android:name=".LoginPackage.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

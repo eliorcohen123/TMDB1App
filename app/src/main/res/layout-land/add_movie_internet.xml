@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/film"
+    android:background="@drawable/background"
     android:orientation="vertical"
     tools:context=".MoviesDataPackage.SearchMovieFromInternet">
 
     <ListView
-        android:id="@+id/list2"
-        style="@style/AppTheme2"
+        android:id="@+id/listViewInt"
+        style="@style/MyAppTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
