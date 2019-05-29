@@ -34,7 +34,7 @@ public class SearchMovieFromInternet extends AppCompatActivity {
     private GetMoviesAsyncTaskInternet mGetMoviesAsyncTaskInternet;  // AsyncTask to search and add movies from SearchMovieFromInternet to MainActivity
     private MovieDBHelper mMovieDBHelperInternet;  // The SQLiteHelper of the app
     private static ProgressDialog mProgressDialogInternet;  // ProgressDialog
-    private static SearchMovieFromInternet mSearchMovieFromInternet;  // Initialize SearchMovieFromInternet
+    private static SearchMovieFromInternet mSearchMovieFromInternet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

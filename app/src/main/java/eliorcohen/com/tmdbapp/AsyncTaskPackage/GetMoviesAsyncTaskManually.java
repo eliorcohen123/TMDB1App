@@ -11,9 +11,9 @@ import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
 
 public class GetMoviesAsyncTaskManually extends AsyncTask<MovieDBHelper, Integer, ArrayList<MovieModel>> {
 
-    private ListView mListView;  // Initialize of ListView
-    private MovieCustomAdapterMain mMovieCustomAdapterMain;  // Initialize of MovieCustomAdapterMain
-    private ArrayList<MovieModel> mMoviesList;  // Initialize of ArrayList of MovieModel
+    private ListView mListView;
+    private MovieCustomAdapterMain mMovieCustomAdapterMain;  // Adapter
+    private ArrayList<MovieModel> mMoviesList;  // ArrayList of MovieModel
 
     // AsyncTask to the ListView
     public GetMoviesAsyncTaskManually(ListView list) {
