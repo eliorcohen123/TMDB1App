@@ -43,7 +43,7 @@ public class SearchMovieFromInternet extends AppCompatActivity {
 
         initUI();
         getData();
-        listLongClick();
+        listViewAction();
     }
 
     private void initUI() {
@@ -60,7 +60,7 @@ public class SearchMovieFromInternet extends AppCompatActivity {
         mAdapterInternet = new MovieCustomAdapterInternet(this, mMovieListInternet);  // Comparing the ArrayList of SearchMovieFromInternet to the CustomAdapter
     }
 
-    private void listLongClick() {
+    private void listViewAction() {
         // Put extra from SearchMovieFromInternet to EditMovie and pass from SearchMovieFromInternet to EditMovie with the put extra when you click on item in ListView
         mListViewInternet.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

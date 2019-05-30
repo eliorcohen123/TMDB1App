@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         initUI();
         getData();
-        listLongClick();
+        listViewAction();
     }
 
     private void initUI() {
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void listLongClick() {
+    private void listViewAction() {
         // Put extra from MainActivity to EditMovie and pass from MainActivity to EditMovie with the put extra when you click on item in ListView
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
