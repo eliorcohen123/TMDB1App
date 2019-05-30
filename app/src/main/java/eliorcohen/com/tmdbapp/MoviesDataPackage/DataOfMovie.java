@@ -33,12 +33,29 @@ public class DataOfMovie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.data_of_movie);
 
+        initUI();
+        radioGroup();
+        getData();
+        btnYouTube();
+        btnBack();
+    }
+
+    private void initUI() {
         item = (MovieModel) getIntent().getExtras().getSerializable(getString(R.string.movie_edit)); // GetSerializable for the texts
 
         rg1 = findViewById(R.id.radioGroup);  // ID of the RadioGroup of DataOfMovie
         rb1 = findViewById(R.id.radioButton1);  // ID of the RadioButton1 of DataOfMovie
         rb2 = findViewById(R.id.radioButton2);  // ID of the RadioButton2 of DataOfMovie
 
+        buttonYouTube = findViewById(R.id.imageViewYouTube);
+        btnBack = findViewById(R.id.btnBack);
+
+        subject = findViewById(R.id.textViewSubject);  // ID of the subject
+        body = findViewById(R.id.textViewBody);  // ID of the body
+        URL = findViewById(R.id.textViewURL);  // ID of the URL
+    }
+
+    private void radioGroup() {
         // Checked if the RadioButton equal to 1 or 2
         if (item.getIs_watch() == 1) {
             rb1.setChecked(true);
@@ -69,16 +86,15 @@ public class DataOfMovie extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        subject = findViewById(R.id.textViewSubject);  // ID of the subject
-        body = findViewById(R.id.textViewBody);  // ID of the body
-        URL = findViewById(R.id.textViewURL);  // ID of the URL
-
+    private void getData() {
         subject.setText(item.getTitle());  // GetSerializable of subject
         body.setText(item.getOverview());  // GetSerializable of body
         URL.setText(item.getPoster_path());  // GetSerializable of URL
+    }
 
-        buttonYouTube = findViewById(R.id.imageViewYouTube);
+    private void btnYouTube() {
         buttonYouTube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,9 +108,18 @@ public class DataOfMovie extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    private void watchYoutubeVideo(String nameQuery) {
+        Intent intent = new Intent(Intent.ACTION_SEARCH);
+        intent.setPackage("com.google.android.youtube");
+        intent.putExtra("query", nameQuery);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void btnBack() {
         // Button are back to the previous activity
-        btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,14 +129,6 @@ public class DataOfMovie extends AppCompatActivity {
                 onBackPressed();
             }
         });
-    }
-
-    private void watchYoutubeVideo(String nameQuery) {
-        Intent intent = new Intent(Intent.ACTION_SEARCH);
-        intent.setPackage("com.google.android.youtube");
-        intent.putExtra("query", nameQuery);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 
 }

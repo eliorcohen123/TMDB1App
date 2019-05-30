@@ -45,7 +45,7 @@ import eliorcohen.com.tmdbapp.R;
  **
  ***
  ****
- ***** Created by Elior Cohen on 5/11/2018.
+ ***** Created by Elior Cohen on 30/05/2019.
  ****
  ***
  **
@@ -65,33 +65,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (!isConnected(MainActivity.this)) buildDialog(MainActivity.this).show();
+        initUI();
+        getData();
+        listLongClick();
 
+        AppRater.app_launched(this);
+    }
+
+    private void initUI() {
         mListView = findViewById(R.id.listViewMain);  // ID of the ListView of MainActivity
         swipeRefreshLayout = findViewById(R.id.swipe_container);  // ID of the SwipeRefreshLayout of MainActivity
+
+        registerForContextMenu(mListView);  // Sets off the menu in MainActivity
+    }
+
+    private void getData() {
+        if (!isConnected(MainActivity.this)) buildDialog(MainActivity.this).show();
 
         mMovieDBHelper = new MovieDBHelper(this);  // Put the SQLiteHelper in MainActivity
         mMovieList = mMovieDBHelper.getAllMovies();  // Put the getAllMovies of SQLiteHelper in the ArrayList of MainActivity
         mAdapter = new MovieCustomAdapterMain(this, mMovieList);  // Comparing the ArrayList of MainActivity to the CustomAdapter
-        registerForContextMenu(mListView);  // Sets off the menu in MainActivity
 
         // Put AsyncTask in the ListView of MainActivity to execute the SQLiteHelper
         mGetMoviesAsyncTaskManually = new GetMoviesAsyncTaskManually(mListView);
         mGetMoviesAsyncTaskManually.execute(mMovieDBHelper);
-
-        // Put extra from MainActivity to EditMovie and pass from MainActivity to EditMovie with the put extra when you click on item in ListView
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MediaPlayer sMove = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sMove.start();  // Play sound
-
-                Intent intent = new Intent(MainActivity.this, DataOfMovie.class);
-                intent.putExtra(getString(R.string.movie_id), mMovieList.get(position).getId());
-                intent.putExtra(getString(R.string.movie_edit), mMovieList.get(position));
-                startActivity(intent);
-            }
-        });
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorOrange));  // Colors of the SwipeRefreshLayout of MainActivity
         // Refresh the MovieDBHelper of app in ListView of MainActivity
@@ -125,10 +122,23 @@ public class MainActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
-        AppRater.app_launched(this);
     }
 
+    private void listLongClick() {
+        // Put extra from MainActivity to EditMovie and pass from MainActivity to EditMovie with the put extra when you click on item in ListView
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MediaPlayer sMove = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
+                sMove.start();  // Play sound
+
+                Intent intent = new Intent(MainActivity.this, DataOfMovie.class);
+                intent.putExtra(getString(R.string.movie_id), mMovieList.get(position).getId());
+                intent.putExtra(getString(R.string.movie_edit), mMovieList.get(position));
+                startActivity(intent);
+            }
+        });
+    }
 
     // Sets off the menu of activity_menu
     @Override

@@ -24,10 +24,20 @@ public class DeleteAllData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.delete_all_data);
 
+        initUI();
+        delData();
+        btnBack();
+    }
+
+    private void initUI() {
+        buttonDeleteAll = findViewById(R.id.buttonDeleteAll);
+        btnBack = findViewById(R.id.btnBack);
+    }
+
+    private void delData() {
         mMovieDBHelper = new MovieDBHelper(this);  // Put the SQLiteHelper in DeleteAllData
 
         // Button are delete all the data of the app
-        buttonDeleteAll = findViewById(R.id.buttonDeleteAll);
         buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,9 +57,10 @@ public class DeleteAllData extends AppCompatActivity {
                 startActivity(intentDeleteAllDataToMain);
             }
         });
+    }
 
+    private void btnBack() {
         // Button are back to the previous activity
-        btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

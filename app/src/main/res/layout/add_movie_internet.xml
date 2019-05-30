@@ -9,7 +9,7 @@
     tools:context=".MoviesDataPackage.SearchMovieFromInternet">
 
     <ListView
-        android:id="@+id/listViewInt"
+        android:id="@+id/listViewInternet"
         style="@style/MyAppTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -17,8 +17,16 @@ public class Credits extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credits);
 
-        // Button are back to the previous activity
+        initUI();
+        btnBack();
+    }
+
+    private void initUI() {
         buttonOK = findViewById(R.id.textViewOK);
+    }
+
+    private void btnBack() {
+        // Button are back to the previous activity
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

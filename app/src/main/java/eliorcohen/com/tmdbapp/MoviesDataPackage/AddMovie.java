@@ -26,12 +26,23 @@ public class AddMovie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_movie);
 
+        initUI();
+        putData();
+        btnBack();
+    }
+
+    private void initUI() {
         subject = findViewById(R.id.editTextSubject);  // ID of the subject
         body = findViewById(R.id.editTextBody);  // ID of the body
         URL = findViewById(R.id.editTextURL);  // ID of the URL
 
         // Button that does the following:
         textViewOK = findViewById(R.id.textViewOK);
+
+        btnBack = findViewById(R.id.btnBack);
+    }
+
+    private void putData() {
         textViewOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,9 +69,10 @@ public class AddMovie extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    private void btnBack() {
         // Button are back to the previous activity
-        btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -42,14 +42,15 @@ import eliorcohen.com.tmdbapp.R;
 
 public class FingerPrint extends AppCompatActivity {
 
-    private TextView mHeadingLabel;
-    private ImageView mFingerprintImage;
+    private TextView mHeadingLabel, paraLabel;
+    private ImageView mFingerprintImage, imageView;
     private TextView mParaLabel;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
     private KeyStore keyStore;
     private Cipher cipher;
     private String KEY_NAME = "AndroidKey";
+    private Button button1;
 
     // All the codes add up to confirmation by fingerprinting
     @Override
@@ -57,10 +58,33 @@ public class FingerPrint extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.finger_print);
 
+        initUI();
+        fingerAuth();
+        btnBack();
+    }
+
+    private void initUI() {
         mHeadingLabel = findViewById(R.id.headingLabel);
         mFingerprintImage = findViewById(R.id.fingerprintImage);
         mParaLabel = findViewById(R.id.paraLabel);
 
+        button1 = findViewById(R.id.button22);
+    }
+
+    private void btnBack() {
+        // Button are back to the previous activity
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaPlayer sCancel = MediaPlayer.create(FingerPrint.this, R.raw.cancel_and_move_sound);
+                sCancel.start();  // Play sound
+
+                onBackPressed();
+            }
+        });
+    }
+
+    private void fingerAuth() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
             keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
@@ -82,18 +106,6 @@ public class FingerPrint extends AppCompatActivity {
                 }
             }
         }
-
-        // Button are back to the previous activity
-        Button button1 = findViewById(R.id.button22);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer sCancel = MediaPlayer.create(FingerPrint.this, R.raw.cancel_and_move_sound);
-                sCancel.start();  // Play sound
-
-                onBackPressed();
-            }
-        });
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -183,8 +195,8 @@ public class FingerPrint extends AppCompatActivity {
         }
 
         private void update(String s, boolean b) {
-            TextView paraLabel = ((Activity) context).findViewById(R.id.paraLabel);
-            ImageView imageView = ((Activity) context).findViewById(R.id.fingerprintImage);
+            paraLabel = ((Activity) context).findViewById(R.id.paraLabel);
+            imageView = ((Activity) context).findViewById(R.id.fingerprintImage);
             paraLabel.setText(s);
             if (!b) {
                 paraLabel.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
@@ -193,7 +205,6 @@ public class FingerPrint extends AppCompatActivity {
                 imageView.setImageResource(R.mipmap.action_done);
             }
         }
-
     }
 
 }

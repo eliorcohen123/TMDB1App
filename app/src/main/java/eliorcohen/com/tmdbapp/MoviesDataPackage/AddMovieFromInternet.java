@@ -25,12 +25,19 @@ public class AddMovieFromInternet extends AppCompatActivity {
     private TextView TextViewOK, TextViewShow;
     private EditText subject, body, URL;
     private Button btnBack;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_movie_from_internet);
 
+        initUI();
+        getData();
+        btnBack();
+    }
+
+    private void initUI() {
         // GetSerializable for the texts
         item = (MovieModel) getIntent().getExtras().getSerializable(getString(R.string.movie_add_from_internet));
 
@@ -38,13 +45,21 @@ public class AddMovieFromInternet extends AppCompatActivity {
         body = findViewById(R.id.editTextBody);  // ID of the body
         URL = findViewById(R.id.editTextURL);  // ID of the URL
 
+        TextViewOK = findViewById(R.id.textViewOK);
+        TextViewShow = findViewById(R.id.textViewShow);
+
+        imageView = findViewById(R.id.imageView3);
+
+        btnBack = findViewById(R.id.btnBack);
+    }
+
+    private void getData() {
         assert item != null;  // If the item of subject not null
         subject.setText(item.getTitle());  // GetSerializable of subject
         body.setText(item.getOverview());  // GetSerializable of body
         URL.setText(item.getPoster_path());  // GetSerializable of URL
 
         // Button that does the following:
-        TextViewOK = findViewById(R.id.textViewOK);
         TextViewOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,12 +89,10 @@ public class AddMovieFromInternet extends AppCompatActivity {
 
         //Initialize the ImageView
         String picture = "https://image.tmdb.org/t/p/w154" + item.getPoster_path();
-        final ImageView imageView = findViewById(R.id.imageView3);
         Picasso.get().load(picture).into(imageView);
         imageView.setVisibility(View.INVISIBLE); //Set the ImageView Invisible
 
         // Button to show the ImageView
-        TextViewShow = findViewById(R.id.textViewShow);
         TextViewShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,9 +103,10 @@ public class AddMovieFromInternet extends AppCompatActivity {
                 imageView.setVisibility(View.VISIBLE);  // Show the ImageView
             }
         });
+    }
 
+    private void btnBack() {
         // Button are back to the previous activity
-        btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

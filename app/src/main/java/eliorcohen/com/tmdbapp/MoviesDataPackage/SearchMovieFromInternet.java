@@ -41,15 +41,26 @@ public class SearchMovieFromInternet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_movie_internet);
 
-        mListViewInternet = findViewById(R.id.listViewInt);  // ID of the ListView of MainActivity
+        initUI();
+        getData();
+        listLongClick();
+    }
+
+    private void initUI() {
+        mListViewInternet = findViewById(R.id.listViewInternet);  // ID of the ListView of SearchMovieFromInternet
 
         mSearchMovieFromInternet = this;  // Put SearchMovieFromInternet in SearchMovieFromInternet
 
+        registerForContextMenu(mListViewInternet);  // Sets off the menu in SearchMovieFromInternet
+    }
+
+    private void getData() {
         mMovieDBHelperInternet = new MovieDBHelper(this);  // Put the SQLiteHelper in SearchMovieFromInternet
         mMovieListInternet = mMovieDBHelperInternet.getAllMovies();  // Put the getAllMovies of SQLiteHelper in the ArrayList of SearchMovieFromInternet
         mAdapterInternet = new MovieCustomAdapterInternet(this, mMovieListInternet);  // Comparing the ArrayList of SearchMovieFromInternet to the CustomAdapter
-        registerForContextMenu(mListViewInternet);  // Sets off the menu in SearchMovieFromInternet
+    }
 
+    private void listLongClick() {
         // Put extra from SearchMovieFromInternet to EditMovie and pass from SearchMovieFromInternet to EditMovie with the put extra when you click on item in ListView
         mListViewInternet.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -63,7 +74,6 @@ public class SearchMovieFromInternet extends AppCompatActivity {
             }
         });
     }
-
 
     // Set movies in SearchMovieFromInternet
     public static void setMovies(ArrayList<MovieModel> list) {

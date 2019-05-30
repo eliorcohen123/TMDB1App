@@ -29,13 +29,21 @@ public class EditMovie extends AppCompatActivity {
     private RadioButton rb1, rb2;
     private EditText subject, body, URL;
     private Button btnBack;
-    private TextView TextViewShow, TextViewOK;
+    private TextView textViewShow, textViewOK;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_movie);
 
+        initUI();
+        radioGroup();
+        getData();
+        btnBack();
+    }
+
+    private void initUI() {
         id = getIntent().getExtras().getInt(getString(R.string.movie_id)); // GetSerializable for the ID
         item = (MovieModel) getIntent().getExtras().getSerializable(getString(R.string.movie_edit)); // GetSerializable for the texts
 
@@ -43,6 +51,19 @@ public class EditMovie extends AppCompatActivity {
         rb1 = findViewById(R.id.radioButton1);  // ID of the RadioButton1 of EditMovie
         rb2 = findViewById(R.id.radioButton2);  // ID of the RadioButton2 of EditMovie
 
+        subject = findViewById(R.id.editTextSubject);  // ID of the subject
+        body = findViewById(R.id.editTextBody);  // ID of the body
+        URL = findViewById(R.id.editTextURL);  // ID of the URL
+
+        textViewOK = findViewById(R.id.textViewOK);
+        textViewShow = findViewById(R.id.textViewShow);
+
+        btnBack = findViewById(R.id.btnBack);
+
+        imageView = findViewById(R.id.imageView);
+    }
+
+    private void radioGroup() {
         // Checked if the RadioButton equal to 1 or 2
         assert item != null;
         if (item.getIs_watch() == 1) {
@@ -74,18 +95,15 @@ public class EditMovie extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        subject = findViewById(R.id.editTextSubject);  // ID of the subject
-        body = findViewById(R.id.editTextBody);  // ID of the body
-        URL = findViewById(R.id.editTextURL);  // ID of the URL
-
+    private void getData() {
         subject.setText(item.getTitle());  // GetSerializable of subject
         body.setText(item.getOverview());  // GetSerializable of body
         URL.setText(item.getPoster_path());  // GetSerializable of URL
 
         // Button that does the following:
-        TextViewOK = findViewById(R.id.textViewOK);
-        TextViewOK.setOnClickListener(new View.OnClickListener() {
+        textViewOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = subject.getText().toString();  // GetText of the subject
@@ -114,13 +132,11 @@ public class EditMovie extends AppCompatActivity {
 
         //Initialize the ImageView
         String picture = "https://image.tmdb.org/t/p/w154" + item.getPoster_path();
-        final ImageView imageView = findViewById(R.id.imageView);
         Picasso.get().load(picture).into(imageView);
         imageView.setVisibility(View.INVISIBLE); //Set the ImageView Invisible
 
         // Button to show the ImageView
-        TextViewShow = findViewById(R.id.textViewShow);
-        TextViewShow.setOnClickListener(new View.OnClickListener() {
+        textViewShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MediaPlayer sShowImage = MediaPlayer.create(EditMovie.this, R.raw.show_image_sound);
@@ -130,9 +146,10 @@ public class EditMovie extends AppCompatActivity {
                 imageView.setVisibility(View.VISIBLE);
             }
         });
+    }
 
+    private void btnBack() {
         // Button are back to the previous activity
-        btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

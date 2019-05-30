@@ -17,8 +17,16 @@ public class DeleteMovie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.delete_movie);
 
-        // A button are passes from DeleteMovie to MainActivity
+        initUI();
+        btnBack();
+    }
+
+    private void initUI() {
         btnBack = findViewById(R.id.btnBack);
+    }
+
+    private void btnBack() {
+        // A button are passes from DeleteMovie to MainActivity
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
