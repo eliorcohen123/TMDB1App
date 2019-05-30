@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         initUI();
         getData();
         listLongClick();
-
-        AppRater.app_launched(this);
     }
 
     private void initUI() {
@@ -77,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipe_container);  // ID of the SwipeRefreshLayout of MainActivity
 
         registerForContextMenu(mListView);  // Sets off the menu in MainActivity
+
+        AppRater.app_launched(this);
     }
 
     private void getData() {
