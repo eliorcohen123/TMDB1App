@@ -24,29 +24,34 @@ public class UsersListActivity extends AppCompatActivity {
     private List<User> listUsers;
     private UsersRecyclerAdapter usersRecyclerAdapter;
     private LoginDBHelper loginDBHelper;
+    private Button btnBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_list);
 
-        getSupportActionBar().setTitle("");
-        initViews();
+        initUI();
+        showUI();
         initObjects();
+    }
 
-        Button button1 = findViewById(R.id.cancelBtn);
-        button1.setOnClickListener(new View.OnClickListener() {
+    // This method is to initialize views
+    private void initUI() {
+        textViewName = findViewById(R.id.textViewName);
+        recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
+    }
+
+    private void showUI() {
+        getSupportActionBar().setTitle("");
+
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-    }
-
-    // This method is to initialize views
-    private void initViews() {
-        textViewName = findViewById(R.id.textViewName);
-        recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
     }
 
     // This method is to initialize objects to be used

@@ -27,7 +27,6 @@
             android:id="@+id/textViewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
     </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.v7.widget.AppCompatTextView
@@ -45,13 +44,13 @@
         android:layout_height="310dp" />
 
     <Button
-        android:id="@+id/cancelBtn"
+        android:id="@+id/btnBack"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="@drawable/custom_button"
         android:text="@string/button1_users"
-        android:textColor="@color/colorLightBlue" />
+        android:textColor="@color/colorWhite" />
 </LinearLayout>
 
