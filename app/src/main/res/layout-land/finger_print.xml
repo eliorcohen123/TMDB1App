@@ -36,7 +36,7 @@
         android:textColor="@color/colorLightBlue2" />
 
     <Button
-        android:id="@+id/button22"
+        android:id="@+id/btnBack"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_gravity="center"

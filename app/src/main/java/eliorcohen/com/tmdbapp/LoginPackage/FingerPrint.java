@@ -50,7 +50,7 @@ public class FingerPrint extends AppCompatActivity {
     private KeyStore keyStore;
     private Cipher cipher;
     private String KEY_NAME = "AndroidKey";
-    private Button button1;
+    private Button btnBack;
 
     // All the codes add up to confirmation by fingerprinting
     @Override
@@ -68,12 +68,12 @@ public class FingerPrint extends AppCompatActivity {
         mFingerprintImage = findViewById(R.id.fingerprintImage);
         mParaLabel = findViewById(R.id.paraLabel);
 
-        button1 = findViewById(R.id.button22);
+        btnBack = findViewById(R.id.btnBack);
     }
 
     private void btnBack() {
         // Button are back to the previous activity
-        button1.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MediaPlayer sCancel = MediaPlayer.create(FingerPrint.this, R.raw.cancel_and_move_sound);
