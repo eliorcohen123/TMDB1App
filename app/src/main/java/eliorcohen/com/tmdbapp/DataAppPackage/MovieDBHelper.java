@@ -60,7 +60,7 @@ public class MovieDBHelper extends SQLiteOpenHelper {
         try {
             Log.d("MovieDBHelper", "insert new movie with id: " + id +
                     ", Name: " + title +
-                    ", Singer: " + overview +
+                    ", Overview: " + overview +
                     ", URL: " + url);
         } catch (SQLiteException ex) {
             Log.e("MovieDBHelper", ex.getMessage());
