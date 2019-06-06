@@ -127,7 +127,9 @@ public class SearchMovieFromInternet extends AppCompatActivity {
                     sSearch.start();  // Play sound
 
                     // Search movies from that URL and put them in the SQLiteHelper
-                    String urlQuery = "https://api.themoviedb.org/3/search/movie?/&query=" + query + "&api_key=4e0be2c22f7268edffde97481d49064a&language=en-US&page=";
+                    String urlQuery = "https://api.themoviedb.org/3/search/movie?/&query=" +
+                            query +
+                            "&api_key=4e0be2c22f7268edffde97481d49064a&language=en-US";
                     mGetMoviesAsyncTaskInternet = new GetMoviesAsyncTaskInternet();
                     mGetMoviesAsyncTaskInternet.execute(urlQuery);
                     return true;
