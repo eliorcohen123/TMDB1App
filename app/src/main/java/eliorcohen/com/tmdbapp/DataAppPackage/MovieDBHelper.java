@@ -79,9 +79,9 @@ public class MovieDBHelper extends SQLiteOpenHelper {
         values.put(MOVIE_OVERVIEW, overview);
         values.put(MOVIE_URL, url);
 
-        int rowNumber3 = db.update(MOVIE_TABLE_NAME, values, MOVIE_ID + " = ?", new String[]{String.valueOf(id)});
+        int rowNumber1 = db.update(MOVIE_TABLE_NAME, values, MOVIE_ID + " = ?", new String[]{String.valueOf(id)});
         try {
-            Log.d("MovieDBHelper", "update new movie with id: " + rowNumber3 +
+            Log.d("MovieDBHelper", "update new movie with id: " + rowNumber1 +
                     ", Name: " + title);
         } catch (SQLiteException ex) {
             Log.e("MovieDBHelper", ex.getMessage());
@@ -102,9 +102,9 @@ public class MovieDBHelper extends SQLiteOpenHelper {
         values.put(MOVIE_URL, movieModel_.getPoster_path());
         values.put(IS_WATCH, movieModel_.getIs_watch());
 
-        int rowNumber3 = db.update(MOVIE_TABLE_NAME, values, MOVIE_ID + " = ?", new String[]{String.valueOf(movieModel_.getId())});
+        int rowNumber2 = db.update(MOVIE_TABLE_NAME, values, MOVIE_ID + " = ?", new String[]{String.valueOf(movieModel_.getId())});
         try {
-            Log.d("MovieDBHelper", "update new movie with id: " + rowNumber3 +
+            Log.d("MovieDBHelper", "update new movie with id: " + rowNumber2 +
                     ", Name: " + movieModel_);
         } catch (SQLiteException ex) {
             Log.e("movie", ex.getMessage());
