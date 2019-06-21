@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private LoginDBHelper loginDBHelper;
     private LinearLayout container;
     private AnimationDrawable anim;
+    private Button fingerPrintBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,30 +43,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initViews();
         initListeners();
         initObjects();
+        passFingerPrint();
 
         container = findViewById(R.id.container);
 
         anim = (AnimationDrawable) container.getBackground();
         anim.setEnterFadeDuration(6000);
         anim.setExitFadeDuration(2000);
-
-        // pass to FingerPrintClass
-        Button button1 = findViewById(R.id.fingerPrintBtn);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer sAdd = MediaPlayer.create(LoginActivity.this, R.raw.cancel_and_move_sound);
-                sAdd.start();  // Play sound
-
-                Intent intentAddToMain = new Intent(LoginActivity.this, FingerPrint.class);
-                startActivity(intentAddToMain);
-            }
-        });
     }
 
     // This method is to initialize views
     private void initViews() {
-
         nestedScrollView = findViewById(R.id.nestedScrollView);
         textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
         textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
@@ -73,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textInputEditTextPassword = findViewById(R.id.textInputEditTextPassword);
         appCompatButtonLogin = findViewById(R.id.appCompatButtonLogin);
         textViewLinkRegister = findViewById(R.id.textViewLinkRegister);
+        fingerPrintBtn = findViewById(R.id.fingerPrintBtn);
     }
 
     // This method is to initialize listeners
@@ -130,6 +119,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // Snack Bar to show success message that record is wrong
             Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    private void passFingerPrint() {
+        // pass to FingerPrintClass
+        fingerPrintBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaPlayer sAdd = MediaPlayer.create(LoginActivity.this, R.raw.cancel_and_move_sound);
+                sAdd.start();  // Play sound
+
+                Intent intentAddToMain = new Intent(LoginActivity.this, FingerPrint.class);
+                startActivity(intentAddToMain);
+            }
+        });
     }
 
     @Override
