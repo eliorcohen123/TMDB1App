@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         getSupportActionBar().hide();
+
         initViews();
         initListeners();
         initObjects();
