@@ -44,12 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initListeners();
         initObjects();
         passFingerPrint();
-
-        container = findViewById(R.id.container);
-
-        anim = (AnimationDrawable) container.getBackground();
-        anim.setEnterFadeDuration(6000);
-        anim.setExitFadeDuration(2000);
+        myAnim();
     }
 
     // This method is to initialize views
@@ -62,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         appCompatButtonLogin = findViewById(R.id.appCompatButtonLogin);
         textViewLinkRegister = findViewById(R.id.textViewLinkRegister);
         fingerPrintBtn = findViewById(R.id.fingerPrintBtn);
+        container = findViewById(R.id.container);
     }
 
     // This method is to initialize listeners
@@ -119,6 +115,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // Snack Bar to show success message that record is wrong
             Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    private void myAnim() {
+        anim = (AnimationDrawable) container.getBackground();
+        anim.setEnterFadeDuration(6000);
+        anim.setExitFadeDuration(2000);
     }
 
     private void passFingerPrint() {
