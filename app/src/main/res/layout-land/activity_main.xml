@@ -6,7 +6,7 @@
     android:background="@drawable/background"
     tools:context=".MainAndOtherPackage.MainActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -19,5 +19,5 @@
             android:layout_marginBottom="8dp"
             android:divider="@android:color/transparent"
             android:dividerHeight="10.0sp" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>
