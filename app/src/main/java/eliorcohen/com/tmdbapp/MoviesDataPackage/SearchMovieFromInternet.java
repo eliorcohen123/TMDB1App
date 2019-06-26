@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterInternet;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
 import eliorcohen.com.tmdbapp.MainAndOtherPackage.ItemDecoration;
 import eliorcohen.com.tmdbapp.RetrofitPackage.GetDataService;
@@ -39,12 +38,6 @@ import retrofit2.Response;
 public class SearchMovieFromInternet extends AppCompatActivity {
 
     private static ArrayList<MovieModel> mMovieListInternet;  // ArrayList of MovieModel
-    //    private static MovieCustomAdapterInternet mAdapterInternet;  // MovieCustomAdapterInternet of SearchMovieFromInternet
-//    private static ListView mListViewInternet;  // ListView of SearchMovieFromInternet
-    //    private GetMoviesAsyncTaskInternet mGetMoviesAsyncTaskInternet;  // AsyncTask to search and add movies from SearchMovieFromInternet to MainActivity
-    private MovieDBHelper mMovieDBHelperInternet;  // The SQLiteHelper of the app
-    private static ProgressDialog mProgressDialogInternet;  // ProgressDialog
-    private static SearchMovieFromInternet mSearchMovieFromInternet;
     private MovieCustomAdapterInternet adapter;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
@@ -58,9 +51,7 @@ public class SearchMovieFromInternet extends AppCompatActivity {
     }
 
     private void initUI() {
-        recyclerView = findViewById(R.id.myRecyclerView);
-
-        mSearchMovieFromInternet = this;  // Put SearchMovieFromInternet in SearchMovieFromInternet
+        recyclerView = findViewById(R.id.recyclerViewInternet);
     }
 
     // Sets off the menu of activity_menu

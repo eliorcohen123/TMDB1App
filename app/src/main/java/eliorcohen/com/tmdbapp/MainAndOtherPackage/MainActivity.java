@@ -8,36 +8,34 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import eliorcohen.com.tmdbapp.AsyncTaskPackage.GetMoviesAsyncTaskManually;
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterMain;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
 import eliorcohen.com.tmdbapp.LoginPackage.UsersListActivity;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.AddMovie;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.DataOfMovie;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.DeleteAllData;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.DeleteMovie;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.EditMovie;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.SearchMovieFromInternet;
 import eliorcohen.com.tmdbapp.R;
 
@@ -53,12 +51,11 @@ import eliorcohen.com.tmdbapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<MovieModel> mMovieList;  // ArrayList of MovieModel
+    private ArrayList<MovieModel> mMovieList = new ArrayList<>();  // ArrayList of MovieModel
     private MovieCustomAdapterMain mAdapter;  // MovieCustomAdapterInternet of MainActivity
-    private GetMoviesAsyncTaskManually mGetMoviesAsyncTaskManually;  // AsyncTask for AddMovie to add movie to MainActivity
-    private ListView mListView;  // ListView of MainActivity
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
     private SwipeRefreshLayout swipeRefreshLayout;  // SwipeRe freshLayout of MainActivity
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,38 +63,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initUI();
-        getData();
-        listViewAction();
+        refreshData();
+        myRecyclerView();
     }
 
     private void initUI() {
-        mListView = findViewById(R.id.listViewMain);  // ID of the ListView of MainActivity
+        recyclerView = findViewById(R.id.recyclerViewMain);  // ID of the ListView of MainActivity
         swipeRefreshLayout = findViewById(R.id.swipe_container);  // ID of the SwipeRefreshLayout of MainActivity
-
-        registerForContextMenu(mListView);  // Sets off the menu in MainActivity
 
         AppRater.app_launched(this);
     }
 
-    private void getData() {
+    private void refreshData() {
         if (!isConnected(MainActivity.this)) buildDialog(MainActivity.this).show();
-
-        mMovieDBHelper = new MovieDBHelper(this);  // Put the SQLiteHelper in MainActivity
-        mMovieList = mMovieDBHelper.getAllMovies();  // Put the getAllMovies of SQLiteHelper in the ArrayList of MainActivity
-        mAdapter = new MovieCustomAdapterMain(this, mMovieList);  // Comparing the ArrayList of MainActivity to the MovieCustomAdapterInternet
-
-        // Put AsyncTask in the ListView of MainActivity to execute the SQLiteHelper
-        mGetMoviesAsyncTaskManually = new GetMoviesAsyncTaskManually(mListView);
-        mGetMoviesAsyncTaskManually.execute(mMovieDBHelper);
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorOrange));  // Colors of the SwipeRefreshLayout of MainActivity
         // Refresh the MovieDBHelper of app in ListView of MainActivity
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mGetMoviesAsyncTaskManually = new GetMoviesAsyncTaskManually(mListView);
-                mGetMoviesAsyncTaskManually.execute(mMovieDBHelper);
-
                 // Vibration for 0.1 second
                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -124,20 +108,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void listViewAction() {
-        // Put extra from MainActivity to EditMovie and pass from MainActivity to EditMovie with the put extra when you click on item in ListView
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MediaPlayer sMove = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sMove.start();  // Play sound
+    private void myRecyclerView() {
+        mAdapter = new MovieCustomAdapterMain(this, mMovieList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ItemDecoration itemDecoration = new ItemDecoration(20);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setAdapter(mAdapter);
+        mMovieDBHelper = new MovieDBHelper(this);
 
-                Intent intent = new Intent(MainActivity.this, DataOfMovie.class);
-                intent.putExtra(getString(R.string.movie_id), mMovieList.get(position).getId());
-                intent.putExtra(getString(R.string.movie_edit), mMovieList.get(position));
-                startActivity(intent);
+        getData();
+    }
+
+    // This method is to fetch all user records from SQLite
+    private void getData() {
+        // AsyncTask is used that SQLite operation not blocks the UI Thread.
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                mMovieList.clear();
+                mMovieList.addAll(mMovieDBHelper.getAllMovies());
+                return null;
             }
-        });
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                mAdapter.notifyDataSetChanged();
+            }
+        }.execute();
     }
 
     // Sets off the menu of activity_menu
@@ -146,14 +144,6 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    // Sets off the menu of list_menu
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.list_menu, menu);
     }
 
     // Options in the activity_menu
@@ -239,48 +229,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    // Options in the list_menu
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int listPosition = info.position;
-        switch (item.getItemId()) {
-            case R.id.edit:  // Edit the movies on MainActivity
-                MediaPlayer sMove = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sMove.start();  // Play sound
-
-                Intent intent = new Intent(MainActivity.this, EditMovie.class);
-                intent.putExtra(getString(R.string.movie_id), mMovieList.get(listPosition).getId());
-                intent.putExtra(getString(R.string.movie_edit), mMovieList.get(listPosition));
-                startActivity(intent);
-                break;
-            case R.id.shareIntent:  // Share the content of movie
-                MediaPlayer sSave = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sSave.start();  // Play sound
-
-                String title = mMovieList.get(listPosition).getTitle();
-                String overview = mMovieList.get(listPosition).getOverview();
-                String URL = "https://image.tmdb.org/t/p/original" + mMovieList.get(listPosition).getPoster_path();
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Title: " + title + "\nOverview: " + overview + "\nURL: " + URL);
-                sendIntent.setType("text/plain");
-                startActivity(sendIntent);
-                break;
-            case R.id.delete:  // Delete item(movie) on MainActivity
-                MediaPlayer sDelete = MediaPlayer.create(MainActivity.this, R.raw.delete_sound);
-                sDelete.start();  // Play sound
-
-                mGetMoviesAsyncTaskManually.deleteMovie(listPosition);
-                mMovieDBHelper.deleteMovie(mMovieList.get(listPosition));
-
-                Intent intentDeleteData = new Intent(MainActivity.this, DeleteMovie.class);
-                startActivity(intentDeleteData);
-                break;
-        }
-        return super.onContextItemSelected(item);
     }
 
     private boolean isConnected(Context context) {

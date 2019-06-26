@@ -9,7 +9,7 @@
     tools:context=".MoviesDataPackage.SearchMovieFromInternet">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myRecyclerView"
+        android:id="@+id/recyclerViewInternet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
