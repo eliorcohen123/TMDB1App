@@ -3,38 +3,51 @@ package eliorcohen.com.tmdbapp.MoviesDataPackage;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import eliorcohen.com.tmdbapp.AsyncTaskPackage.GetMoviesAsyncTaskInternet;
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterInternet;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
+import eliorcohen.com.tmdbapp.MainAndOtherPackage.ItemDecoration;
+import eliorcohen.com.tmdbapp.RetrofitPackage.GetDataService;
+import eliorcohen.com.tmdbapp.DataAppPackage.JSONResponse;
 import eliorcohen.com.tmdbapp.R;
+import eliorcohen.com.tmdbapp.RetrofitPackage.RetrofitClientInstance;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SearchMovieFromInternet extends AppCompatActivity {
 
     private static ArrayList<MovieModel> mMovieListInternet;  // ArrayList of MovieModel
-    private static MovieCustomAdapterInternet mAdapterInternet;  // CustomAdapter of SearchMovieFromInternet
-    private static ListView mListViewInternet;  // ListView of SearchMovieFromInternet
-    private GetMoviesAsyncTaskInternet mGetMoviesAsyncTaskInternet;  // AsyncTask to search and add movies from SearchMovieFromInternet to MainActivity
+    //    private static MovieCustomAdapterInternet mAdapterInternet;  // MovieCustomAdapterInternet of SearchMovieFromInternet
+//    private static ListView mListViewInternet;  // ListView of SearchMovieFromInternet
+    //    private GetMoviesAsyncTaskInternet mGetMoviesAsyncTaskInternet;  // AsyncTask to search and add movies from SearchMovieFromInternet to MainActivity
     private MovieDBHelper mMovieDBHelperInternet;  // The SQLiteHelper of the app
     private static ProgressDialog mProgressDialogInternet;  // ProgressDialog
     private static SearchMovieFromInternet mSearchMovieFromInternet;
+    private MovieCustomAdapterInternet adapter;
+    private RecyclerView recyclerView;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,45 +55,12 @@ public class SearchMovieFromInternet extends AppCompatActivity {
         setContentView(R.layout.add_movie_internet);
 
         initUI();
-        getData();
-        listViewAction();
     }
 
     private void initUI() {
-        mListViewInternet = findViewById(R.id.listViewInternet);  // ID of the ListView of SearchMovieFromInternet
+        recyclerView = findViewById(R.id.myRecyclerView);
 
         mSearchMovieFromInternet = this;  // Put SearchMovieFromInternet in SearchMovieFromInternet
-
-        registerForContextMenu(mListViewInternet);  // Sets off the menu in SearchMovieFromInternet
-    }
-
-    private void getData() {
-        mMovieDBHelperInternet = new MovieDBHelper(this);  // Put the SQLiteHelper in SearchMovieFromInternet
-        mMovieListInternet = mMovieDBHelperInternet.getAllMovies();  // Put the getAllMovies of SQLiteHelper in the ArrayList of SearchMovieFromInternet
-        mAdapterInternet = new MovieCustomAdapterInternet(this, mMovieListInternet);  // Comparing the ArrayList of SearchMovieFromInternet to the CustomAdapter
-    }
-
-    private void listViewAction() {
-        // Put extra from SearchMovieFromInternet to EditMovie and pass from SearchMovieFromInternet to EditMovie with the put extra when you click on item in ListView
-        mListViewInternet.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MediaPlayer sMove = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.cancel_and_move_sound);
-                sMove.start();  // Play sound
-
-                Intent intentSearchToAddInternet = new Intent(SearchMovieFromInternet.this, AddMovieFromInternet.class);
-                intentSearchToAddInternet.putExtra(getString(R.string.movie_add_from_internet), mMovieListInternet.get(position));
-                startActivity(intentSearchToAddInternet);
-            }
-        });
-    }
-
-    // Set movies in SearchMovieFromInternet
-    public static void setMovies(ArrayList<MovieModel> list) {
-        mMovieListInternet = list;
-        mAdapterInternet.clear();
-        mAdapterInternet.addAll(list);
-        mListViewInternet.setAdapter(mAdapterInternet);
     }
 
     // Sets off the menu of activity_menu
@@ -126,12 +106,35 @@ public class SearchMovieFromInternet extends AppCompatActivity {
                     MediaPlayer sSearch = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.search_and_refresh_sound);
                     sSearch.start();  // Play sound
 
+                    progressDialog = new ProgressDialog(SearchMovieFromInternet.this);
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.show();
+
+                    /*Create handle for the RetrofitInstance interface*/
+                    GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+                    Call<JSONResponse> call = service.getAllPhotos("/3/search/movie?/&query="
+                            + query +
+                            "&api_key=4e0be2c22f7268edffde97481d49064a&language=en-US");
+                    call.enqueue(new Callback<JSONResponse>() {
+                        @Override
+                        public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
+                            progressDialog.dismiss();
+                            JSONResponse jsonResponse = response.body();
+                            mMovieListInternet = new ArrayList<MovieModel>(Arrays.asList(jsonResponse.getResults()));
+                            generateDataList(mMovieListInternet);
+                        }
+
+                        @Override
+                        public void onFailure(Call<JSONResponse> call, Throwable t) {
+                            progressDialog.dismiss();
+                            Toast.makeText(SearchMovieFromInternet.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                     // Search movies from that URL and put them in the SQLiteHelper
-                    String urlQuery = "https://api.themoviedb.org/3/search/movie?/&query=" +
-                            query +
-                            "&api_key=4e0be2c22f7268edffde97481d49064a&language=en-US";
-                    mGetMoviesAsyncTaskInternet = new GetMoviesAsyncTaskInternet();
-                    mGetMoviesAsyncTaskInternet.execute(urlQuery);
+                    SharedPreferences.Editor editor = getSharedPreferences("total_query", MODE_PRIVATE).edit();
+                    editor.putString("query", query);
+                    editor.apply();
                     return true;
                 }
 
@@ -160,19 +163,13 @@ public class SearchMovieFromInternet extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // stopShowingProgressBar
-    public static void stopShowingProgressBar() {
-        if (mProgressDialogInternet != null) {
-            mProgressDialogInternet.dismiss();
-            mProgressDialogInternet = null;
-        }
-    }
-
-    // startShowingProgressBar
-    public static void startShowingProgressBar() {
-        mProgressDialogInternet = ProgressDialog.show(mSearchMovieFromInternet, "Loading...",
-                "Please wait...", true);
-        mProgressDialogInternet.show();
+    /*Method to generate List of data using RecyclerView with custom adapter*/
+    private void generateDataList(List<MovieModel> photoList) {
+        adapter = new MovieCustomAdapterInternet(this, photoList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ItemDecoration itemDecoration = new ItemDecoration(20);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setAdapter(adapter);
     }
 
 }

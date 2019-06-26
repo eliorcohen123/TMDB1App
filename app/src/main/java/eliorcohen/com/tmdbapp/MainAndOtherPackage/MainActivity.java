@@ -54,7 +54,7 @@ import eliorcohen.com.tmdbapp.R;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<MovieModel> mMovieList;  // ArrayList of MovieModel
-    private MovieCustomAdapterMain mAdapter;  // CustomAdapter of MainActivity
+    private MovieCustomAdapterMain mAdapter;  // MovieCustomAdapterInternet of MainActivity
     private GetMoviesAsyncTaskManually mGetMoviesAsyncTaskManually;  // AsyncTask for AddMovie to add movie to MainActivity
     private ListView mListView;  // ListView of MainActivity
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         mMovieDBHelper = new MovieDBHelper(this);  // Put the SQLiteHelper in MainActivity
         mMovieList = mMovieDBHelper.getAllMovies();  // Put the getAllMovies of SQLiteHelper in the ArrayList of MainActivity
-        mAdapter = new MovieCustomAdapterMain(this, mMovieList);  // Comparing the ArrayList of MainActivity to the CustomAdapter
+        mAdapter = new MovieCustomAdapterMain(this, mMovieList);  // Comparing the ArrayList of MainActivity to the MovieCustomAdapterInternet
 
         // Put AsyncTask in the ListView of MainActivity to execute the SQLiteHelper
         mGetMoviesAsyncTaskManually = new GetMoviesAsyncTaskManually(mListView);

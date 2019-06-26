@@ -29,7 +29,7 @@
         android:roundIcon="@drawable/movie_icon"
         android:supportsRtl="false"
         android:theme="@style/MyAppTheme">
-        <activity android:name=".LoginPackage.LoginActivity">
+        <activity android:name=".MainAndOtherPackage.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,7 +61,7 @@
         <activity android:name=".MoviesDataPackage.DataOfMovie" />
         <activity android:name=".MainAndOtherPackage.Credits" />
         <activity android:name=".LoginPackage.FingerPrint" />
-        <activity android:name=".MainAndOtherPackage.MainActivity" />
+        <!--<activity android:name=".MainAndOtherPackage.MainActivity" />-->
         <activity android:name=".LoginPackage.RegisterActivity" />
         <activity android:name=".LoginPackage.UsersListActivity" />
         <activity android:name=".MoviesDataPackage.SearchMovieFromInternet" />
