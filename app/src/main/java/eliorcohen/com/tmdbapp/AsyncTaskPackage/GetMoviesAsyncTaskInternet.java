@@ -21,6 +21,7 @@ public class GetMoviesAsyncTaskInternet extends AsyncTask<String, Integer, Array
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+
         SearchMovieFromInternet.startShowingProgressBar();
     }
 

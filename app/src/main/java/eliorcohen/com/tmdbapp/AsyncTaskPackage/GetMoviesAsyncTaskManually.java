@@ -38,6 +38,7 @@ public class GetMoviesAsyncTaskManually extends AsyncTask<MovieDBHelper, Integer
     @Override
     protected void onPostExecute(ArrayList<MovieModel> movieModels) {
         super.onPostExecute(movieModels);
+
         mMovieCustomAdapterMain = new MovieCustomAdapterMain(mListView.getContext(), movieModels);
         mListView.setAdapter(mMovieCustomAdapterMain);
     }
