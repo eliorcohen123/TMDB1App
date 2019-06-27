@@ -17,7 +17,6 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,10 +28,13 @@ import eliorcohen.com.tmdbapp.MainAndOtherPackage.ItemDecoration;
 import eliorcohen.com.tmdbapp.RetrofitPackage.GetDataService;
 import eliorcohen.com.tmdbapp.DataAppPackage.JSONResponse;
 import eliorcohen.com.tmdbapp.R;
-import eliorcohen.com.tmdbapp.RetrofitPackage.RetrofitClientInstance;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class SearchMovieFromInternet extends AppCompatActivity {
 
@@ -100,24 +102,33 @@ public class SearchMovieFromInternet extends AppCompatActivity {
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
 
-                    /*Create handle for the RetrofitInstance interface*/
-                    GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-                    Call<JSONResponse> call = service.getAllPhotos("/3/search/movie?/&query="
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("https://api.themoviedb.org")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                            .build();
+                    GetDataService apiService = retrofit.create(GetDataService.class);
+
+                    Observable<JSONResponse> observable = apiService.getAllPhotos("/3/search/movie?/&query="
                             + query +
-                            "&api_key=4e0be2c22f7268edffde97481d49064a&language=en-US");
-                    call.enqueue(new Callback<JSONResponse>() {
+                            "&api_key=4e0be2c22f7268edffde97481d49064a&language=en-US").subscribeOn(Schedulers.newThread())
+                            .observeOn(AndroidSchedulers.mainThread());
+                    observable.subscribe(new Observer<JSONResponse>() {
                         @Override
-                        public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
-                            progressDialog.dismiss();
-                            JSONResponse jsonResponse = response.body();
-                            mMovieListInternet = new ArrayList<MovieModel>(Arrays.asList(jsonResponse.getResults()));
-                            generateDataList(mMovieListInternet);
+                        public void onCompleted() {
+
                         }
 
                         @Override
-                        public void onFailure(Call<JSONResponse> call, Throwable t) {
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onNext(JSONResponse products) {
                             progressDialog.dismiss();
-                            Toast.makeText(SearchMovieFromInternet.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
+                            mMovieListInternet = new ArrayList<MovieModel>(Arrays.asList(products.getResults()));
+                            generateDataList(mMovieListInternet);
                         }
                     });
                     return true;

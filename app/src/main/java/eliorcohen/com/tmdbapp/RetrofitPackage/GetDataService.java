@@ -1,12 +1,12 @@
 package eliorcohen.com.tmdbapp.RetrofitPackage;
 
 import eliorcohen.com.tmdbapp.DataAppPackage.JSONResponse;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
+import rx.Observable;
 
 public interface GetDataService {
 
     @GET()
-    Call<JSONResponse> getAllPhotos(@Url String url);
+    Observable<JSONResponse> getAllPhotos(@Url String url);
 }
