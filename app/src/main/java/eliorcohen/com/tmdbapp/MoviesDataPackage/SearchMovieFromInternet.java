@@ -28,9 +28,7 @@ import eliorcohen.com.tmdbapp.MainAndOtherPackage.ItemDecoration;
 import eliorcohen.com.tmdbapp.RetrofitPackage.GetDataService;
 import eliorcohen.com.tmdbapp.DataAppPackage.JSONResponse;
 import eliorcohen.com.tmdbapp.R;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import eliorcohen.com.tmdbapp.RetrofitPackage.RetrofitClientInstance;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -102,12 +100,7 @@ public class SearchMovieFromInternet extends AppCompatActivity {
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
 
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("https://api.themoviedb.org")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                            .build();
-                    GetDataService apiService = retrofit.create(GetDataService.class);
+                    GetDataService apiService = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
                     Observable<JSONResponse> observable = apiService.getAllPhotos("/3/search/movie?/&query="
                             + query +
