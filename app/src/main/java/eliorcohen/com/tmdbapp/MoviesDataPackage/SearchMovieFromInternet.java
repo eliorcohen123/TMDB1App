@@ -3,7 +3,6 @@ package eliorcohen.com.tmdbapp.MoviesDataPackage;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -121,11 +120,6 @@ public class SearchMovieFromInternet extends AppCompatActivity {
                             Toast.makeText(SearchMovieFromInternet.this, "Something went wrong... Please try later!", Toast.LENGTH_SHORT).show();
                         }
                     });
-
-                    // Search movies from that URL and put them in the SQLiteHelper
-                    SharedPreferences.Editor editor = getSharedPreferences("total_query", MODE_PRIVATE).edit();
-                    editor.putString("query", query);
-                    editor.apply();
                     return true;
                 }
 
