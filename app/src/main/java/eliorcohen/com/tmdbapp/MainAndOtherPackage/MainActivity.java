@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewMain);  // ID of the ListView of MainActivity
         swipeRefreshLayout = findViewById(R.id.swipe_container);  // ID of the SwipeRefreshLayout of MainActivity
 
+        mMovieDBHelper = new MovieDBHelper(this);
+
         AppRater.app_launched(this);
     }
 
@@ -124,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                mMovieDBHelper = new MovieDBHelper(MainActivity.this);
                 mMovieList.clear();
                 mMovieList.addAll(mMovieDBHelper.getAllMovies());
                 return null;
