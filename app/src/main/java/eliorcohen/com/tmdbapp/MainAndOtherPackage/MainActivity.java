@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
         ItemDecoration itemDecoration = new ItemDecoration(20);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(mAdapter);
-        mMovieDBHelper = new MovieDBHelper(this);
 
         getData();
     }
@@ -125,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
+                mMovieDBHelper = new MovieDBHelper(MainActivity.this);
                 mMovieList.clear();
                 mMovieList.addAll(mMovieDBHelper.getAllMovies());
                 return null;
