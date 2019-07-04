@@ -122,7 +122,9 @@ public class SearchMovieFromInternet extends AppCompatActivity {
                         public void onNext(JSONResponse products) {
                             mMovieListInternet = new ArrayList<MovieModel>(Arrays.asList(products.getResults()));
                             generateDataList(mMovieListInternet);
-                            progressDialog.dismiss();
+                            if (progressDialog != null) {
+                                progressDialog.dismiss();
+                            }
                         }
                     });
                     return true;
