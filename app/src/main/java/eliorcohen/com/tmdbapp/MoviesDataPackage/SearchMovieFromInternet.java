@@ -51,6 +51,8 @@ public class SearchMovieFromInternet extends AppCompatActivity {
 
     private void initUI() {
         recyclerView = findViewById(R.id.recyclerViewInternet);
+
+        progressDialog = new ProgressDialog(SearchMovieFromInternet.this);
     }
 
     // Sets off the menu of activity_menu
@@ -96,7 +98,6 @@ public class SearchMovieFromInternet extends AppCompatActivity {
                     MediaPlayer sSearch = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.search_and_refresh_sound);
                     sSearch.start();  // Play sound
 
-                    progressDialog = new ProgressDialog(SearchMovieFromInternet.this);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
 
@@ -119,9 +120,9 @@ public class SearchMovieFromInternet extends AppCompatActivity {
 
                         @Override
                         public void onNext(JSONResponse products) {
-                            progressDialog.dismiss();
                             mMovieListInternet = new ArrayList<MovieModel>(Arrays.asList(products.getResults()));
                             generateDataList(mMovieListInternet);
+                            progressDialog.dismiss();
                         }
                     });
                     return true;
