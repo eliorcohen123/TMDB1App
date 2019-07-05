@@ -75,16 +75,13 @@ public class DataOfMovie extends AppCompatActivity {
                     sRadioButton.start();  // Play sound
 
                     item.setIs_watch(1);
-
-                    mMovieDBHelper.updateMovieIsWatch(item);
                 } else if (checkedId == R.id.radioButton2) {
                     MediaPlayer sRadioButton = MediaPlayer.create(DataOfMovie.this, R.raw.radiobutton_sound);
                     sRadioButton.start();  // Play sound
 
                     item.setIs_watch(0);
-
-                    mMovieDBHelper.updateMovieIsWatch(item);
                 }
+                mMovieDBHelper.updateMovieIsWatch(item);
             }
         });
     }
