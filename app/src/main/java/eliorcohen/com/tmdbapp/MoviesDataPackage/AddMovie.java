@@ -40,6 +40,8 @@ public class AddMovie extends AppCompatActivity {
         textViewOK = findViewById(R.id.textViewOK);
 
         btnBack = findViewById(R.id.btnBack);
+
+        mMovieDBHelper = new MovieDBHelper(AddMovie.this);
     }
 
     private void putData() {
@@ -60,7 +62,6 @@ public class AddMovie extends AppCompatActivity {
                     sAdd.start();  // Play sound
 
                     // The texts in the SQLiteHelper
-                    mMovieDBHelper = new MovieDBHelper(AddMovie.this);
                     mMovieDBHelper.addMovie(title, overview, url);
 
                     // Pass from AddMovie to MainActivity

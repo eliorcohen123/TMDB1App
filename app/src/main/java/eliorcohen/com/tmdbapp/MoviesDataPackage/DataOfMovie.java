@@ -54,6 +54,8 @@ public class DataOfMovie extends AppCompatActivity {
         subject = findViewById(R.id.textViewSubject);  // ID of the subject
         body = findViewById(R.id.textViewBody);  // ID of the body
         URL = findViewById(R.id.textViewURL);  // ID of the URL
+
+        mMovieDBHelper = new MovieDBHelper(DataOfMovie.this);
     }
 
     private void radioGroup() {
@@ -74,15 +76,13 @@ public class DataOfMovie extends AppCompatActivity {
 
                     item.setIs_watch(1);
 
-                    MovieDBHelper movieDBHelper = new MovieDBHelper(DataOfMovie.this);
-                    movieDBHelper.updateMovieIsWatch(item);
+                    mMovieDBHelper.updateMovieIsWatch(item);
                 } else if (checkedId == R.id.radioButton2) {
                     MediaPlayer sRadioButton = MediaPlayer.create(DataOfMovie.this, R.raw.radiobutton_sound);
                     sRadioButton.start();  // Play sound
 
                     item.setIs_watch(0);
 
-                    mMovieDBHelper = new MovieDBHelper(DataOfMovie.this);
                     mMovieDBHelper.updateMovieIsWatch(item);
                 }
             }

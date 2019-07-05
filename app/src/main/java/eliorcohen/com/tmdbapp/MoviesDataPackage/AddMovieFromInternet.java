@@ -51,6 +51,8 @@ public class AddMovieFromInternet extends AppCompatActivity {
         imageView = findViewById(R.id.imageView3);
 
         btnBack = findViewById(R.id.btnBack);
+
+        mMovieDBHelper = new MovieDBHelper(AddMovieFromInternet.this);
     }
 
     private void getData() {
@@ -77,7 +79,6 @@ public class AddMovieFromInternet extends AppCompatActivity {
                     sAdd.start();  // Play sound
 
                     // The texts in the SQLiteHelper
-                    mMovieDBHelper = new MovieDBHelper(AddMovieFromInternet.this);
                     mMovieDBHelper.addMovie(title, overview, url);
 
                     // Pass from AddMovieFromInternet to MainActivity

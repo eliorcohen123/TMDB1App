@@ -61,6 +61,8 @@ public class EditMovie extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
 
         imageView = findViewById(R.id.imageView);
+
+        mMovieDBHelper = new MovieDBHelper(EditMovie.this);
     }
 
     private void radioGroup() {
@@ -82,15 +84,13 @@ public class EditMovie extends AppCompatActivity {
 
                     item.setIs_watch(1);
 
-                    MovieDBHelper movieDBHelper = new MovieDBHelper(EditMovie.this);
-                    movieDBHelper.updateMovieIsWatch(item);
+                    mMovieDBHelper.updateMovieIsWatch(item);
                 } else if (checkedId == R.id.radioButton2) {
                     MediaPlayer sRadioButton = MediaPlayer.create(EditMovie.this, R.raw.radiobutton_sound);
                     sRadioButton.start();  // Play sound
 
                     item.setIs_watch(0);
 
-                    mMovieDBHelper = new MovieDBHelper(EditMovie.this);
                     mMovieDBHelper.updateMovieIsWatch(item);
                 }
             }
@@ -120,7 +120,6 @@ public class EditMovie extends AppCompatActivity {
                     sAdd.start();  // Play sound
 
                     // The texts in the SQLiteHelper
-                    mMovieDBHelper = new MovieDBHelper(EditMovie.this);
                     mMovieDBHelper.updateMovie(title, overview, url, id);
 
                     // Pass from EditMovie to MainActivity
