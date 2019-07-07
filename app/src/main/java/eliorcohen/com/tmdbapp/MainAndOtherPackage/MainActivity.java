@@ -51,8 +51,8 @@ import eliorcohen.com.tmdbapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<MovieModel> mMovieList;  // ArrayList of MovieModel
-    private MovieCustomAdapterMain mAdapter;  // MovieCustomAdapterInternet of MainActivity
+    private ArrayList<MovieModel> mMovieListMain;  // ArrayList of MovieModel
+    private MovieCustomAdapterMain mAdapterMain;  // MovieCustomAdapterInternet of MainActivity
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
     private SwipeRefreshLayout swipeRefreshLayout;  // SwipeRe freshLayout of MainActivity
     private RecyclerView recyclerView;
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipe_container);  // ID of the SwipeRefreshLayout of MainActivity
 
         mMovieDBHelper = new MovieDBHelper(this);
-        mMovieList = new ArrayList<>();
+        mMovieListMain = new ArrayList<>();
 
         AppRater.app_launched(this);
     }
@@ -112,11 +112,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void myRecyclerView() {
-        mAdapter = new MovieCustomAdapterMain(this, mMovieList);
+        mAdapterMain = new MovieCustomAdapterMain(this, mMovieListMain);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ItemDecoration itemDecoration = new ItemDecoration(20);
         recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapterMain);
 
         getData();
     }
@@ -127,15 +127,15 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                mMovieList.clear();
-                mMovieList.addAll(mMovieDBHelper.getAllMovies());
+                mMovieListMain.clear();
+                mMovieListMain.addAll(mMovieDBHelper.getAllMovies());
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                mAdapter.notifyDataSetChanged();
+                mAdapterMain.notifyDataSetChanged();
             }
         }.execute();
     }

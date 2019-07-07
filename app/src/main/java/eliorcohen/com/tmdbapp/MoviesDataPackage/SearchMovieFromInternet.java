@@ -37,7 +37,7 @@ import rx.schedulers.Schedulers;
 public class SearchMovieFromInternet extends AppCompatActivity {
 
     private static ArrayList<MovieModel> mMovieListInternet;  // ArrayList of MovieModel
-    private MovieCustomAdapterInternet adapter;
+    private MovieCustomAdapterInternet mAdapterInternet;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
 
@@ -155,13 +155,13 @@ public class SearchMovieFromInternet extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*Method to generate List of data using RecyclerView with custom adapter*/
+    /*Method to generate List of data using RecyclerView with custom mAdapterInternet*/
     private void generateDataList(List<MovieModel> photoList) {
-        adapter = new MovieCustomAdapterInternet(this, photoList);
+        mAdapterInternet = new MovieCustomAdapterInternet(this, photoList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ItemDecoration itemDecoration = new ItemDecoration(20);
         recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mAdapterInternet);
     }
 
 }
