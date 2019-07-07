@@ -51,7 +51,7 @@ import eliorcohen.com.tmdbapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<MovieModel> mMovieList = new ArrayList<>();  // ArrayList of MovieModel
+    private ArrayList<MovieModel> mMovieList;  // ArrayList of MovieModel
     private MovieCustomAdapterMain mAdapter;  // MovieCustomAdapterInternet of MainActivity
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
     private SwipeRefreshLayout swipeRefreshLayout;  // SwipeRe freshLayout of MainActivity
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipe_container);  // ID of the SwipeRefreshLayout of MainActivity
 
         mMovieDBHelper = new MovieDBHelper(this);
+        mMovieList = new ArrayList<>();
 
         AppRater.app_launched(this);
     }
