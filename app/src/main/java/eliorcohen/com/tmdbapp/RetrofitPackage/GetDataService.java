@@ -8,5 +8,5 @@ import rx.Observable;
 public interface GetDataService {
 
     @GET()
-    Observable<JSONResponse> getAllPhotos(@Url String url);
+    Observable<JSONResponse> getAllMovies(@Url String url);
 }

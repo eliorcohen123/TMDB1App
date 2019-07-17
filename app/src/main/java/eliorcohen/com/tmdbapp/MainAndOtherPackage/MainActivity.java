@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         initUI();
         refreshData();
         myRecyclerView();
+        getData();
     }
 
     private void initUI() {
@@ -117,8 +118,6 @@ public class MainActivity extends AppCompatActivity {
         ItemDecoration itemDecoration = new ItemDecoration(20);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(mAdapterMain);
-
-        getData();
     }
 
     // This method is to fetch all user records from SQLite

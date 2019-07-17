@@ -164,7 +164,8 @@ public class MovieDBHelper extends SQLiteOpenHelper {
     }
 
     // Get all movies
-    Cursor getAllMoviesCursor() {
+    public Cursor getAllMoviesCursor() {
+
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(MOVIE_TABLE_NAME, null, null, null, null, null, null, null);
         return cursor;
