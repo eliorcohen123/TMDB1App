@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
     private SwipeRefreshLayout swipeRefreshLayout;  // SwipeRe freshLayout of MainActivity
     private RecyclerView recyclerView;
+    private ItemDecoration itemDecoration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     private void myRecyclerView() {
         mAdapterMain = new MovieCustomAdapterMain(this, mMovieListMain);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ItemDecoration itemDecoration = new ItemDecoration(20);
+        itemDecoration = new ItemDecoration(20);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(mAdapterMain);
     }

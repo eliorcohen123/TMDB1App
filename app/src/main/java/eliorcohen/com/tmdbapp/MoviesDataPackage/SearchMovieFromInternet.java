@@ -40,6 +40,7 @@ public class SearchMovieFromInternet extends AppCompatActivity {
     private MovieCustomAdapterInternet mAdapterInternet;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
+    private ItemDecoration itemDecoration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +160,7 @@ public class SearchMovieFromInternet extends AppCompatActivity {
     private void generateDataList(List<MovieModel> photoList) {
         mAdapterInternet = new MovieCustomAdapterInternet(this, photoList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ItemDecoration itemDecoration = new ItemDecoration(20);
+        itemDecoration = new ItemDecoration(20);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(mAdapterInternet);
     }
