@@ -34,7 +34,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class SearchMovieFromInternet extends AppCompatActivity {
+public class SearchMovieFromInternet extends AppCompatActivity implements SearchMovieInterface {
 
     private static ArrayList<MovieModel> mMovieListInternet;  // ArrayList of MovieModel
     private MovieCustomAdapterInternet mAdapterInternet;
@@ -99,11 +99,9 @@ public class SearchMovieFromInternet extends AppCompatActivity {
                     MediaPlayer sSearch = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.search_and_refresh_sound);
                     sSearch.start();  // Play sound
 
-                    progressDialog.setMessage("Loading...");
-                    progressDialog.show();
+                    startProgressDialog();
 
                     GetDataService apiService = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-
                     Observable<JSONResponse> observable = apiService.getAllMovies("/3/search/movie?/&query="
                             + query +
                             "&api_key=4e0be2c22f7268edffde97481d49064a&language=en-US").subscribeOn(Schedulers.newThread())
@@ -123,9 +121,8 @@ public class SearchMovieFromInternet extends AppCompatActivity {
                         public void onNext(JSONResponse products) {
                             mMovieListInternet = new ArrayList<MovieModel>(Arrays.asList(products.getResults()));
                             generateDataList(mMovieListInternet);
-                            if (progressDialog != null) {
-                                progressDialog.dismiss();
-                            }
+
+                            stopProgressDialog();
                         }
                     });
                     return true;
@@ -163,6 +160,19 @@ public class SearchMovieFromInternet extends AppCompatActivity {
         itemDecoration = new ItemDecoration(20);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(mAdapterInternet);
+    }
+
+    @Override
+    public void startProgressDialog() {
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+    }
+
+    @Override
+    public void stopProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
 }
