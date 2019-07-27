@@ -53,7 +53,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     private void initUI() {
         recyclerView = findViewById(R.id.recyclerViewInternet);
 
-        progressDialog = new ProgressDialog(SearchMovieFromInternet.this);
+        progressDialog = new ProgressDialog(this);
     }
 
     // Sets off the menu of activity_menu
