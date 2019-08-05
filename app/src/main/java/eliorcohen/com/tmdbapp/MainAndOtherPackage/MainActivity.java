@@ -116,8 +116,10 @@ public class MainActivity extends AppCompatActivity {
     private void myRecyclerView() {
         mAdapterMain = new MovieCustomAdapterMain(this, mMovieListMain);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        itemDecoration = new ItemDecoration(20);
-        recyclerView.addItemDecoration(itemDecoration);
+        if (itemDecoration == null) {
+            itemDecoration = new ItemDecoration(20);
+            recyclerView.addItemDecoration(itemDecoration);
+        }
         recyclerView.setAdapter(mAdapterMain);
     }
 
