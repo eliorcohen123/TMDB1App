@@ -42,6 +42,7 @@ public class DeleteMovie extends AppCompatActivity implements View.OnClickListen
 
                 Intent intent = new Intent(DeleteMovie.this, MainActivity.class);
                 startActivity(intent);
+                break;
         }
     }
 

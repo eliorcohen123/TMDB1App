@@ -60,11 +60,13 @@ public class DeleteAllData extends AppCompatActivity implements View.OnClickList
 
                 Intent intentDeleteAllDataToMain = new Intent(DeleteAllData.this, MainActivity.class);
                 startActivity(intentDeleteAllDataToMain);
+                break;
             case R.id.btnBack:
                 MediaPlayer sCancel = MediaPlayer.create(DeleteAllData.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 onBackPressed();
+                break;
         }
     }
 

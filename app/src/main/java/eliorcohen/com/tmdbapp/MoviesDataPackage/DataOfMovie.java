@@ -116,12 +116,14 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.youtube"));
                     startActivity(intent);
                 }
+                break;
             case R.id.btnBack:
                 MediaPlayer sCancel = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 Intent intent = new Intent(DataOfMovie.this, MainActivity.class);
                 startActivity(intent);
+                break;
         }
     }
 

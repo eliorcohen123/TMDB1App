@@ -95,6 +95,7 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
                 sBack.start();  // Play sound
 
                 onBackPressed();
+                break;
         }
     }
 

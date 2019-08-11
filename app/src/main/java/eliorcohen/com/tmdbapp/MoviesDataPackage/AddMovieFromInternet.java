@@ -99,17 +99,20 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
                     Intent intentAddInternetToMain = new Intent(AddMovieFromInternet.this, MainActivity.class);
                     startActivity(intentAddInternetToMain);
                 }
+                break;
             case R.id.textViewShow:
                 MediaPlayer sShowImage = MediaPlayer.create(AddMovieFromInternet.this, R.raw.show_image_sound);
                 sShowImage.start();  // Play sound
 
                 URL.setVisibility(View.INVISIBLE);  // Canceling the show of URL
                 imageView.setVisibility(View.VISIBLE);  // Show the ImageView
+                break;
             case R.id.btnBack:
                 MediaPlayer sCancel = MediaPlayer.create(AddMovieFromInternet.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 onBackPressed();
+                break;
         }
     }
 
