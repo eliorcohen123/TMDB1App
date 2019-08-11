@@ -1,5 +1,6 @@
 package eliorcohen.com.tmdbapp.LoginPackage;
 
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -16,7 +17,7 @@ import java.util.List;
 
 import eliorcohen.com.tmdbapp.R;
 
-public class UsersListActivity extends AppCompatActivity {
+public class UsersListActivity extends AppCompatActivity implements View.OnClickListener {
 
     private AppCompatActivity activity = UsersListActivity.this;
     private AppCompatTextView textViewName;
@@ -32,6 +33,7 @@ public class UsersListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_users_list);
 
         initUI();
+        initListeners();
         showUI();
         initObjects();
     }
@@ -40,18 +42,15 @@ public class UsersListActivity extends AppCompatActivity {
     private void initUI() {
         textViewName = findViewById(R.id.textViewName);
         recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
+        btnBack = findViewById(R.id.btnBack);
+    }
+
+    private void initListeners() {
+        btnBack.setOnClickListener(this);
     }
 
     private void showUI() {
         getSupportActionBar().setTitle("");
-
-        btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
     }
 
     // This method is to initialize objects to be used
@@ -86,6 +85,17 @@ public class UsersListActivity extends AppCompatActivity {
                 usersRecyclerAdapter.notifyDataSetChanged();
             }
         }.execute();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnBack:
+                MediaPlayer sBack = MediaPlayer.create(UsersListActivity.this, R.raw.cancel_and_move_sound);
+                sBack.start();  // Play sound
+
+                onBackPressed();
+        }
     }
 
 }

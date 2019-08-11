@@ -3,7 +3,9 @@ package eliorcohen.com.tmdbapp.MoviesDataPackage;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -18,11 +20,11 @@ import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
 import eliorcohen.com.tmdbapp.R;
 
-public class AddMovieFromInternet extends AppCompatActivity {
+public class AddMovieFromInternet extends AppCompatActivity implements View.OnClickListener {
 
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
     private MovieModel item;
-    private TextView TextViewOK, TextViewShow;
+    private TextView textViewOK, textViewShow;
     private EditText subject, body, URL;
     private Button btnBack;
     private ImageView imageView;
@@ -34,7 +36,7 @@ public class AddMovieFromInternet extends AppCompatActivity {
 
         initUI();
         getData();
-        btnBack();
+        initListeners();
     }
 
     private void initUI() {
@@ -45,14 +47,20 @@ public class AddMovieFromInternet extends AppCompatActivity {
         body = findViewById(R.id.editTextBody);  // ID of the body
         URL = findViewById(R.id.editTextURL);  // ID of the URL
 
-        TextViewOK = findViewById(R.id.textViewOK);
-        TextViewShow = findViewById(R.id.textViewShow);
+        textViewOK = findViewById(R.id.textViewOK);
+        textViewShow = findViewById(R.id.textViewShow);
 
         imageView = findViewById(R.id.imageView3);
 
         btnBack = findViewById(R.id.btnBack);
 
-        mMovieDBHelper = new MovieDBHelper(AddMovieFromInternet.this);
+        mMovieDBHelper = new MovieDBHelper(this);
+    }
+
+    private void initListeners() {
+        textViewOK.setOnClickListener(this);
+        textViewShow.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
     }
 
     private void getData() {
@@ -61,10 +69,16 @@ public class AddMovieFromInternet extends AppCompatActivity {
         body.setText(item.getOverview());  // GetSerializable of body
         URL.setText(item.getPoster_path());  // GetSerializable of URL
 
-        // Button that does the following:
-        TextViewOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //Initialize the ImageView
+        String picture = "https://image.tmdb.org/t/p/w154" + item.getPoster_path();
+        Picasso.get().load(picture).into(imageView);
+        imageView.setVisibility(View.INVISIBLE); //Set the ImageView Invisible
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.textViewOK:
                 String title = subject.getText().toString();  // GetText of the subject
                 String overview = body.getText().toString();  // GetText of the body
                 String url = URL.getText().toString();  // GetText of the URL
@@ -85,38 +99,18 @@ public class AddMovieFromInternet extends AppCompatActivity {
                     Intent intentAddInternetToMain = new Intent(AddMovieFromInternet.this, MainActivity.class);
                     startActivity(intentAddInternetToMain);
                 }
-            }
-        });
-
-        //Initialize the ImageView
-        String picture = "https://image.tmdb.org/t/p/w154" + item.getPoster_path();
-        Picasso.get().load(picture).into(imageView);
-        imageView.setVisibility(View.INVISIBLE); //Set the ImageView Invisible
-
-        // Button to show the ImageView
-        TextViewShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.textViewShow:
                 MediaPlayer sShowImage = MediaPlayer.create(AddMovieFromInternet.this, R.raw.show_image_sound);
                 sShowImage.start();  // Play sound
 
                 URL.setVisibility(View.INVISIBLE);  // Canceling the show of URL
                 imageView.setVisibility(View.VISIBLE);  // Show the ImageView
-            }
-        });
-    }
-
-    private void btnBack() {
-        // Button are back to the previous activity
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.btnBack:
                 MediaPlayer sCancel = MediaPlayer.create(AddMovieFromInternet.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 onBackPressed();
-            }
-        });
+        }
     }
 
 }

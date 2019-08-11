@@ -14,8 +14,10 @@ import android.os.CancellationSignal;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +42,7 @@ import javax.crypto.SecretKey;
 import eliorcohen.com.tmdbapp.MainAndOtherPackage.SplashActivity;
 import eliorcohen.com.tmdbapp.R;
 
-public class FingerPrint extends AppCompatActivity {
+public class FingerPrint extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mHeadingLabel, paraLabel;
     private ImageView mFingerprintImage, imageView;
@@ -59,8 +61,8 @@ public class FingerPrint extends AppCompatActivity {
         setContentView(R.layout.finger_print);
 
         initUI();
+        initListeners();
         fingerAuth();
-        btnBack();
     }
 
     private void initUI() {
@@ -71,17 +73,8 @@ public class FingerPrint extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
     }
 
-    private void btnBack() {
-        // Button are back to the previous activity
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer sCancel = MediaPlayer.create(FingerPrint.this, R.raw.cancel_and_move_sound);
-                sCancel.start();  // Play sound
-
-                onBackPressed();
-            }
-        });
+    private void initListeners() {
+        btnBack.setOnClickListener(this);
     }
 
     private void fingerAuth() {
@@ -204,6 +197,18 @@ public class FingerPrint extends AppCompatActivity {
                 paraLabel.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
                 imageView.setImageResource(R.mipmap.action_done);
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnBack:
+                MediaPlayer sCancel = MediaPlayer.create(FingerPrint.this, R.raw.cancel_and_move_sound);
+                sCancel.start();  // Play sound
+
+                onBackPressed();
+                break;
         }
     }
 

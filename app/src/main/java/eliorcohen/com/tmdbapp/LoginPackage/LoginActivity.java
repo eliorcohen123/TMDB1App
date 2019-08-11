@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.core.widget.NestedScrollView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -44,7 +47,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initViews();
         initListeners();
         initObjects();
-        passFingerPrint();
         myAnim();
     }
 
@@ -65,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void initListeners() {
         appCompatButtonLogin.setOnClickListener(this);
         textViewLinkRegister.setOnClickListener(this);
+        fingerPrintBtn.setOnClickListener(this);
     }
 
     // This method is to initialize objects to be used
@@ -91,6 +94,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 // Navigate to RegisterActivity
                 Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intentRegister);
+                break;
+            case R.id.fingerPrintBtn:
+                MediaPlayer sFingerPrint = MediaPlayer.create(LoginActivity.this, R.raw.cancel_and_move_sound);
+                sFingerPrint.start();  // Play sound
+
+                Intent intentAddToMain = new Intent(LoginActivity.this, FingerPrint.class);
+                startActivity(intentAddToMain);
                 break;
         }
     }
@@ -122,20 +132,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         anim = (AnimationDrawable) container.getBackground();
         anim.setEnterFadeDuration(6000);
         anim.setExitFadeDuration(2000);
-    }
-
-    private void passFingerPrint() {
-        // pass to FingerPrintClass
-        fingerPrintBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer sAdd = MediaPlayer.create(LoginActivity.this, R.raw.cancel_and_move_sound);
-                sAdd.start();  // Play sound
-
-                Intent intentAddToMain = new Intent(LoginActivity.this, FingerPrint.class);
-                startActivity(intentAddToMain);
-            }
-        });
     }
 
     @Override

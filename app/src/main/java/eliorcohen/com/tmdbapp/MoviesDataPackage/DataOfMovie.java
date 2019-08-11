@@ -19,7 +19,7 @@ import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
 import eliorcohen.com.tmdbapp.MainAndOtherPackage.MainActivity;
 import eliorcohen.com.tmdbapp.R;
 
-public class DataOfMovie extends AppCompatActivity {
+public class DataOfMovie extends AppCompatActivity implements View.OnClickListener {
 
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
     private MovieModel item;
@@ -35,10 +35,9 @@ public class DataOfMovie extends AppCompatActivity {
         setContentView(R.layout.data_of_movie);
 
         initUI();
+        initListeners();
         radioGroup();
         getData();
-        btnYouTube();
-        btnBack();
     }
 
     private void initUI() {
@@ -55,7 +54,12 @@ public class DataOfMovie extends AppCompatActivity {
         body = findViewById(R.id.textViewBody);  // ID of the body
         URL = findViewById(R.id.textViewURL);  // ID of the URL
 
-        mMovieDBHelper = new MovieDBHelper(DataOfMovie.this);
+        mMovieDBHelper = new MovieDBHelper(this);
+    }
+
+    private void initListeners() {
+        buttonYouTube.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
     }
 
     private void radioGroup() {
@@ -92,22 +96,6 @@ public class DataOfMovie extends AppCompatActivity {
         URL.setText(item.getPoster_path());  // GetSerializable of URL
     }
 
-    private void btnYouTube() {
-        buttonYouTube.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer sCancel = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
-                sCancel.start();  // Play sound
-                try {
-                    watchYoutubeVideo(item.getTitle() + " Trailer");
-                } catch (Exception e) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.youtube"));
-                    startActivity(intent);
-                }
-            }
-        });
-    }
-
     private void watchYoutubeVideo(String nameQuery) {
         Intent intent = new Intent(Intent.ACTION_SEARCH);
         intent.setPackage("com.google.android.youtube");
@@ -116,18 +104,25 @@ public class DataOfMovie extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void btnBack() {
-        // Button are back to the previous activity
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imageViewYouTube:
+                MediaPlayer sYouTube = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
+                sYouTube.start();  // Play sound
+                try {
+                    watchYoutubeVideo(item.getTitle() + " Trailer");
+                } catch (Exception e) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.google.android.youtube"));
+                    startActivity(intent);
+                }
+            case R.id.btnBack:
                 MediaPlayer sCancel = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 Intent intent = new Intent(DataOfMovie.this, MainActivity.class);
                 startActivity(intent);
-            }
-        });
+        }
     }
 
 }

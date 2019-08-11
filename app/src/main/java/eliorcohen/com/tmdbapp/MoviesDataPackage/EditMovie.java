@@ -3,7 +3,9 @@ package eliorcohen.com.tmdbapp.MoviesDataPackage;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +22,7 @@ import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
 import eliorcohen.com.tmdbapp.R;
 
-public class EditMovie extends AppCompatActivity {
+public class EditMovie extends AppCompatActivity implements View.OnClickListener {
 
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
     private int id;
@@ -28,8 +30,8 @@ public class EditMovie extends AppCompatActivity {
     private RadioGroup rg1;
     private RadioButton rb1, rb2;
     private EditText subject, body, URL;
-    private Button btnBack;
     private TextView textViewShow, textViewOK;
+    private Button btnBack;
     private ImageView imageView;
 
     @Override
@@ -38,9 +40,9 @@ public class EditMovie extends AppCompatActivity {
         setContentView(R.layout.edit_movie);
 
         initUI();
+        initListeners();
         radioGroup();
         getData();
-        btnBack();
     }
 
     private void initUI() {
@@ -62,7 +64,13 @@ public class EditMovie extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageView);
 
-        mMovieDBHelper = new MovieDBHelper(EditMovie.this);
+        mMovieDBHelper = new MovieDBHelper(this);
+    }
+
+    private void initListeners() {
+        textViewShow.setOnClickListener(this);
+        textViewOK.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
     }
 
     private void radioGroup() {
@@ -99,10 +107,16 @@ public class EditMovie extends AppCompatActivity {
         body.setText(item.getOverview());  // GetSerializable of body
         URL.setText(item.getPoster_path());  // GetSerializable of URL
 
-        // Button that does the following:
-        textViewOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //Initialize the ImageView
+        String picture = "https://image.tmdb.org/t/p/w154" + item.getPoster_path();
+        Picasso.get().load(picture).into(imageView);
+        imageView.setVisibility(View.INVISIBLE); //Set the ImageView Invisible
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.textViewOK:
                 String title = subject.getText().toString();  // GetText of the subject
                 String overview = body.getText().toString();  // GetText of the body
                 String url = URL.getText().toString();  // GetText of the URL
@@ -123,38 +137,18 @@ public class EditMovie extends AppCompatActivity {
                     Intent intentEditToMain = new Intent(EditMovie.this, MainActivity.class);
                     startActivity(intentEditToMain);
                 }
-            }
-        });
-
-        //Initialize the ImageView
-        String picture = "https://image.tmdb.org/t/p/w154" + item.getPoster_path();
-        Picasso.get().load(picture).into(imageView);
-        imageView.setVisibility(View.INVISIBLE); //Set the ImageView Invisible
-
-        // Button to show the ImageView
-        textViewShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.textViewShow:
                 MediaPlayer sShowImage = MediaPlayer.create(EditMovie.this, R.raw.show_image_sound);
                 sShowImage.start();  // Play sound
 
                 URL.setVisibility(View.INVISIBLE);
                 imageView.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
-    private void btnBack() {
-        // Button are back to the previous activity
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.btnBack:
                 MediaPlayer sCancel = MediaPlayer.create(EditMovie.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 onBackPressed();
-            }
-        });
+        }
     }
 
 }

@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import eliorcohen.com.tmdbapp.R;
 
-public class Credits extends AppCompatActivity {
+public class Credits extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonOK;
 
@@ -18,11 +18,16 @@ public class Credits extends AppCompatActivity {
         setContentView(R.layout.credits);
 
         initUI();
+        initListeners();
         btnBack();
     }
 
     private void initUI() {
         buttonOK = findViewById(R.id.textViewOK);
+    }
+
+    private void initListeners() {
+        buttonOK.setOnClickListener(this);
     }
 
     private void btnBack() {
@@ -36,6 +41,17 @@ public class Credits extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.textViewOK:
+                MediaPlayer sCancel = MediaPlayer.create(Credits.this, R.raw.cancel_and_move_sound);
+                sCancel.start();  // Play sound
+
+                onBackPressed();
+        }
     }
 
 }
