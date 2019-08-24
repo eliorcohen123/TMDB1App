@@ -3,6 +3,7 @@ package eliorcohen.com.tmdbapp.MoviesDataPackage;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -17,6 +18,9 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,13 +38,19 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class SearchMovieFromInternet extends AppCompatActivity implements SearchMovieInterface {
+public class SearchMovieFromInternet extends AppCompatActivity implements SearchMovieInterface, View.OnClickListener {
 
     private static ArrayList<MovieModel> mMovieListInternet;  // ArrayList of MovieModel
     private MovieCustomAdapterInternet mAdapterInternet;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
     private ItemDecoration itemDecoration;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+    private ImageView imagePre, imageNext, imagePreFirst;
+    private int myPage = 1;
+    private String myStringQuery;
+    private TextView textPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +58,60 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         setContentView(R.layout.add_movie_internet);
 
         initUI();
+        initListeners();
     }
 
     private void initUI() {
+        prefs = getSharedPreferences("mysettingsquery", Context.MODE_PRIVATE);
+        prefs.edit().clear().apply();
+
         recyclerView = findViewById(R.id.recyclerViewInternet);
+        imagePre = findViewById(R.id.imagePre);
+        imageNext = findViewById(R.id.imageNext);
+        imagePreFirst = findViewById(R.id.imagePreFirst);
+        textPage = findViewById(R.id.textPage);
 
         progressDialog = new ProgressDialog(this);
+
+        editor = prefs.edit();
+
+        imagePre.setVisibility(View.GONE);
+        imageNext.setVisibility(View.GONE);
+        imagePreFirst.setVisibility(View.GONE);
+        textPage.setVisibility(View.GONE);
+    }
+
+    private void initListeners() {
+        imageNext.setOnClickListener(this);
+        imagePre.setOnClickListener(this);
+        imagePreFirst.setOnClickListener(this);
+    }
+
+    private void getMyPage(String query, int page) {
+        GetDataService apiService = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Observable<JSONResponse> observable = apiService.getAllMovies("/3/search/movie?/&query="
+                + query +
+                "&api_key=4e0be2c22f7268edffde97481d49064a&language=en-US&page=" + page).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(new Observer<JSONResponse>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(JSONResponse products) {
+                mMovieListInternet = new ArrayList<MovieModel>(Arrays.asList(products.getResults()));
+                generateDataList(mMovieListInternet);
+
+                stopProgressDialog();
+            }
+        });
     }
 
     // Sets off the menu of activity_menu
@@ -101,30 +159,21 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
                     startProgressDialog();
 
-                    GetDataService apiService = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-                    Observable<JSONResponse> observable = apiService.getAllMovies("/3/search/movie?/&query="
-                            + query +
-                            "&api_key=4e0be2c22f7268edffde97481d49064a&language=en-US").subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread());
-                    observable.subscribe(new Observer<JSONResponse>() {
-                        @Override
-                        public void onCompleted() {
+                    myStringQuery = prefs.getString("mystringquery", "");
 
-                        }
+                    editor.putString("mystringquery", query);
+                    editor.apply();
 
-                        @Override
-                        public void onError(Throwable e) {
+                    if (!myStringQuery.equals(query)) {
+                        myPage = 1;
+                    }
 
-                        }
+                    imageNext.setVisibility(View.VISIBLE);
+                    textPage.setVisibility(View.VISIBLE);
 
-                        @Override
-                        public void onNext(JSONResponse products) {
-                            mMovieListInternet = new ArrayList<MovieModel>(Arrays.asList(products.getResults()));
-                            generateDataList(mMovieListInternet);
-
-                            stopProgressDialog();
-                        }
-                    });
+                    getPage0(query);
+                    getPage1();
+                    getPageText(myPage);
                     return true;
                 }
 
@@ -135,6 +184,42 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
             });
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void getPage0(String query) {
+        if (myPage <= 0) {
+            myPage = 1;
+        } else {
+            imagePre.setVisibility(View.VISIBLE);
+            getMyPage(query, myPage);
+        }
+    }
+
+    private void getPage1() {
+        if (myPage == 1) {
+            imagePre.setVisibility(View.GONE);
+        } else {
+            imagePre.setVisibility(View.VISIBLE);
+        }
+
+        if (myPage > 2) {
+            imagePreFirst.setVisibility(View.VISIBLE);
+        } else {
+            imagePreFirst.setVisibility(View.GONE);
+        }
+    }
+
+    private void getPageText(int page) {
+        textPage.setText(String.valueOf(page));
+    }
+
+    private void getCheckMaxPage() {
+        if (mAdapterInternet.getItemCount() == 0) {
+            myPage = myPage - 2;
+            imageNext.setVisibility(View.GONE);
+        } else if (mAdapterInternet.getItemCount() > 0) {
+            imageNext.setVisibility(View.VISIBLE);
+        }
     }
 
     // Options in the activity_menu
@@ -174,6 +259,37 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     public void stopProgressDialog() {
         if (progressDialog != null) {
             progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        myStringQuery = prefs.getString("mystringquery", "");
+        switch (view.getId()) {
+            case R.id.imageNext:
+                myPage++;
+
+                getCheckMaxPage();
+                getPage0(myStringQuery);
+                getPage1();
+                getPageText(myPage);
+                break;
+            case R.id.imagePre:
+                myPage--;
+
+                getCheckMaxPage();
+                getPage0(myStringQuery);
+                getPage1();
+                getPageText(myPage);
+                break;
+            case R.id.imagePreFirst:
+                myPage = 1;
+
+                getCheckMaxPage();
+                getPage0(myStringQuery);
+                getPage1();
+                getPageText(myPage);
+                break;
         }
     }
 
