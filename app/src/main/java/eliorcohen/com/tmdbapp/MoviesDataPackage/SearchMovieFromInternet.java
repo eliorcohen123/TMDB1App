@@ -269,10 +269,10 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
             case R.id.imageNext:
                 myPage++;
 
+                getCheckMaxPage();
                 getPage0(myStringQuery);
                 getPage1();
                 getPageText(myPage);
-                getCheckMaxPage();
                 break;
             case R.id.imagePre:
                 myPage--;
@@ -281,18 +281,18 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
                     myPage = myPage + 2;
                 }
 
+                getCheckMaxPage();
                 getPage0(myStringQuery);
                 getPage1();
                 getPageText(myPage);
-                getCheckMaxPage();
                 break;
             case R.id.imagePreFirst:
                 myPage = 1;
 
+                getCheckMaxPage();
                 getPage0(myStringQuery);
                 getPage1();
                 getPageText(myPage);
-                getCheckMaxPage();
                 break;
         }
     }
