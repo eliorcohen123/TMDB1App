@@ -65,6 +65,8 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         prefs = getSharedPreferences("mysettingsquery", Context.MODE_PRIVATE);
         prefs.edit().clear().apply();
 
+        editor = prefs.edit();
+
         recyclerView = findViewById(R.id.recyclerViewInternet);
         imagePre = findViewById(R.id.imagePre);
         imageNext = findViewById(R.id.imageNext);
@@ -72,8 +74,6 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         textPage = findViewById(R.id.textPage);
 
         progressDialog = new ProgressDialog(this);
-
-        editor = prefs.edit();
 
         imagePre.setVisibility(View.GONE);
         imageNext.setVisibility(View.GONE);
