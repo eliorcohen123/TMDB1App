@@ -87,20 +87,28 @@ public class MovieDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(MOVIE_TITLE, title);
-        values.put(MOVIE_OVERVIEW, overview);
-        values.put(MOVIE_URL, url);
+        Cursor cursor1;
+        String sql = "SELECT * FROM " + MOVIE_TABLE_NAME + " WHERE " + MOVIE_TITLE + "= '" + title + "'";
+        cursor1 = db.rawQuery(sql, null);
+        if (cursor1.getCount() > 0) {
+            Toast.makeText(ctx, "Current movie already exist in your favorites", Toast.LENGTH_LONG).show();
+        } else {
+            values.put(MOVIE_TITLE, title);
+            values.put(MOVIE_OVERVIEW, overview);
+            values.put(MOVIE_URL, url);
 
-        int rowNumber1 = db.update(MOVIE_TABLE_NAME, values, MOVIE_ID + " = ?", new String[]{String.valueOf(id)});
-        try {
-            Log.d("MovieDBHelper", "update new movie with id: " + rowNumber1 +
-                    ", Name: " + title);
-        } catch (SQLiteException ex) {
-            Log.e("MovieDBHelper", ex.getMessage());
-            throw ex;
-        } finally {
-            db.close();
+            int rowNumber1 = db.update(MOVIE_TABLE_NAME, values, MOVIE_ID + " = ?", new String[]{String.valueOf(id)});
+            try {
+                Log.d("MovieDBHelper", "update new movie with id: " + rowNumber1 +
+                        ", Name: " + title);
+            } catch (SQLiteException ex) {
+                Log.e("MovieDBHelper", ex.getMessage());
+                throw ex;
+            } finally {
+                db.close();
+            }
         }
+        cursor1.close();
     }
 
     //Edit Movies RadioButton
