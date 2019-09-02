@@ -22,6 +22,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,10 +54,10 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
     private ItemDecoration itemDecoration;
-    private SharedPreferences prefs;
-    private SharedPreferences.Editor editor;
+    private SharedPreferences prefsQuery, prefsMaxPage;
+    private SharedPreferences.Editor editorQuery, editorMaxPage;
     private ImageView imagePre, imageNext, imagePreFirst;
-    private int myPage = 1;
+    private int myPage = 1, myMaxPageSum;
     private String myStringQuery;
     private TextView textPage;
 
@@ -62,10 +71,15 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     }
 
     private void initUI() {
-        prefs = getSharedPreferences("mysettingsquery", Context.MODE_PRIVATE);
-        prefs.edit().clear().apply();
+        prefsQuery = getSharedPreferences("mysettingsquery", Context.MODE_PRIVATE);
+        prefsQuery.edit().clear().apply();
 
-        editor = prefs.edit();
+        editorQuery = prefsQuery.edit();
+
+        prefsMaxPage = getSharedPreferences("mysettingsmaxpage", Context.MODE_PRIVATE);
+        prefsMaxPage.edit().clear().apply();
+
+        editorMaxPage = prefsMaxPage.edit();
 
         recyclerView = findViewById(R.id.recyclerViewInternet);
         imagePre = findViewById(R.id.imagePre);
@@ -159,10 +173,10 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
                     startProgressDialog();
 
-                    myStringQuery = prefs.getString("mystringquery", "");
+                    myStringQuery = prefsQuery.getString("mystringquery", "");
 
-                    editor.putString("mystringquery", query);
-                    editor.apply();
+                    editorQuery.putString("mystringquery", query);
+                    editorQuery.apply();
 
                     if (!myStringQuery.equals(query)) {
                         myPage = 1;
@@ -174,6 +188,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
                     getPage0(query);
                     getPage1();
                     getPageText(myPage);
+                    getSumPage(query, myPage);
                     return true;
                 }
 
@@ -184,6 +199,31 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
             });
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void getSumPage(String query, int page) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.themoviedb.org/3/search/movie?/&query="
+                + query +
+                "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject mainObj = new JSONObject(response);
+                    int sumPage = mainObj.getInt("total_pages");
+                    editorMaxPage.putInt("mymaxpage", sumPage);
+                    editorMaxPage.apply();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
     private void getPage0(String query) {
@@ -214,10 +254,10 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     }
 
     private void getCheckMaxPage() {
-        if (mAdapterInternet.getItemCount() == 0) {
-            myPage = myPage - 2;
+        myMaxPageSum = prefsMaxPage.getInt("mymaxpage", 0);
+        if (myPage == myMaxPageSum) {
             imageNext.setVisibility(View.GONE);
-        } else if (mAdapterInternet.getItemCount() > 0) {
+        } else if (myPage < myMaxPageSum) {
             imageNext.setVisibility(View.VISIBLE);
         }
     }
@@ -264,7 +304,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
     @Override
     public void onClick(View view) {
-        myStringQuery = prefs.getString("mystringquery", "");
+        myStringQuery = prefsQuery.getString("mystringquery", "");
         switch (view.getId()) {
             case R.id.imageNext:
                 myPage++;
@@ -273,6 +313,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
                 getPage0(myStringQuery);
                 getPage1();
                 getPageText(myPage);
+                getSumPage(myStringQuery, myPage);
                 break;
             case R.id.imagePre:
                 myPage--;
@@ -285,6 +326,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
                 getPage0(myStringQuery);
                 getPage1();
                 getPageText(myPage);
+                getSumPage(myStringQuery, myPage);
                 break;
             case R.id.imagePreFirst:
                 myPage = 1;
@@ -293,6 +335,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
                 getPage0(myStringQuery);
                 getPage1();
                 getPageText(myPage);
+                getSumPage(myStringQuery, myPage);
                 break;
         }
     }
