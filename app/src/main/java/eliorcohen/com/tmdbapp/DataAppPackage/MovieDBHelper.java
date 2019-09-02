@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,9 +19,12 @@ public class MovieDBHelper extends SQLiteOpenHelper {
     private static final String MOVIE_OVERVIEW = "OVERVIEW";
     private static final String MOVIE_URL = "URL";
     private static final String IS_WATCH = "IS_WATCH";
+    private Context ctx;
 
     public MovieDBHelper(Context context) {
         super(context, MOVIE_TABLE_NAME, null, 1);
+
+        this.ctx = context;
     }
 
     @Override
@@ -52,21 +56,29 @@ public class MovieDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(MOVIE_TITLE, title);
-        contentValues.put(MOVIE_OVERVIEW, overview);
-        contentValues.put(MOVIE_URL, url);
+        Cursor cursor1;
+        String sql = "SELECT * FROM " + MOVIE_TABLE_NAME + " WHERE " + MOVIE_TITLE + "= '" + title + "'";
+        cursor1 = db.rawQuery(sql, null);
+        if (cursor1.getCount() > 0) {
+            Toast.makeText(ctx, "Current movie already exist in your favorites", Toast.LENGTH_LONG).show();
+        } else {
+            contentValues.put(MOVIE_TITLE, title);
+            contentValues.put(MOVIE_OVERVIEW, overview);
+            contentValues.put(MOVIE_URL, url);
 
-        long id = db.insertOrThrow(MOVIE_TABLE_NAME, null, contentValues);
-        try {
-            Log.d("MovieDBHelper", "insert new movie with id: " + id +
-                    ", Name: " + title +
-                    ", Overview: " + overview +
-                    ", URL: " + url);
-        } catch (SQLiteException ex) {
-            Log.e("MovieDBHelper", ex.getMessage());
-        } finally {
-            db.close();
+            long id = db.insertOrThrow(MOVIE_TABLE_NAME, null, contentValues);
+            try {
+                Log.d("MovieDBHelper", "insert new movie with id: " + id +
+                        ", Name: " + title +
+                        ", Overview: " + overview +
+                        ", URL: " + url);
+            } catch (SQLiteException ex) {
+                Log.e("MovieDBHelper", ex.getMessage());
+            } finally {
+                db.close();
+            }
         }
+        cursor1.close();
     }
 
     //Edit Movies
