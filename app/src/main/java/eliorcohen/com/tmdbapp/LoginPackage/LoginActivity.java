@@ -50,6 +50,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         myAnim();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (anim != null && !anim.isRunning())
+            anim.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (anim != null && anim.isRunning())
+            anim.stop();
+    }
+
     // This method is to initialize views
     private void initViews() {
         nestedScrollView = findViewById(R.id.nestedScrollView);
@@ -132,20 +146,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         anim = (AnimationDrawable) container.getBackground();
         anim.setEnterFadeDuration(6000);
         anim.setExitFadeDuration(2000);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (anim != null && !anim.isRunning())
-            anim.start();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (anim != null && anim.isRunning())
-            anim.stop();
     }
 
 }
