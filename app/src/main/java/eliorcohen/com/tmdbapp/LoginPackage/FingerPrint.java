@@ -53,6 +53,8 @@ public class FingerPrint extends AppCompatActivity implements View.OnClickListen
     private Cipher cipher;
     private String KEY_NAME = "AndroidKey";
     private Button btnBack;
+    private MediaPlayer sPassword, sFinger;
+    private MediaPlayer sCancel;
 
     // All the codes add up to confirmation by fingerprinting
     @Override
@@ -71,6 +73,10 @@ public class FingerPrint extends AppCompatActivity implements View.OnClickListen
         mParaLabel = findViewById(R.id.paraLabel);
 
         btnBack = findViewById(R.id.btnBack);
+
+        sPassword = MediaPlayer.create(FingerPrint.this, R.raw.access_sound);
+        sFinger = MediaPlayer.create(FingerPrint.this, R.raw.good_access_sound);
+        sCancel = MediaPlayer.create(FingerPrint.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -166,7 +172,6 @@ public class FingerPrint extends AppCompatActivity implements View.OnClickListen
         public void onAuthenticationFailed() {
             this.update("Auth Failed. ", false);
 
-            MediaPlayer sPassword = MediaPlayer.create(FingerPrint.this, R.raw.access_sound);
             sPassword.start();  // Play sound
         }
 
@@ -180,7 +185,6 @@ public class FingerPrint extends AppCompatActivity implements View.OnClickListen
         public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
             this.update("You can now access the app.", true);
 
-            MediaPlayer sFinger = MediaPlayer.create(FingerPrint.this, R.raw.good_access_sound);
             sFinger.start();  // Play sound
 
             Intent intentFinger = new Intent(FingerPrint.this, SplashActivity.class);
@@ -204,7 +208,6 @@ public class FingerPrint extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnBack:
-                MediaPlayer sCancel = MediaPlayer.create(FingerPrint.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 onBackPressed();

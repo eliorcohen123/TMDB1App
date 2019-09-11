@@ -28,6 +28,7 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
     private EditText subject, body, URL;
     private Button btnBack;
     private ImageView imageView;
+    private MediaPlayer sError, sAdd, sShowImage, sCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,11 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
         btnBack = findViewById(R.id.btnBack);
 
         mMovieDBHelper = new MovieDBHelper(this);
+
+        sError = MediaPlayer.create(AddMovieFromInternet.this, R.raw.error_sound);
+        sAdd = MediaPlayer.create(AddMovieFromInternet.this, R.raw.add_and_edit_sound);
+        sShowImage = MediaPlayer.create(AddMovieFromInternet.this, R.raw.show_image_sound);
+        sCancel = MediaPlayer.create(AddMovieFromInternet.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -84,12 +90,10 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
                 String url = URL.getText().toString();  // GetText of the URL
 
                 if (TextUtils.isEmpty(subject.getText())) { // If the text are empty the movie will not be approved
-                    MediaPlayer sError = MediaPlayer.create(AddMovieFromInternet.this, R.raw.error_sound);
                     sError.start();  // Play sound
 
                     subject.setError("Title is required!");  // Print text of error if the text are empty
                 } else {
-                    MediaPlayer sAdd = MediaPlayer.create(AddMovieFromInternet.this, R.raw.add_and_edit_sound);
                     sAdd.start();  // Play sound
 
                     // The texts in the SQLiteHelper
@@ -101,14 +105,12 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
                 }
                 break;
             case R.id.textViewShow:
-                MediaPlayer sShowImage = MediaPlayer.create(AddMovieFromInternet.this, R.raw.show_image_sound);
                 sShowImage.start();  // Play sound
 
                 URL.setVisibility(View.INVISIBLE);  // Canceling the show of URL
                 imageView.setVisibility(View.VISIBLE);  // Show the ImageView
                 break;
             case R.id.btnBack:
-                MediaPlayer sCancel = MediaPlayer.create(AddMovieFromInternet.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 onBackPressed();

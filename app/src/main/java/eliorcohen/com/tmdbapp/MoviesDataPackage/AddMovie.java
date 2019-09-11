@@ -22,6 +22,7 @@ public class AddMovie extends AppCompatActivity implements View.OnClickListener 
     private EditText subject, body, URL;
     private TextView textViewOK;
     private Button btnBack;
+    private MediaPlayer sCancel, sError, sAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,10 @@ public class AddMovie extends AppCompatActivity implements View.OnClickListener 
         btnBack = findViewById(R.id.btnBack);
 
         mMovieDBHelper = new MovieDBHelper(this);
+
+        sCancel = MediaPlayer.create(AddMovie.this, R.raw.cancel_and_move_sound);
+        sError = MediaPlayer.create(AddMovie.this, R.raw.error_sound);
+        sAdd = MediaPlayer.create(AddMovie.this, R.raw.add_and_edit_sound);
     }
 
     private void initListeners() {
@@ -54,7 +59,6 @@ public class AddMovie extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnBack:
-                MediaPlayer sCancel = MediaPlayer.create(AddMovie.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 onBackPressed();
@@ -65,12 +69,10 @@ public class AddMovie extends AppCompatActivity implements View.OnClickListener 
                 String url = URL.getText().toString();  // GetText of the URL
 
                 if (TextUtils.isEmpty(subject.getText())) {  // If the text are empty the movie will not be approved
-                    MediaPlayer sError = MediaPlayer.create(AddMovie.this, R.raw.error_sound);
                     sError.start();  // Play sound
 
                     subject.setError("Title is required!");  // Print text of error if the text are empty
                 } else {
-                    MediaPlayer sAdd = MediaPlayer.create(AddMovie.this, R.raw.add_and_edit_sound);
                     sAdd.start();  // Play sound
 
                     // The texts in the SQLiteHelper

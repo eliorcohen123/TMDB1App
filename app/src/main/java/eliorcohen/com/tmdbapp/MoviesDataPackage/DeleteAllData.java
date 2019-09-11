@@ -20,6 +20,7 @@ public class DeleteAllData extends AppCompatActivity implements View.OnClickList
 
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
     private Button buttonDeleteAll, btnBack;
+    private MediaPlayer sDeleteAll, sCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,9 @@ public class DeleteAllData extends AppCompatActivity implements View.OnClickList
         btnBack = findViewById(R.id.btnBack);
 
         mMovieDBHelper = new MovieDBHelper(this);  // Put the SQLiteHelper in DeleteAllData
+
+        sDeleteAll = MediaPlayer.create(DeleteAllData.this, R.raw.delete_all_sound);
+        sCancel = MediaPlayer.create(DeleteAllData.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -46,7 +50,6 @@ public class DeleteAllData extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonDeleteAll:
-                MediaPlayer sDeleteAll = MediaPlayer.create(DeleteAllData.this, R.raw.delete_all_sound);
                 sDeleteAll.start();  // Play sound
 
                 mMovieDBHelper.deleteData();
@@ -62,7 +65,6 @@ public class DeleteAllData extends AppCompatActivity implements View.OnClickList
                 startActivity(intentDeleteAllDataToMain);
                 break;
             case R.id.btnBack:
-                MediaPlayer sCancel = MediaPlayer.create(DeleteAllData.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 onBackPressed();

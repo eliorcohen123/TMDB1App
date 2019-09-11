@@ -33,6 +33,7 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
     private TextView textViewShow, textViewOK;
     private Button btnBack;
     private ImageView imageView;
+    private MediaPlayer sRadioButton, sError, sAdd, sShowImage, sCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,12 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
         imageView = findViewById(R.id.imageView);
 
         mMovieDBHelper = new MovieDBHelper(this);
+
+        sRadioButton = MediaPlayer.create(EditMovie.this, R.raw.radiobutton_sound);
+        sError = MediaPlayer.create(EditMovie.this, R.raw.error_sound);
+        sAdd = MediaPlayer.create(EditMovie.this, R.raw.add_and_edit_sound);
+        sShowImage = MediaPlayer.create(EditMovie.this, R.raw.show_image_sound);
+        sCancel = MediaPlayer.create(EditMovie.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -87,12 +94,10 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.radioButton1) {
-                    MediaPlayer sRadioButton = MediaPlayer.create(EditMovie.this, R.raw.radiobutton_sound);
                     sRadioButton.start();  // Play sound
 
                     item.setIs_watch(1);
                 } else if (checkedId == R.id.radioButton2) {
-                    MediaPlayer sRadioButton = MediaPlayer.create(EditMovie.this, R.raw.radiobutton_sound);
                     sRadioButton.start();  // Play sound
 
                     item.setIs_watch(0);
@@ -122,12 +127,10 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
                 String url = URL.getText().toString();  // GetText of the URL
 
                 if (TextUtils.isEmpty(subject.getText())) {  // If the text are empty the movie will not be approved
-                    MediaPlayer sError = MediaPlayer.create(EditMovie.this, R.raw.error_sound);
                     sError.start();  // Play sound
 
                     subject.setError("Title is required!");  // Print text of error if the text are empty
                 } else {
-                    MediaPlayer sAdd = MediaPlayer.create(EditMovie.this, R.raw.add_and_edit_sound);
                     sAdd.start();  // Play sound
 
                     // The texts in the SQLiteHelper
@@ -139,13 +142,11 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
                 }
                 break;
             case R.id.textViewShow:
-                MediaPlayer sShowImage = MediaPlayer.create(EditMovie.this, R.raw.show_image_sound);
                 sShowImage.start();  // Play sound
 
                 URL.setVisibility(View.INVISIBLE);
                 imageView.setVisibility(View.VISIBLE);
             case R.id.btnBack:
-                MediaPlayer sCancel = MediaPlayer.create(EditMovie.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 onBackPressed();

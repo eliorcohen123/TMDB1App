@@ -2,6 +2,7 @@ package eliorcohen.com.tmdbapp.CustomAdapterPackage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,12 @@ public class MovieCustomAdapterInternet extends RecyclerView.Adapter<MovieCustom
 
     private Context context;
     private List<MovieModel> dataList;
+    private MediaPlayer sMove;
 
     public MovieCustomAdapterInternet(Context context, List<MovieModel> dataList) {
         this.context = context;
         this.dataList = dataList;
+        sMove = MediaPlayer.create(context, R.raw.cancel_and_move_sound);
     }
 
     class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -68,6 +71,8 @@ public class MovieCustomAdapterInternet extends RecyclerView.Adapter<MovieCustom
                 Intent intentSearchToAddInternet = new Intent(context, AddMovieFromInternet.class);
                 intentSearchToAddInternet.putExtra(context.getString(R.string.movie_add_from_internet), dataList.get(position));
                 context.startActivity(intentSearchToAddInternet);
+
+                sMove.start();  // Play sound
             }
         });
 

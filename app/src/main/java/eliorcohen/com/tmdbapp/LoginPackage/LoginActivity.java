@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private LinearLayout container;
     private AnimationDrawable anim;
     private Button fingerPrintBtn;
+    private MediaPlayer sAdd, sAddGood, sFingerPrint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textViewLinkRegister = findViewById(R.id.textViewLinkRegister);
         fingerPrintBtn = findViewById(R.id.fingerPrintBtn);
         container = findViewById(R.id.container);
+
+        sAdd = MediaPlayer.create(LoginActivity.this, R.raw.cancel_and_move_sound);
+        sFingerPrint = MediaPlayer.create(LoginActivity.this, R.raw.cancel_and_move_sound);
+        sAddGood = MediaPlayer.create(LoginActivity.this, R.raw.good_access_sound);
     }
 
     // This method is to initialize listeners
@@ -102,7 +107,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 verifyFromSQLite();
                 break;
             case R.id.textViewLinkRegister:
-                MediaPlayer sAdd = MediaPlayer.create(LoginActivity.this, R.raw.cancel_and_move_sound);
                 sAdd.start();  // Play sound
 
                 // Navigate to RegisterActivity
@@ -110,7 +114,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intentRegister);
                 break;
             case R.id.fingerPrintBtn:
-                MediaPlayer sFingerPrint = MediaPlayer.create(LoginActivity.this, R.raw.cancel_and_move_sound);
                 sFingerPrint.start();  // Play sound
 
                 Intent intentAddToMain = new Intent(LoginActivity.this, FingerPrint.class);
@@ -131,8 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
         if (loginDBHelper.checkUser(textInputEditTextEmail.getText().toString().trim(), textInputEditTextPassword.getText().toString().trim())) {
-            MediaPlayer sAdd = MediaPlayer.create(LoginActivity.this, R.raw.good_access_sound);
-            sAdd.start();  // Play sound
+            sAddGood.start();  // Play sound
 
             Intent intentAddToMain = new Intent(LoginActivity.this, SplashActivity.class);
             startActivity(intentAddToMain);

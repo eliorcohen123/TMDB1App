@@ -15,6 +15,7 @@ import eliorcohen.com.tmdbapp.R;
 public class DeleteMovie extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnBack;
+    private MediaPlayer sOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class DeleteMovie extends AppCompatActivity implements View.OnClickListen
 
     private void initUI() {
         btnBack = findViewById(R.id.btnBack);
+
+        sOk = MediaPlayer.create(DeleteMovie.this, R.raw.ok_sound);
     }
 
     private void initListeners() {
@@ -37,7 +40,6 @@ public class DeleteMovie extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnBack:
-                MediaPlayer sOk = MediaPlayer.create(DeleteMovie.this, R.raw.ok_sound);
                 sOk.start();  // Play sound
 
                 Intent intent = new Intent(DeleteMovie.this, MainActivity.class);

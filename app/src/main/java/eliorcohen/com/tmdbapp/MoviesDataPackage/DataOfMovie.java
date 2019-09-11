@@ -28,6 +28,7 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
     private TextView subject, body, URL;
     private ImageView buttonYouTube;
     private Button btnBack;
+    private MediaPlayer sRadioButton, sYouTube,  sCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,10 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
         URL = findViewById(R.id.textViewURL);  // ID of the URL
 
         mMovieDBHelper = new MovieDBHelper(this);
+
+        sRadioButton = MediaPlayer.create(DataOfMovie.this, R.raw.radiobutton_sound);
+        sYouTube = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
+        sCancel = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -75,12 +80,10 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.radioButton1) {
-                    MediaPlayer sRadioButton = MediaPlayer.create(DataOfMovie.this, R.raw.radiobutton_sound);
                     sRadioButton.start();  // Play sound
 
                     item.setIs_watch(1);
                 } else if (checkedId == R.id.radioButton2) {
-                    MediaPlayer sRadioButton = MediaPlayer.create(DataOfMovie.this, R.raw.radiobutton_sound);
                     sRadioButton.start();  // Play sound
 
                     item.setIs_watch(0);
@@ -108,7 +111,6 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageViewYouTube:
-                MediaPlayer sYouTube = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
                 sYouTube.start();  // Play sound
                 try {
                     watchYoutubeVideo(item.getTitle() + " Trailer");
@@ -118,7 +120,6 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
                 }
                 break;
             case R.id.btnBack:
-                MediaPlayer sCancel = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
                 sCancel.start();  // Play sound
 
                 Intent intent = new Intent(DataOfMovie.this, MainActivity.class);

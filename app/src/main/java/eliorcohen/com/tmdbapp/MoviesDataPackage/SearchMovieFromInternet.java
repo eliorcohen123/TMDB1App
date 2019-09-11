@@ -60,6 +60,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     private int myPage = 1, myMaxPageSum;
     private String myStringQuery;
     private TextView textPage;
+    private MediaPlayer sSearch, sMove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,9 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         imageNext.setVisibility(View.GONE);
         imagePreFirst.setVisibility(View.GONE);
         textPage.setVisibility(View.GONE);
+
+        sSearch = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.search_and_refresh_sound);
+        sMove = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -168,7 +172,6 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    MediaPlayer sSearch = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.search_and_refresh_sound);
                     sSearch.start();  // Play sound
 
                     startProgressDialog();
@@ -269,8 +272,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
             case R.id.action_search:  // Start search
                 break;
             case R.id.backSearch:  // Back to the previous activity
-                MediaPlayer sCancel = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.cancel_and_move_sound);
-                sCancel.start();  // Play sound
+                sMove.start();  // Play sound
 
                 onBackPressed();
                 break;
@@ -307,6 +309,8 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         myStringQuery = prefsQuery.getString("mystringquery", "");
         switch (view.getId()) {
             case R.id.imageNext:
+                sMove.start();  // Play sound
+
                 myPage++;
 
                 getCheckMaxPage();
@@ -316,6 +320,8 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
                 getSumPage(myStringQuery, myPage);
                 break;
             case R.id.imagePre:
+                sMove.start();  // Play sound
+
                 myPage--;
 
                 getCheckMaxPage();
@@ -325,6 +331,8 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
                 getSumPage(myStringQuery, myPage);
                 break;
             case R.id.imagePreFirst:
+                sMove.start();  // Play sound
+
                 myPage = 1;
 
                 getCheckMaxPage();

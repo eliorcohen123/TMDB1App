@@ -3,12 +3,14 @@ package eliorcohen.com.tmdbapp.LoginPackage;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.Button;
 
@@ -26,6 +28,7 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
     private UsersRecyclerAdapter usersRecyclerAdapter;
     private LoginDBHelper loginDBHelper;
     private Button btnBack;
+    private MediaPlayer sBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
         textViewName = findViewById(R.id.textViewName);
         recyclerViewUsers = findViewById(R.id.recyclerViewUsers);
         btnBack = findViewById(R.id.btnBack);
+
+        sBack = MediaPlayer.create(UsersListActivity.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -91,7 +96,6 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnBack:
-                MediaPlayer sBack = MediaPlayer.create(UsersListActivity.this, R.raw.cancel_and_move_sound);
                 sBack.start();  // Play sound
 
                 onBackPressed();

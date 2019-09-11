@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;  // SwipeRe freshLayout of MainActivity
     private RecyclerView recyclerView;
     private ItemDecoration itemDecoration;
+    private MediaPlayer sSearch, sMove, sExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
         mMovieDBHelper = new MovieDBHelper(this);
         mMovieListMain = new ArrayList<>();
+
+        sSearch = MediaPlayer.create(MainActivity.this, R.raw.search_and_refresh_sound);
+        sMove = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
+        sExit = MediaPlayer.create(MainActivity.this, R.raw.exit_sound);
 
         AppRater.app_launched(this);
     }
@@ -105,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 text.setTextColor(getResources().getColor(R.color.colorBrown));
                 toast.show();  // Toast
 
-                MediaPlayer sSearch = MediaPlayer.create(MainActivity.this, R.raw.search_and_refresh_sound);
                 sSearch.start();  // Play sound
 
                 swipeRefreshLayout.setRefreshing(false);
@@ -169,8 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 AudioManager managerNo = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                 managerNo.setStreamMute(AudioManager.STREAM_MUSIC, false);
 
-                MediaPlayer sUnMute = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sUnMute.start();  // Play sound
+                sMove.start();  // Play sound
 
                 Toast toastUnMute = Toast.makeText(MainActivity.this, "The sound are on!", Toast.LENGTH_SHORT);
                 View viewUnMute = toastUnMute.getView();
@@ -180,43 +183,37 @@ public class MainActivity extends AppCompatActivity {
                 toastUnMute.show();  // Toast
                 break;
             case R.id.addManually:  // Pass from MainActivity to AddMovie for add movies
-                MediaPlayer sMove = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
                 sMove.start();  // Play sound
 
                 Intent intentAddManually = new Intent(MainActivity.this, AddMovie.class);
                 startActivity(intentAddManually);
                 break;
             case R.id.addFromInternet:  // Pass from MainActivity to SearchMovieFromInternet for search movies
-                MediaPlayer sMoveInternet = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sMoveInternet.start();  // Play sound
+                sMove.start();  // Play sound
 
                 Intent intentAddFromInternet = new Intent(MainActivity.this, SearchMovieFromInternet.class);
                 startActivity(intentAddFromInternet);
                 break;
             case R.id.credits:  // Credits of the creator of the app
-                MediaPlayer sMoveCredits = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sMoveCredits.start();  // Play sound
+                sMove.start();  // Play sound
 
                 Intent intentCredits = new Intent(MainActivity.this, Credits.class);
                 startActivity(intentCredits);
                 break;
             case R.id.accounts:
-                MediaPlayer sAccounts = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sAccounts.start();  // Play sound
+                sMove.start();  // Play sound
 
                 Intent intentAccounts = new Intent(MainActivity.this, UsersListActivity.class);
                 startActivity(intentAccounts);
                 break;
             case R.id.deleteAllData:  // Delete all data of the app for delete all the data of the app
-                MediaPlayer sMoveDeleteData = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sMoveDeleteData.start();  // Play sound
+                sMove.start();  // Play sound
 
                 Intent intentDeleteAllData = new Intent(MainActivity.this, DeleteAllData.class);
                 startActivity(intentDeleteAllData);
                 break;
             case R.id.shareIntentApp:
-                MediaPlayer sMoveShare = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
-                sMoveShare.start();  // Play sound
+                sMove.start();  // Play sound
 
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -226,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(sendIntent);
                 break;
             case R.id.exit:  // Exit from the app
-                MediaPlayer sExit = MediaPlayer.create(MainActivity.this, R.raw.exit_sound);
                 sExit.start();  // Play sound
 
                 ActivityCompat.finishAffinity(this);

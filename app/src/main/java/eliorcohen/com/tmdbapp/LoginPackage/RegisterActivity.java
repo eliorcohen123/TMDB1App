@@ -3,14 +3,18 @@ package eliorcohen.com.tmdbapp.LoginPackage;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.core.widget.NestedScrollView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
+
 import android.view.View;
 
 import eliorcohen.com.tmdbapp.R;
@@ -32,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private InputValidation inputValidation;
     private LoginDBHelper loginDBHelper;
     private User user;
+    private MediaPlayer sAdd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +62,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         textInputEditTextConfirmPassword = findViewById(R.id.textInputEditTextConfirmPassword);
         appCompatButtonRegister = findViewById(R.id.appCompatButtonRegister);
         appCompatTextViewLoginLink = findViewById(R.id.appCompatTextViewLoginLink);
+
+        sAdd = MediaPlayer.create(RegisterActivity.this, R.raw.add_and_edit_sound);
     }
 
     // This method is to initialize listeners
@@ -119,7 +126,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
             emptyInputEditText();
 
-            MediaPlayer sAdd = MediaPlayer.create(RegisterActivity.this, R.raw.add_and_edit_sound);
             sAdd.start();  // Play sound
 
             // Pass from RegisterActivity to LoginActivity

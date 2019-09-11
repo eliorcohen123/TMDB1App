@@ -32,10 +32,12 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
     private Context context;
     private List<MovieModel> dataList;
     private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private MediaPlayer sMove;
 
     public MovieCustomAdapterMain(Context context, List<MovieModel> dataList) {
         this.context = context;
         this.dataList = dataList;
+        sMove = MediaPlayer.create(context, R.raw.cancel_and_move_sound);
     }
 
     class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
@@ -44,6 +46,7 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
         private TextView title1, overview1;
         private ImageView image1;
         private LinearLayout linearLayout1;
+        private MediaPlayer sMove, sDelete;
 
         CustomViewHolder(View itemView) {
             super(itemView);
@@ -54,6 +57,9 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
             overview1 = mView.findViewById(R.id.overview1);
             image1 = mView.findViewById(R.id.image1);
             linearLayout1 = mView.findViewById(R.id.linear1);
+
+            sMove = MediaPlayer.create(context, R.raw.cancel_and_move_sound);
+            sDelete = MediaPlayer.create(context, R.raw.delete_sound);
 
             itemView.setOnCreateContextMenuListener(this);
         }
@@ -76,7 +82,6 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
                 MovieModel current = dataList.get(getAdapterPosition());
                 switch (item.getItemId()) {
                     case 1:
-                        MediaPlayer sMove = MediaPlayer.create(context, R.raw.cancel_and_move_sound);
                         sMove.start();  // Play sound
 
                         Intent intent = new Intent(context, EditMovie.class);
@@ -85,8 +90,7 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
                         context.startActivity(intent);
                         break;
                     case 2:
-                        MediaPlayer sSave = MediaPlayer.create(context, R.raw.cancel_and_move_sound);
-                        sSave.start();  // Play sound
+                        sMove.start();  // Play sound
 
                         String title = current.getTitle();
                         String overview = current.getOverview();
@@ -98,7 +102,6 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
                         context.startActivity(sendIntent);
                         break;
                     case 3:
-                        MediaPlayer sDelete = MediaPlayer.create(context, R.raw.delete_sound);
                         sDelete.start();  // Play sound
 
                         mMovieDBHelper = new MovieDBHelper(context);
@@ -130,7 +133,6 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
         holder.linearLayout1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MediaPlayer sMove = MediaPlayer.create(context, R.raw.cancel_and_move_sound);
                 sMove.start();  // Play sound
 
                 Intent intent = new Intent(context, DataOfMovie.class);
