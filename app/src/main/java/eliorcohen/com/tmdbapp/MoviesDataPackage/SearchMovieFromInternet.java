@@ -318,10 +318,6 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
             case R.id.imagePre:
                 myPage--;
 
-                if (mAdapterInternet.getItemCount() == 0) {
-                    myPage = myPage + 2;
-                }
-
                 getCheckMaxPage();
                 getPage0(myStringQuery);
                 getPage1();
