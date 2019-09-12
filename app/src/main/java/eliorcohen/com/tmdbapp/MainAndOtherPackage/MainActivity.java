@@ -3,6 +3,7 @@ package eliorcohen.com.tmdbapp.MainAndOtherPackage;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -38,6 +39,7 @@ import eliorcohen.com.tmdbapp.MoviesDataPackage.AddMovie;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.DeleteAllData;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.SearchMovieFromInternet;
 import eliorcohen.com.tmdbapp.R;
+import guy4444.smartrate.SmartRate;
 
 /*
  **
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initUI();
+        initAppRater();
         refreshData();
         myRecyclerView();
         getData();
@@ -80,8 +83,24 @@ public class MainActivity extends AppCompatActivity {
         sSearch = MediaPlayer.create(MainActivity.this, R.raw.search_and_refresh_sound);
         sMove = MediaPlayer.create(MainActivity.this, R.raw.cancel_and_move_sound);
         sExit = MediaPlayer.create(MainActivity.this, R.raw.exit_sound);
+    }
 
-        AppRater.app_launched(this);
+    private void initAppRater() {
+        SmartRate.Rate(MainActivity.this
+                , "Rate Us"
+                , "Tell others what you think about this app"
+                , "Continue"
+                , "Please take a moment and rate us on Google Play"
+                , "click here"
+                , "Ask me later"
+                , "Never ask again"
+                , "Cancel"
+                , "Thanks for the feedback"
+                , Color.parseColor("#2196F3")
+                , 5
+                , 1
+                , 1
+        );
     }
 
     private void refreshData() {
