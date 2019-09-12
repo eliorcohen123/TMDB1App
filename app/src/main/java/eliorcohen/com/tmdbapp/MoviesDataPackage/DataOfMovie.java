@@ -76,20 +76,17 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
         }
 
         // Put the data of the checked RadioButton in SQLiteHelper
-        rg1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.radioButton1) {
-                    sRadioButton.start();  // Play sound
+        rg1.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.radioButton1) {
+                sRadioButton.start();  // Play sound
 
-                    item.setIs_watch(1);
-                } else if (checkedId == R.id.radioButton2) {
-                    sRadioButton.start();  // Play sound
+                item.setIs_watch(1);
+            } else if (checkedId == R.id.radioButton2) {
+                sRadioButton.start();  // Play sound
 
-                    item.setIs_watch(0);
-                }
-                mMovieDBHelper.updateMovieIsWatch(item);
+                item.setIs_watch(0);
             }
+            mMovieDBHelper.updateMovieIsWatch(item);
         });
     }
 

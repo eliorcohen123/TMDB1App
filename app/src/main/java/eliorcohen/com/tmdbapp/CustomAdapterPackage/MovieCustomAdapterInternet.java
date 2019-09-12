@@ -65,15 +65,12 @@ public class MovieCustomAdapterInternet extends RecyclerView.Adapter<MovieCustom
         holder.overview1.setText(dataList.get(position).getOverview());
         Picasso.get().load("https://image.tmdb.org/t/p/original" + dataList.get(position).getPoster_path()).into(holder.image1);
 
-        holder.linearLayout1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentSearchToAddInternet = new Intent(context, AddMovieFromInternet.class);
-                intentSearchToAddInternet.putExtra(context.getString(R.string.movie_add_from_internet), dataList.get(position));
-                context.startActivity(intentSearchToAddInternet);
+        holder.linearLayout1.setOnClickListener(v -> {
+            Intent intentSearchToAddInternet = new Intent(context, AddMovieFromInternet.class);
+            intentSearchToAddInternet.putExtra(context.getString(R.string.movie_add_from_internet), dataList.get(position));
+            context.startActivity(intentSearchToAddInternet);
 
-                sMove.start();  // Play sound
-            }
+            sMove.start();  // Play sound
         });
 
         setFadeAnimation(holder.itemView);

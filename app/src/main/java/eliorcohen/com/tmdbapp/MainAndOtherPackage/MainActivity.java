@@ -268,10 +268,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
         builder.setTitle("No Internet Connection");
         builder.setMessage("You need to have Mobile Data or wifi To use the Internet services. Press ok to Resume");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
+        builder.setPositiveButton("Ok", (dialog, which) -> {
         });
         return builder;
     }

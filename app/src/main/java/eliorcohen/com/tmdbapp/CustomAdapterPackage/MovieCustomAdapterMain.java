@@ -130,16 +130,13 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
         holder.overview1.setText(current.getOverview());
         Picasso.get().load("https://image.tmdb.org/t/p/original" + current.getPoster_path()).into(holder.image1);
 
-        holder.linearLayout1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sMove.start();  // Play sound
+        holder.linearLayout1.setOnClickListener(v -> {
+            sMove.start();  // Play sound
 
-                Intent intent = new Intent(context, DataOfMovie.class);
-                intent.putExtra(context.getString(R.string.movie_id), dataList.get(position).getId());
-                intent.putExtra(context.getString(R.string.movie_edit), dataList.get(position));
-                context.startActivity(intent);
-            }
+            Intent intent = new Intent(context, DataOfMovie.class);
+            intent.putExtra(context.getString(R.string.movie_id), dataList.get(position).getId());
+            intent.putExtra(context.getString(R.string.movie_edit), dataList.get(position));
+            context.startActivity(intent);
         });
 
         setFadeAnimation(holder.mView);

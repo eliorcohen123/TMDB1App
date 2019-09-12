@@ -207,24 +207,18 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     private void getSumPage(String query, int page) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.themoviedb.org/3/search/movie?/&query="
                 + query +
-                "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject mainObj = new JSONObject(response);
-                    int sumPage = mainObj.getInt("total_pages");
-                    editorMaxPage.putInt("mymaxpage", sumPage);
-                    editorMaxPage.apply();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page, response -> {
+                    try {
+                        JSONObject mainObj = new JSONObject(response);
+                        int sumPage = mainObj.getInt("total_pages");
+                        editorMaxPage.putInt("mymaxpage", sumPage);
+                        editorMaxPage.apply();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }, error -> {
 
-            }
-        });
+                });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
