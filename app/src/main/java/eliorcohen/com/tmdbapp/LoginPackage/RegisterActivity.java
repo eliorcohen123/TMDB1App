@@ -44,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         getSupportActionBar().hide();
+
         initViews();
         initListeners();
         initObjects();
