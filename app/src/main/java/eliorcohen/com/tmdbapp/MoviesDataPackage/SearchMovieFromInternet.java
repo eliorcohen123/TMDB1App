@@ -176,8 +176,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
                     myStringQuery = prefsQuery.getString("mystringquery", "");
 
-                    editorQuery.putString("mystringquery", query);
-                    editorQuery.apply();
+                    editorQuery.putString("mystringquery", query).apply();
 
                     if (!myStringQuery.equals(query)) {
                         myPage = 1;
@@ -209,8 +208,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
                     try {
                         JSONObject mainObj = new JSONObject(response);
                         int sumPage = mainObj.getInt("total_pages");
-                        editorMaxPage.putInt("mymaxpage", sumPage);
-                        editorMaxPage.apply();
+                        editorMaxPage.putInt("mymaxpage", sumPage).apply();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
