@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        recyclerView = findViewById(R.id.recyclerViewMain);  // ID of the ListView of MainActivity
+        recyclerView = findViewById(R.id.recyclerViewMain);  // ID of the RecyclerView of MainActivity
         swipeRefreshLayout = findViewById(R.id.swipe_container);  // ID of the SwipeRefreshLayout of MainActivity
 
         mMovieDBHelper = new MovieDBHelper(this);
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         if (!isConnected(MainActivity.this)) buildDialog(MainActivity.this).show();
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorOrange));  // Colors of the SwipeRefreshLayout of MainActivity
-        // Refresh the MovieDBHelper of app in ListView of MainActivity
+        // Refresh the MovieDBHelper of app in RecyclerView of MainActivity
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
