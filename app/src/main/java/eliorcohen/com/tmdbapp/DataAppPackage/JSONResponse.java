@@ -8,4 +8,8 @@ public class JSONResponse {
         return results;
     }
 
+    public void setResults(MovieModel[] results) {
+        this.results = results;
+    }
+
 }
