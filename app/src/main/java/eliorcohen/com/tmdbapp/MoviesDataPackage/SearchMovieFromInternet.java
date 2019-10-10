@@ -71,13 +71,12 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
     private void initUI() {
         prefsQuery = getSharedPreferences("mysettingsquery", Context.MODE_PRIVATE);
-        prefsQuery.edit().clear().apply();
-
-        editorQuery = prefsQuery.edit();
-
         prefsMaxPage = getSharedPreferences("mysettingsmaxpage", Context.MODE_PRIVATE);
+
+        prefsQuery.edit().clear().apply();
         prefsMaxPage.edit().clear().apply();
 
+        editorQuery = prefsQuery.edit();
         editorMaxPage = prefsMaxPage.edit();
 
         recyclerView = findViewById(R.id.recyclerViewInternet);
