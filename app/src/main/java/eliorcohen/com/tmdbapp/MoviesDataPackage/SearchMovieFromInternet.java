@@ -121,8 +121,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
             @Override
             public void onNext(JSONResponse products) {
-                mMovieListInternet = new ArrayList<MovieModel>(Arrays.asList(products.getResults()));
-                generateDataList(mMovieListInternet);
+                generateDataList(Arrays.asList(products.getResults()));
 
                 stopProgressDialog();
             }
@@ -204,16 +203,16 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.themoviedb.org/3/search/movie?/&query="
                 + query +
                 "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page, response -> {
-                    try {
-                        JSONObject mainObj = new JSONObject(response);
-                        int sumPage = mainObj.getInt("total_pages");
-                        editorMaxPage.putInt("mymaxpage", sumPage).apply();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }, error -> {
+            try {
+                JSONObject mainObj = new JSONObject(response);
+                int sumPage = mainObj.getInt("total_pages");
+                editorMaxPage.putInt("mymaxpage", sumPage).apply();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, error -> {
 
-                });
+        });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
@@ -271,6 +270,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
     /*Method to generate List of data using RecyclerView with custom mAdapterInternet*/
     private void generateDataList(List<MovieModel> photoList) {
+        mMovieListInternet = new ArrayList<MovieModel>(photoList);
         mAdapterInternet = new MovieCustomAdapterInternet(this, photoList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if (itemDecoration == null) {
