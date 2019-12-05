@@ -271,7 +271,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     /*Method to generate List of data using RecyclerView with custom mAdapterInternet*/
     private void generateDataList(List<MovieModel> photoList) {
         mMovieListInternet = new ArrayList<MovieModel>(photoList);
-        mAdapterInternet = new MovieCustomAdapterInternet(this, photoList);
+        mAdapterInternet = new MovieCustomAdapterInternet(this, mMovieListInternet);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if (itemDecoration == null) {
             itemDecoration = new ItemDecoration(20);
