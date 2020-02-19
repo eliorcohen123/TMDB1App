@@ -298,39 +298,28 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         myStringQuery = prefsQuery.getString("mystringquery", "");
         switch (view.getId()) {
             case R.id.imageNext:
-                sMove.start();  // Play sound
-
                 myPage++;
-
-                getCheckMaxPage();
-                getPage0(myStringQuery);
-                getPage1();
-                getPageText(myPage);
-                getSumPage(myStringQuery, myPage);
+                performBtn(myPage);
                 break;
             case R.id.imagePre:
-                sMove.start();  // Play sound
-
                 myPage--;
-
-                getCheckMaxPage();
-                getPage0(myStringQuery);
-                getPage1();
-                getPageText(myPage);
-                getSumPage(myStringQuery, myPage);
+                performBtn(myPage);
                 break;
             case R.id.imagePreFirst:
-                sMove.start();  // Play sound
-
                 myPage = 1;
-
-                getCheckMaxPage();
-                getPage0(myStringQuery);
-                getPage1();
-                getPageText(myPage);
-                getSumPage(myStringQuery, myPage);
+                performBtn(myPage);
                 break;
         }
+    }
+
+    private void performBtn(int page) {
+        sMove.start();  // Play sound
+
+        getCheckMaxPage();
+        getPage0(myStringQuery);
+        getPage1();
+        getPageText(page);
+        getSumPage(myStringQuery, page);
     }
 
 }
