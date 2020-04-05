@@ -134,8 +134,8 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
             sMove.start();  // Play sound
 
             Intent intent = new Intent(context, DataOfMovie.class);
-            intent.putExtra(context.getString(R.string.movie_id), dataList.get(position).getId());
-            intent.putExtra(context.getString(R.string.movie_edit), dataList.get(position));
+            intent.putExtra(context.getString(R.string.movie_id), current.getId());
+            intent.putExtra(context.getString(R.string.movie_edit), current);
             context.startActivity(intent);
         });
 
