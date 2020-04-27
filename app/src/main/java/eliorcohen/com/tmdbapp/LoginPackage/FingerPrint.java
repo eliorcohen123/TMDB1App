@@ -53,8 +53,7 @@ public class FingerPrint extends AppCompatActivity implements View.OnClickListen
     private Cipher cipher;
     private String KEY_NAME = "AndroidKey";
     private Button btnBack;
-    private MediaPlayer sPassword, sFinger;
-    private MediaPlayer sCancel;
+    private MediaPlayer sPassword, sFinger, sCancel;
 
     // All the codes add up to confirmation by fingerprinting
     @Override
