@@ -20,8 +20,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
+import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.DataOfMovie;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.DeleteMovie;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.EditMovie;
@@ -31,7 +32,7 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
 
     private Context context;
     private List<MovieModel> dataList;
-    private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private MovieViewModelFavorites movieViewModelFavorites;
     private MediaPlayer sMove;
 
     public MovieCustomAdapterMain(Context context, List<MovieModel> dataList) {
@@ -104,8 +105,8 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
                     case 3:
                         sDelete.start();  // Play sound
 
-                        mMovieDBHelper = new MovieDBHelper(context);
-                        mMovieDBHelper.deleteMovie(current);
+                        movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
+                        movieViewModelFavorites.deleteMovie(current);
 
                         Intent intentDeleteData = new Intent(context, DeleteMovie.class);
                         context.startActivity(intentDeleteData);

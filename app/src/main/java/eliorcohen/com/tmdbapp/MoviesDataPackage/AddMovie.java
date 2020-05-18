@@ -12,13 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
 import eliorcohen.com.tmdbapp.MainAndOtherPackage.MainActivity;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.R;
 
 public class AddMovie extends AppCompatActivity implements View.OnClickListener {
 
-    private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private MovieViewModelFavorites movieViewModelFavorites;
     private EditText subject, body, URL;
     private TextView textViewOK;
     private Button btnBack;
@@ -43,7 +44,7 @@ public class AddMovie extends AppCompatActivity implements View.OnClickListener 
 
         btnBack = findViewById(R.id.btnBack);
 
-        mMovieDBHelper = new MovieDBHelper(this);
+        movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
         sCancel = MediaPlayer.create(AddMovie.this, R.raw.cancel_and_move_sound);
         sError = MediaPlayer.create(AddMovie.this, R.raw.error_sound);
@@ -76,7 +77,7 @@ public class AddMovie extends AppCompatActivity implements View.OnClickListener 
                     sAdd.start();  // Play sound
 
                     // The texts in the SQLiteHelper
-                    mMovieDBHelper.addMovie(title, overview, url);
+                    movieViewModelFavorites.insertMovie(title, overview, url);
 
                     // Pass from AddMovie to MainActivity
                     Intent intentAddToMain = new Intent(AddMovie.this, MainActivity.class);

@@ -12,13 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
 import eliorcohen.com.tmdbapp.MainAndOtherPackage.MainActivity;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.R;
 
 public class DeleteAllData extends AppCompatActivity implements View.OnClickListener {
 
-    private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private MovieViewModelFavorites movieViewModelFavorites;
     private Button buttonDeleteAll, btnBack;
     private MediaPlayer sDeleteAll, sCancel;
 
@@ -35,7 +36,7 @@ public class DeleteAllData extends AppCompatActivity implements View.OnClickList
         buttonDeleteAll = findViewById(R.id.buttonDeleteAll);
         btnBack = findViewById(R.id.btnBack);
 
-        mMovieDBHelper = new MovieDBHelper(this);  // Put the SQLiteHelper in DeleteAllData
+        movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
         sDeleteAll = MediaPlayer.create(DeleteAllData.this, R.raw.delete_all_sound);
         sCancel = MediaPlayer.create(DeleteAllData.this, R.raw.cancel_and_move_sound);
@@ -52,7 +53,7 @@ public class DeleteAllData extends AppCompatActivity implements View.OnClickList
             case R.id.buttonDeleteAll:
                 sDeleteAll.start();  // Play sound
 
-                mMovieDBHelper.deleteData();
+                movieViewModelFavorites.deleteAll();
 
                 Toast toast = Toast.makeText(DeleteAllData.this, "All the data are deleted!", Toast.LENGTH_LONG);
                 View view = toast.getView();

@@ -14,14 +14,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
+import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
 import eliorcohen.com.tmdbapp.MainAndOtherPackage.MainActivity;
 import eliorcohen.com.tmdbapp.R;
 
 public class DataOfMovie extends AppCompatActivity implements View.OnClickListener {
 
-    private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private MovieViewModelFavorites movieViewModelFavorites;
     private MovieModel item;
     private RadioGroup rg1;
     private RadioButton rb1, rb2;
@@ -55,7 +56,7 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
         body = findViewById(R.id.textViewBody);  // ID of the body
         URL = findViewById(R.id.textViewURL);  // ID of the URL
 
-        mMovieDBHelper = new MovieDBHelper(this);
+        movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
         sRadioButton = MediaPlayer.create(DataOfMovie.this, R.raw.radiobutton_sound);
         sYouTube = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
@@ -86,7 +87,7 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
 
                 item.setIs_watch(0);
             }
-            mMovieDBHelper.updateMovieIsWatch(item);
+            movieViewModelFavorites.updateMovieIsWatch(item);
         });
     }
 

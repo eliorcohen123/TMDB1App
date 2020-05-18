@@ -17,14 +17,15 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
 import eliorcohen.com.tmdbapp.MainAndOtherPackage.MainActivity;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
 import eliorcohen.com.tmdbapp.R;
 
 public class EditMovie extends AppCompatActivity implements View.OnClickListener {
 
-    private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private MovieViewModelFavorites movieViewModelFavorites;
     private int id;
     private MovieModel item;
     private RadioGroup rg1;
@@ -65,7 +66,7 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
 
         imageView = findViewById(R.id.imageView);
 
-        mMovieDBHelper = new MovieDBHelper(this);
+        movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
         sRadioButton = MediaPlayer.create(EditMovie.this, R.raw.radiobutton_sound);
         sError = MediaPlayer.create(EditMovie.this, R.raw.error_sound);
@@ -100,7 +101,7 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
 
                 item.setIs_watch(0);
             }
-            mMovieDBHelper.updateMovieIsWatch(item);
+            movieViewModelFavorites.updateMovieIsWatch(item);
         });
     }
 
@@ -131,7 +132,7 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
                     sAdd.start();  // Play sound
 
                     // The texts in the SQLiteHelper
-                    mMovieDBHelper.updateMovie(title, overview, url, id);
+                    movieViewModelFavorites.updateMovie(title, overview, url, id);
 
                     // Pass from EditMovie to MainActivity
                     Intent intentEditToMain = new Intent(EditMovie.this, MainActivity.class);

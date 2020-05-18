@@ -5,19 +5,21 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
+import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
+
 public class MovieContentProvider extends ContentProvider {
 
-    private MovieDBHelper movieDBHelper;
+    private MovieViewModelFavorites movieViewModelFavorites;
 
     @Override
     public boolean onCreate() {
-        movieDBHelper = new MovieDBHelper(getContext());
+        movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
         return true;
     }
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        Cursor cursor = movieDBHelper.getAllMoviesCursor();
+        Cursor cursor = movieViewModelFavorites.getAllMoviesCursor();
         return cursor;
     }
 

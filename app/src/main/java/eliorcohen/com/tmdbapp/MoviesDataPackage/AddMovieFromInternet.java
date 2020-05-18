@@ -15,14 +15,15 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
 import eliorcohen.com.tmdbapp.MainAndOtherPackage.MainActivity;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
 import eliorcohen.com.tmdbapp.R;
 
 public class AddMovieFromInternet extends AppCompatActivity implements View.OnClickListener {
 
-    private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private MovieViewModelFavorites movieViewModelFavorites;
     private MovieModel item;
     private TextView textViewOK, textViewShow;
     private EditText subject, body, URL;
@@ -55,7 +56,7 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
 
         btnBack = findViewById(R.id.btnBack);
 
-        mMovieDBHelper = new MovieDBHelper(this);
+        movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
         sError = MediaPlayer.create(AddMovieFromInternet.this, R.raw.error_sound);
         sAdd = MediaPlayer.create(AddMovieFromInternet.this, R.raw.add_and_edit_sound);
@@ -97,7 +98,7 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
                     sAdd.start();  // Play sound
 
                     // The texts in the SQLiteHelper
-                    mMovieDBHelper.addMovie(title, overview, url);
+                    movieViewModelFavorites.insertMovie(title, overview, url);
 
                     // Pass from AddMovieFromInternet to MainActivity
                     Intent intentAddInternetToMain = new Intent(AddMovieFromInternet.this, MainActivity.class);

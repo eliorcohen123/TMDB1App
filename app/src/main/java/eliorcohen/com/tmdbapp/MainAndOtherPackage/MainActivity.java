@@ -1,7 +1,6 @@
 package eliorcohen.com.tmdbapp.MainAndOtherPackage;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -32,8 +31,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterMain;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
+import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.LoginPackage.UsersListActivity;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.AddMovie;
 import eliorcohen.com.tmdbapp.MoviesDataPackage.DeleteAllData;
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<MovieModel> mMovieListMain;  // ArrayList of MovieModel
     private MovieCustomAdapterMain mAdapterMain;  // MovieCustomAdapterInternet of MainActivity
-    private MovieDBHelper mMovieDBHelper;  // The SQLiteHelper of the app
+    private MovieViewModelFavorites movieViewModelFavorites;
     private SwipeRefreshLayout swipeRefreshLayout;  // SwipeRe freshLayout of MainActivity
     private RecyclerView recyclerView;
     private ItemDecoration itemDecoration;
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewMain);  // ID of the RecyclerView of MainActivity
         swipeRefreshLayout = findViewById(R.id.swipe_container);  // ID of the SwipeRefreshLayout of MainActivity
 
-        mMovieDBHelper = new MovieDBHelper(this);
+        movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
         mMovieListMain = new ArrayList<>();
 
         sSearch = MediaPlayer.create(MainActivity.this, R.raw.search_and_refresh_sound);
@@ -153,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... params) {
                 mMovieListMain.clear();
-                mMovieListMain.addAll(mMovieDBHelper.getAllMovies());
+                mMovieListMain.addAll(movieViewModelFavorites.getAllMovies());
                 return null;
             }
 
