@@ -3,7 +3,6 @@ package eliorcohen.com.tmdbapp.MoviesDataPackage;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -52,10 +51,8 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
     private ItemDecoration itemDecoration;
-    private SharedPreferences prefsQuery, prefsMaxPage;
-    private SharedPreferences.Editor editorQuery, editorMaxPage;
     private ImageView imagePre, imageNext, imagePreFirst;
-    private int myPage = 1, myMaxPageSum;
+    private int myPage = 1, sumPage;
     private String myStringQuery;
     private TextView textPage;
     private MediaPlayer sSearch, sMove;
@@ -70,15 +67,6 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     }
 
     private void initUI() {
-        prefsQuery = getSharedPreferences("mysettingsquery", Context.MODE_PRIVATE);
-        prefsMaxPage = getSharedPreferences("mysettingsmaxpage", Context.MODE_PRIVATE);
-
-        prefsQuery.edit().clear().apply();
-        prefsMaxPage.edit().clear().apply();
-
-        editorQuery = prefsQuery.edit();
-        editorMaxPage = prefsMaxPage.edit();
-
         recyclerView = findViewById(R.id.recyclerViewInternet);
         imagePre = findViewById(R.id.imagePre);
         imageNext = findViewById(R.id.imageNext);
@@ -100,32 +88,6 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         imageNext.setOnClickListener(this);
         imagePre.setOnClickListener(this);
         imagePreFirst.setOnClickListener(this);
-    }
-
-    private void getMyPage(String query, int page) {
-        GetDataService apiService = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Observable<JSONResponse> observable = apiService.getAllMovies("/3/search/movie?/&query="
-                + query +
-                "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page).subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread());
-        observable.subscribe(new Observer<JSONResponse>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(JSONResponse products) {
-                generateDataList(Arrays.asList(products.getResults()));
-
-                stopProgressDialog();
-            }
-        });
     }
 
     // Sets off the menu of activity_menu
@@ -172,21 +134,15 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
                     startProgressDialog();
 
-                    myStringQuery = prefsQuery.getString("mystringquery", "");
+                    myPage = 1;
 
-                    editorQuery.putString("mystringquery", query).apply();
-
-                    if (!myStringQuery.equals(query)) {
-                        myPage = 1;
-                    }
-
-                    imageNext.setVisibility(View.VISIBLE);
                     textPage.setVisibility(View.VISIBLE);
 
-                    getPage0(query);
-                    getPage1();
+                    myStringQuery = query;
+
+                    getPage(myStringQuery);
                     getPageText(myPage);
-                    getSumPage(query, myPage);
+                    getSumPage(myStringQuery, myPage);
                     return true;
                 }
 
@@ -199,14 +155,40 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         return super.onCreateOptionsMenu(menu);
     }
 
+    private void getMyData(String query, int page) {
+        GetDataService apiService = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Observable<JSONResponse> observable = apiService.getAllMovies("/3/search/movie?/&query="
+                + query +
+                "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(new Observer<JSONResponse>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(JSONResponse products) {
+                generateDataList(Arrays.asList(products.getResults()));
+
+                stopProgressDialog();
+            }
+        });
+    }
+
     private void getSumPage(String query, int page) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.themoviedb.org/3/search/movie?/&query="
                 + query +
                 "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page, response -> {
             try {
                 JSONObject mainObj = new JSONObject(response);
-                int sumPage = mainObj.getInt("total_pages");
-                editorMaxPage.putInt("mymaxpage", sumPage).apply();
+                sumPage = mainObj.getInt("total_pages");
+                getCheckMaxPage();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -217,16 +199,13 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         requestQueue.add(stringRequest);
     }
 
-    private void getPage0(String query) {
+    private void getPage(String query) {
         if (myPage <= 0) {
             myPage = 1;
         } else {
-            imagePre.setVisibility(View.VISIBLE);
-            getMyPage(query, myPage);
+            getMyData(query, myPage);
         }
-    }
 
-    private void getPage1() {
         if (myPage == 1) {
             imagePre.setVisibility(View.GONE);
         } else {
@@ -245,10 +224,9 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     }
 
     private void getCheckMaxPage() {
-        myMaxPageSum = prefsMaxPage.getInt("mymaxpage", 0);
-        if (myPage == myMaxPageSum) {
+        if (myPage == sumPage) {
             imageNext.setVisibility(View.GONE);
-        } else if (myPage < myMaxPageSum) {
+        } else if (myPage < sumPage) {
             imageNext.setVisibility(View.VISIBLE);
         }
     }
@@ -295,7 +273,6 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
     @Override
     public void onClick(View view) {
-        myStringQuery = prefsQuery.getString("mystringquery", "");
         switch (view.getId()) {
             case R.id.imageNext:
                 myPage++;
@@ -315,11 +292,10 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     private void performBtn(int page) {
         sMove.start();  // Play sound
 
-        getCheckMaxPage();
-        getPage0(myStringQuery);
-        getPage1();
+        getPage(myStringQuery);
         getPageText(page);
         getSumPage(myStringQuery, page);
+        getCheckMaxPage();
     }
 
 }
