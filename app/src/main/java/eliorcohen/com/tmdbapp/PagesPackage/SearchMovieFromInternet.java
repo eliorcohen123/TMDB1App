@@ -36,7 +36,7 @@ import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterInternet;
 import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
 import eliorcohen.com.tmdbapp.OthersPackage.ItemDecoration;
 import eliorcohen.com.tmdbapp.RetrofitPackage.GetDataService;
-import eliorcohen.com.tmdbapp.ModelsPackage.JSONResponseModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.R;
 import eliorcohen.com.tmdbapp.RetrofitPackage.RetrofitClientInstance;
 import rx.Observable;
@@ -157,11 +157,11 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
     private void getMyData(String query, int page) {
         GetDataService apiService = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Observable<JSONResponseModel> observable = apiService.getAllMovies("/3/search/movie?/&query="
+        Observable<Results> observable = apiService.getAllMovies("/3/search/movie?/&query="
                 + query +
                 "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
-        observable.subscribe(new Observer<JSONResponseModel>() {
+        observable.subscribe(new Observer<Results>() {
             @Override
             public void onCompleted() {
 
@@ -173,7 +173,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
             }
 
             @Override
-            public void onNext(JSONResponseModel products) {
+            public void onNext(Results products) {
                 generateDataList(Arrays.asList(products.getResults()));
 
                 stopProgressDialog();
