@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.ViewModelPackege;
+package eliorcohen.com.tmdbapp.ViewModelsPackege;
 
 import android.app.Application;
 import android.database.Cursor;

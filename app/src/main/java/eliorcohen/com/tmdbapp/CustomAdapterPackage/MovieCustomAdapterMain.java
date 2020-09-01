@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
-import eliorcohen.com.tmdbapp.ViewModelPackege.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.PagesPackage.DataOfMovie;
 import eliorcohen.com.tmdbapp.PagesPackage.DeleteMovie;

@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import eliorcohen.com.tmdbapp.ViewModelPackege.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
 import eliorcohen.com.tmdbapp.R;

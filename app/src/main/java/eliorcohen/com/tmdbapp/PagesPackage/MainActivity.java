@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterMain;
 import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
-import eliorcohen.com.tmdbapp.ViewModelPackege.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.OthersPackage.ItemDecoration;
 import eliorcohen.com.tmdbapp.R;
