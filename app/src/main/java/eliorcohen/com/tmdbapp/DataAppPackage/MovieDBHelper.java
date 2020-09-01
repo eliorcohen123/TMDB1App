@@ -160,7 +160,7 @@ public class MovieDBHelper extends SQLiteOpenHelper {
     // Get all movies
     public ArrayList<Results> getAllMovies() {
 
-        ArrayList<Results> results = new ArrayList<>();
+        ArrayList<Results> arrayList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(MOVIE_TABLE_NAME, null, null, null, null, null, null, null);
         while (cursor.moveToNext()) {
@@ -170,12 +170,12 @@ public class MovieDBHelper extends SQLiteOpenHelper {
             String overview = cursor.getString(2);
             String poster_path = cursor.getString(3);
             int is_watch = cursor.getInt(4);
-            Results result = new Results(title, overview, poster_path, is_watch);
-            result.setId(id);
-            results.add(result);
+            Results results = new Results(title, overview, poster_path, is_watch);
+            results.setId(id);
+            arrayList.add(results);
         }
         cursor.close();
-        return results;
+        return arrayList;
     }
 
     // Get all movies
