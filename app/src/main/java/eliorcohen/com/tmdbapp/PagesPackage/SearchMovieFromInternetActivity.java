@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterInternet;
+import eliorcohen.com.tmdbapp.CustomAdaptersPackage.MovieCustomAdapterInternet;
 import eliorcohen.com.tmdbapp.InterfacesPackage.SearchMovieInterface;
 import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.OthersPackage.ItemDecoration;

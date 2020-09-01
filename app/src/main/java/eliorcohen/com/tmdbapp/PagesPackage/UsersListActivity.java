@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eliorcohen.com.tmdbapp.DataAppPackage.AuthenticationDBHelper;
-import eliorcohen.com.tmdbapp.CustomAdapterPackage.UsersRecyclerAdapter;
+import eliorcohen.com.tmdbapp.CustomAdaptersPackage.UsersRecyclerAdapter;
 import eliorcohen.com.tmdbapp.ModelsPackage.UserModel;
 import eliorcohen.com.tmdbapp.R;
 

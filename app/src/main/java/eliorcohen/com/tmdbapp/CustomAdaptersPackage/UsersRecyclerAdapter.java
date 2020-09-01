@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.CustomAdapterPackage;
+package eliorcohen.com.tmdbapp.CustomAdaptersPackage;
 
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;

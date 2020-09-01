@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.CustomAdapterPackage;
+package eliorcohen.com.tmdbapp.CustomAdaptersPackage;
 
 import android.content.Context;
 import android.content.Intent;

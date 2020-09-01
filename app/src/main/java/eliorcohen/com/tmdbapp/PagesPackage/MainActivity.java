@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterMain;
+import eliorcohen.com.tmdbapp.CustomAdaptersPackage.MovieCustomAdapterMain;
 import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
