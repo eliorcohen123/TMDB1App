@@ -23,9 +23,9 @@ import java.util.List;
 import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
-import eliorcohen.com.tmdbapp.PagesPackage.DataOfMovie;
-import eliorcohen.com.tmdbapp.PagesPackage.DeleteMovie;
-import eliorcohen.com.tmdbapp.PagesPackage.EditMovie;
+import eliorcohen.com.tmdbapp.PagesPackage.DataOfMovieActivity;
+import eliorcohen.com.tmdbapp.PagesPackage.DeleteMovieActivity;
+import eliorcohen.com.tmdbapp.PagesPackage.EditMovieActivity;
 import eliorcohen.com.tmdbapp.R;
 
 public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdapterMain.CustomViewHolder> {
@@ -85,7 +85,7 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
                     case 1:
                         sMove.start();  // Play sound
 
-                        Intent intent = new Intent(context, EditMovie.class);
+                        Intent intent = new Intent(context, EditMovieActivity.class);
                         intent.putExtra(context.getString(R.string.movie_id), current.getId());
                         intent.putExtra(context.getString(R.string.movie_edit), current);
                         context.startActivity(intent);
@@ -108,7 +108,7 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
                         movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
                         movieViewModelFavorites.deleteMovie(current);
 
-                        Intent intentDeleteData = new Intent(context, DeleteMovie.class);
+                        Intent intentDeleteData = new Intent(context, DeleteMovieActivity.class);
                         context.startActivity(intentDeleteData);
                         break;
                 }
@@ -134,7 +134,7 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
         holder.linearLayout1.setOnClickListener(v -> {
             sMove.start();  // Play sound
 
-            Intent intent = new Intent(context, DataOfMovie.class);
+            Intent intent = new Intent(context, DataOfMovieActivity.class);
             intent.putExtra(context.getString(R.string.movie_id), current.getId());
             intent.putExtra(context.getString(R.string.movie_edit), current);
             context.startActivity(intent);

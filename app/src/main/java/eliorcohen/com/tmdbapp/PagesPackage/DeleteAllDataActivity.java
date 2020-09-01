@@ -16,7 +16,7 @@ import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.R;
 
-public class DeleteAllData extends AppCompatActivity implements View.OnClickListener {
+public class DeleteAllDataActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MovieViewModelFavorites movieViewModelFavorites;
     private Button buttonDeleteAll, btnBack;
@@ -37,8 +37,8 @@ public class DeleteAllData extends AppCompatActivity implements View.OnClickList
 
         movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
-        sDeleteAll = MediaPlayer.create(DeleteAllData.this, R.raw.delete_all_sound);
-        sCancel = MediaPlayer.create(DeleteAllData.this, R.raw.cancel_and_move_sound);
+        sDeleteAll = MediaPlayer.create(DeleteAllDataActivity.this, R.raw.delete_all_sound);
+        sCancel = MediaPlayer.create(DeleteAllDataActivity.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -54,14 +54,14 @@ public class DeleteAllData extends AppCompatActivity implements View.OnClickList
 
                 movieViewModelFavorites.deleteAll();
 
-                Toast toast = Toast.makeText(DeleteAllData.this, "All the data are deleted!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(DeleteAllDataActivity.this, "All the data are deleted!", Toast.LENGTH_LONG);
                 View view = toast.getView();
                 view.getBackground().setColorFilter(getResources().getColor(R.color.colorLightBlue), PorterDuff.Mode.SRC_IN);
                 TextView text = view.findViewById(android.R.id.message);
                 text.setTextColor(getResources().getColor(R.color.colorBrown));
                 toast.show();
 
-                Intent intentDeleteAllDataToMain = new Intent(DeleteAllData.this, MainActivity.class);
+                Intent intentDeleteAllDataToMain = new Intent(DeleteAllDataActivity.this, MainActivity.class);
                 startActivity(intentDeleteAllDataToMain);
                 break;
             case R.id.btnBack:

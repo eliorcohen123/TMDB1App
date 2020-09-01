@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.PagesPackage;
+package eliorcohen.com.tmdbapp.InterfacesPackage;
 
 public interface SearchMovieInterface {
 

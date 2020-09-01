@@ -41,7 +41,7 @@ import javax.crypto.SecretKey;
 
 import eliorcohen.com.tmdbapp.R;
 
-public class FingerPrint extends AppCompatActivity implements View.OnClickListener {
+public class FingerPrintActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mHeadingLabel, paraLabel;
     private ImageView mFingerprintImage, imageView;
@@ -72,9 +72,9 @@ public class FingerPrint extends AppCompatActivity implements View.OnClickListen
 
         btnBack = findViewById(R.id.btnBack);
 
-        sPassword = MediaPlayer.create(FingerPrint.this, R.raw.access_sound);
-        sFinger = MediaPlayer.create(FingerPrint.this, R.raw.good_access_sound);
-        sCancel = MediaPlayer.create(FingerPrint.this, R.raw.cancel_and_move_sound);
+        sPassword = MediaPlayer.create(FingerPrintActivity.this, R.raw.access_sound);
+        sFinger = MediaPlayer.create(FingerPrintActivity.this, R.raw.good_access_sound);
+        sCancel = MediaPlayer.create(FingerPrintActivity.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -185,7 +185,7 @@ public class FingerPrint extends AppCompatActivity implements View.OnClickListen
 
             sFinger.start();  // Play sound
 
-            Intent intentFinger = new Intent(FingerPrint.this, SplashActivity.class);
+            Intent intentFinger = new Intent(FingerPrintActivity.this, SplashActivity.class);
             startActivity(intentFinger);
         }
 

@@ -22,7 +22,7 @@ import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.R;
 
-public class EditMovie extends AppCompatActivity implements View.OnClickListener {
+public class EditMovieActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MovieViewModelFavorites movieViewModelFavorites;
     private int id;
@@ -67,11 +67,11 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
 
         movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
-        sRadioButton = MediaPlayer.create(EditMovie.this, R.raw.radiobutton_sound);
-        sError = MediaPlayer.create(EditMovie.this, R.raw.error_sound);
-        sAdd = MediaPlayer.create(EditMovie.this, R.raw.add_and_edit_sound);
-        sShowImage = MediaPlayer.create(EditMovie.this, R.raw.show_image_sound);
-        sCancel = MediaPlayer.create(EditMovie.this, R.raw.cancel_and_move_sound);
+        sRadioButton = MediaPlayer.create(EditMovieActivity.this, R.raw.radiobutton_sound);
+        sError = MediaPlayer.create(EditMovieActivity.this, R.raw.error_sound);
+        sAdd = MediaPlayer.create(EditMovieActivity.this, R.raw.add_and_edit_sound);
+        sShowImage = MediaPlayer.create(EditMovieActivity.this, R.raw.show_image_sound);
+        sCancel = MediaPlayer.create(EditMovieActivity.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -134,7 +134,7 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
                     movieViewModelFavorites.updateMovie(title, overview, url, id);
 
                     // Pass from EditMovie to MainActivity
-                    Intent intentEditToMain = new Intent(EditMovie.this, MainActivity.class);
+                    Intent intentEditToMain = new Intent(EditMovieActivity.this, MainActivity.class);
                     startActivity(intentEditToMain);
                 }
                 break;

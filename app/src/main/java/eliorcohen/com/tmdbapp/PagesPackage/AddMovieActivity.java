@@ -16,7 +16,7 @@ import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.R;
 
-public class AddMovie extends AppCompatActivity implements View.OnClickListener {
+public class AddMovieActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MovieViewModelFavorites movieViewModelFavorites;
     private EditText subject, body, URL;
@@ -45,9 +45,9 @@ public class AddMovie extends AppCompatActivity implements View.OnClickListener 
 
         movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
-        sCancel = MediaPlayer.create(AddMovie.this, R.raw.cancel_and_move_sound);
-        sError = MediaPlayer.create(AddMovie.this, R.raw.error_sound);
-        sAdd = MediaPlayer.create(AddMovie.this, R.raw.add_and_edit_sound);
+        sCancel = MediaPlayer.create(AddMovieActivity.this, R.raw.cancel_and_move_sound);
+        sError = MediaPlayer.create(AddMovieActivity.this, R.raw.error_sound);
+        sAdd = MediaPlayer.create(AddMovieActivity.this, R.raw.add_and_edit_sound);
     }
 
     private void initListeners() {
@@ -79,7 +79,7 @@ public class AddMovie extends AppCompatActivity implements View.OnClickListener 
                     movieViewModelFavorites.insertMovie(title, overview, url);
 
                     // Pass from AddMovie to MainActivity
-                    Intent intentAddToMain = new Intent(AddMovie.this, MainActivity.class);
+                    Intent intentAddToMain = new Intent(AddMovieActivity.this, MainActivity.class);
                     startActivity(intentAddToMain);
                 }
                 break;

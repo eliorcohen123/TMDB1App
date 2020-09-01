@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterInternet;
+import eliorcohen.com.tmdbapp.InterfacesPackage.SearchMovieInterface;
 import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.OthersPackage.ItemDecoration;
 import eliorcohen.com.tmdbapp.RetrofitPackage.GetDataService;
@@ -44,7 +45,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class SearchMovieFromInternet extends AppCompatActivity implements SearchMovieInterface, View.OnClickListener {
+public class SearchMovieFromInternetActivity extends AppCompatActivity implements SearchMovieInterface, View.OnClickListener {
 
     private static ArrayList<Results> mMovieListInternet;  // ArrayList of MovieModel
     private MovieCustomAdapterInternet mAdapterInternet;
@@ -80,8 +81,8 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
         imagePreFirst.setVisibility(View.GONE);
         textPage.setVisibility(View.GONE);
 
-        sSearch = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.search_and_refresh_sound);
-        sMove = MediaPlayer.create(SearchMovieFromInternet.this, R.raw.cancel_and_move_sound);
+        sSearch = MediaPlayer.create(SearchMovieFromInternetActivity.this, R.raw.search_and_refresh_sound);
+        sMove = MediaPlayer.create(SearchMovieFromInternetActivity.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {

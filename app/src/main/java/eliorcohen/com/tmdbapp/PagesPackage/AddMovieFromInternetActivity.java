@@ -20,7 +20,7 @@ import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.R;
 
-public class AddMovieFromInternet extends AppCompatActivity implements View.OnClickListener {
+public class AddMovieFromInternetActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MovieViewModelFavorites movieViewModelFavorites;
     private Results item;
@@ -57,10 +57,10 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
 
         movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
-        sError = MediaPlayer.create(AddMovieFromInternet.this, R.raw.error_sound);
-        sAdd = MediaPlayer.create(AddMovieFromInternet.this, R.raw.add_and_edit_sound);
-        sShowImage = MediaPlayer.create(AddMovieFromInternet.this, R.raw.show_image_sound);
-        sCancel = MediaPlayer.create(AddMovieFromInternet.this, R.raw.cancel_and_move_sound);
+        sError = MediaPlayer.create(AddMovieFromInternetActivity.this, R.raw.error_sound);
+        sAdd = MediaPlayer.create(AddMovieFromInternetActivity.this, R.raw.add_and_edit_sound);
+        sShowImage = MediaPlayer.create(AddMovieFromInternetActivity.this, R.raw.show_image_sound);
+        sCancel = MediaPlayer.create(AddMovieFromInternetActivity.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -100,7 +100,7 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
                     movieViewModelFavorites.insertMovie(title, overview, url);
 
                     // Pass from AddMovieFromInternet to MainActivity
-                    Intent intentAddInternetToMain = new Intent(AddMovieFromInternet.this, MainActivity.class);
+                    Intent intentAddInternetToMain = new Intent(AddMovieFromInternetActivity.this, MainActivity.class);
                     startActivity(intentAddInternetToMain);
                 }
                 break;

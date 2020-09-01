@@ -1,6 +1,5 @@
 package eliorcohen.com.tmdbapp.PagesPackage;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -11,38 +10,37 @@ import android.widget.Button;
 
 import eliorcohen.com.tmdbapp.R;
 
-public class DeleteMovie extends AppCompatActivity implements View.OnClickListener {
+public class CreditsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnBack;
-    private MediaPlayer sOk;
+    private Button buttonOK;
+    private MediaPlayer sCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.delete_movie);
+        setContentView(R.layout.credits);
 
         initUI();
         initListeners();
     }
 
     private void initUI() {
-        btnBack = findViewById(R.id.btnBack);
+        buttonOK = findViewById(R.id.textViewOK);
 
-        sOk = MediaPlayer.create(DeleteMovie.this, R.raw.ok_sound);
+        sCancel = MediaPlayer.create(CreditsActivity.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
-        btnBack.setOnClickListener(this);
+        buttonOK.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnBack:
-                sOk.start();  // Play sound
+            case R.id.textViewOK:
+                sCancel.start();  // Play sound
 
-                Intent intent = new Intent(DeleteMovie.this, MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
                 break;
         }
     }

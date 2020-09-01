@@ -19,7 +19,7 @@ import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.R;
 
-public class DataOfMovie extends AppCompatActivity implements View.OnClickListener {
+public class DataOfMovieActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MovieViewModelFavorites movieViewModelFavorites;
     private Results item;
@@ -57,9 +57,9 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
 
         movieViewModelFavorites = new MovieViewModelFavorites(ConApp.getApplication());
 
-        sRadioButton = MediaPlayer.create(DataOfMovie.this, R.raw.radiobutton_sound);
-        sYouTube = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
-        sCancel = MediaPlayer.create(DataOfMovie.this, R.raw.cancel_and_move_sound);
+        sRadioButton = MediaPlayer.create(DataOfMovieActivity.this, R.raw.radiobutton_sound);
+        sYouTube = MediaPlayer.create(DataOfMovieActivity.this, R.raw.cancel_and_move_sound);
+        sCancel = MediaPlayer.create(DataOfMovieActivity.this, R.raw.cancel_and_move_sound);
     }
 
     private void initListeners() {
@@ -119,7 +119,7 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
             case R.id.btnBack:
                 sCancel.start();  // Play sound
 
-                Intent intent = new Intent(DataOfMovie.this, MainActivity.class);
+                Intent intent = new Intent(DataOfMovieActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
         }

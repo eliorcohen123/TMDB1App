@@ -54,18 +54,18 @@
             android:readPermission="eliorcohen.com.tmdbapp.READ_MOVIES"
             android:writePermission="eliorcohen.com.tmdbapp.WRITE_MOVIES" />
 
-        <activity android:name=".PagesPackage.EditMovie" />
-        <activity android:name=".PagesPackage.AddMovie" />
-        <activity android:name=".PagesPackage.DeleteAllData" />
-        <activity android:name=".PagesPackage.AddMovieFromInternet" />
-        <activity android:name=".PagesPackage.DeleteMovie" />
-        <activity android:name=".PagesPackage.DataOfMovie" />
-        <activity android:name=".PagesPackage.Credits" />
-        <activity android:name=".PagesPackage.FingerPrint" />
+        <activity android:name=".PagesPackage.EditMovieActivity" />
+        <activity android:name=".PagesPackage.AddMovieActivity" />
+        <activity android:name=".PagesPackage.DeleteAllDataActivity" />
+        <activity android:name=".PagesPackage.AddMovieFromInternetActivity" />
+        <activity android:name=".PagesPackage.DeleteMovieActivity" />
+        <activity android:name=".PagesPackage.DataOfMovieActivity" />
+        <activity android:name=".PagesPackage.CreditsActivity" />
+        <activity android:name=".PagesPackage.FingerPrintActivity" />
         <activity android:name=".PagesPackage.MainActivity" />
         <activity android:name=".PagesPackage.RegisterActivity" />
         <activity android:name=".PagesPackage.UsersListActivity" />
-        <activity android:name=".PagesPackage.SearchMovieFromInternet" />
+        <activity android:name=".PagesPackage.SearchMovieFromInternetActivity" />
         <activity android:name=".PagesPackage.SplashActivity" />
 
         <service android:name=".OthersPackage.MyFirebaseMessagingService">

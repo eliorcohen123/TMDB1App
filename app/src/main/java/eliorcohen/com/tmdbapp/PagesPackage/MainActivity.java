@@ -201,19 +201,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.addManually:  // Pass from MainActivity to AddMovie for add movies
                 sMove.start();  // Play sound
 
-                Intent intentAddManually = new Intent(MainActivity.this, AddMovie.class);
+                Intent intentAddManually = new Intent(MainActivity.this, AddMovieActivity.class);
                 startActivity(intentAddManually);
                 break;
             case R.id.addFromInternet:  // Pass from MainActivity to SearchMovieFromInternet for search movies
                 sMove.start();  // Play sound
 
-                Intent intentAddFromInternet = new Intent(MainActivity.this, SearchMovieFromInternet.class);
+                Intent intentAddFromInternet = new Intent(MainActivity.this, SearchMovieFromInternetActivity.class);
                 startActivity(intentAddFromInternet);
                 break;
             case R.id.credits:  // Credits of the creator of the app
                 sMove.start();  // Play sound
 
-                Intent intentCredits = new Intent(MainActivity.this, Credits.class);
+                Intent intentCredits = new Intent(MainActivity.this, CreditsActivity.class);
                 startActivity(intentCredits);
                 break;
             case R.id.accounts:
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.deleteAllData:  // Delete all data of the app for delete all the data of the app
                 sMove.start();  // Play sound
 
-                Intent intentDeleteAllData = new Intent(MainActivity.this, DeleteAllData.class);
+                Intent intentDeleteAllData = new Intent(MainActivity.this, DeleteAllDataActivity.class);
                 startActivity(intentDeleteAllData);
                 break;
             case R.id.shareIntentApp:

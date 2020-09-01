@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.fingerPrintBtn:
                 sFingerPrint.start();  // Play sound
 
-                Intent intentAddToMain = new Intent(LoginActivity.this, FingerPrint.class);
+                Intent intentAddToMain = new Intent(LoginActivity.this, FingerPrintActivity.class);
                 startActivity(intentAddToMain);
                 break;
         }

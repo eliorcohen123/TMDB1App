@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import eliorcohen.com.tmdbapp.ModelsPackage.Results;
-import eliorcohen.com.tmdbapp.PagesPackage.AddMovieFromInternet;
+import eliorcohen.com.tmdbapp.PagesPackage.AddMovieFromInternetActivity;
 import eliorcohen.com.tmdbapp.R;
 
 public class MovieCustomAdapterInternet extends RecyclerView.Adapter<MovieCustomAdapterInternet.CustomViewHolder> {
@@ -66,7 +66,7 @@ public class MovieCustomAdapterInternet extends RecyclerView.Adapter<MovieCustom
         Picasso.get().load("https://image.tmdb.org/t/p/original" + dataList.get(position).getPoster_path()).into(holder.image1);
 
         holder.linearLayout1.setOnClickListener(v -> {
-            Intent intentSearchToAddInternet = new Intent(context, AddMovieFromInternet.class);
+            Intent intentSearchToAddInternet = new Intent(context, AddMovieFromInternetActivity.class);
             intentSearchToAddInternet.putExtra(context.getString(R.string.movie_add_from_internet), dataList.get(position));
             context.startActivity(intentSearchToAddInternet);
 
