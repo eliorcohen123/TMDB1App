@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.DataAppPackage;
+package eliorcohen.com.tmdbapp.ViewModelPackege;
 
 import android.app.Application;
 import android.database.Cursor;
@@ -6,6 +6,9 @@ import android.database.Cursor;
 import java.util.ArrayList;
 
 import androidx.lifecycle.AndroidViewModel;
+
+import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
+import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
 
 public class MovieViewModelFavorites extends AndroidViewModel {
 

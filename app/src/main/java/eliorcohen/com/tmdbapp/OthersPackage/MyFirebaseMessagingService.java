@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.MainAndOtherPackage;
+package eliorcohen.com.tmdbapp.OthersPackage;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -14,7 +14,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import eliorcohen.com.tmdbapp.LoginPackage.LoginActivity;
+import eliorcohen.com.tmdbapp.PagesPackage.LoginActivity;
 import eliorcohen.com.tmdbapp.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {

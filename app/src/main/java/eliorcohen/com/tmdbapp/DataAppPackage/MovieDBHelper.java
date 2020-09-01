@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+
 public class MovieDBHelper extends SQLiteOpenHelper {
 
     private static final String MOVIE_TABLE_NAME = "MOVIES";

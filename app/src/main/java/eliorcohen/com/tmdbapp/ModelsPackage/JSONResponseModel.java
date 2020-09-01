@@ -1,6 +1,6 @@
-package eliorcohen.com.tmdbapp.DataAppPackage;
+package eliorcohen.com.tmdbapp.ModelsPackage;
 
-public class JSONResponse {
+public class JSONResponseModel {
 
     private MovieModel[] results;
 

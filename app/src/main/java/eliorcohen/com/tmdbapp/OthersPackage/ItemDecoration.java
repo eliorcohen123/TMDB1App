@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.MainAndOtherPackage;
+package eliorcohen.com.tmdbapp.OthersPackage;
 
 import android.graphics.Rect;
 import android.view.View;

@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.MainAndOtherPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,12 +31,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterMain;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
-import eliorcohen.com.tmdbapp.LoginPackage.UsersListActivity;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.AddMovie;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.DeleteAllData;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.SearchMovieFromInternet;
+import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ViewModelPackege.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
+import eliorcohen.com.tmdbapp.OthersPackage.ItemDecoration;
 import eliorcohen.com.tmdbapp.R;
 import guy4444.smartrate.SmartRate;
 

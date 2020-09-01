@@ -20,12 +20,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.DataOfMovie;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.DeleteMovie;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.EditMovie;
+import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ViewModelPackege.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
+import eliorcohen.com.tmdbapp.PagesPackage.DataOfMovie;
+import eliorcohen.com.tmdbapp.PagesPackage.DeleteMovie;
+import eliorcohen.com.tmdbapp.PagesPackage.EditMovie;
 import eliorcohen.com.tmdbapp.R;
 
 public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdapterMain.CustomViewHolder> {

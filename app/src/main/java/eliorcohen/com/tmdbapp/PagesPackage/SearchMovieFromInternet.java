@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.MoviesDataPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.app.ProgressDialog;
 import android.app.SearchManager;
@@ -33,10 +33,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterInternet;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.ItemDecoration;
+import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.OthersPackage.ItemDecoration;
 import eliorcohen.com.tmdbapp.RetrofitPackage.GetDataService;
-import eliorcohen.com.tmdbapp.DataAppPackage.JSONResponse;
+import eliorcohen.com.tmdbapp.ModelsPackage.JSONResponseModel;
 import eliorcohen.com.tmdbapp.R;
 import eliorcohen.com.tmdbapp.RetrofitPackage.RetrofitClientInstance;
 import rx.Observable;
@@ -157,11 +157,11 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
     private void getMyData(String query, int page) {
         GetDataService apiService = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Observable<JSONResponse> observable = apiService.getAllMovies("/3/search/movie?/&query="
+        Observable<JSONResponseModel> observable = apiService.getAllMovies("/3/search/movie?/&query="
                 + query +
                 "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
-        observable.subscribe(new Observer<JSONResponse>() {
+        observable.subscribe(new Observer<JSONResponseModel>() {
             @Override
             public void onCompleted() {
 
@@ -173,7 +173,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
             }
 
             @Override
-            public void onNext(JSONResponse products) {
+            public void onNext(JSONResponseModel products) {
                 generateDataList(Arrays.asList(products.getResults()));
 
                 stopProgressDialog();

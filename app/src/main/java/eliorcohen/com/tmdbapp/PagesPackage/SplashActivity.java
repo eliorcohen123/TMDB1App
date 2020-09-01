@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.MainAndOtherPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.content.Intent;
 import android.os.Bundle;

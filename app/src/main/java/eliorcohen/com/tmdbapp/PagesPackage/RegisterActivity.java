@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.LoginPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -17,6 +17,9 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import android.view.View;
 
+import eliorcohen.com.tmdbapp.DataAppPackage.AuthenticationDBHelper;
+import eliorcohen.com.tmdbapp.ModelsPackage.UserModel;
+import eliorcohen.com.tmdbapp.OthersPackage.InputValidation;
 import eliorcohen.com.tmdbapp.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,8 +37,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private AppCompatButton appCompatButtonRegister;
     private AppCompatTextView appCompatTextViewLoginLink;
     private InputValidation inputValidation;
-    private LoginDBHelper loginDBHelper;
-    private User user;
+    private AuthenticationDBHelper authenticationDBHelper;
+    private UserModel userModel;
     private MediaPlayer sAdd;
 
     @Override
@@ -76,8 +79,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     // This method is to initialize objects to be used
     private void initObjects() {
         inputValidation = new InputValidation(activity);
-        loginDBHelper = new LoginDBHelper(activity);
-        user = new User();
+        authenticationDBHelper = new AuthenticationDBHelper(activity);
+        userModel = new UserModel();
     }
 
     /**
@@ -115,13 +118,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 textInputLayoutConfirmPassword, getString(R.string.error_password_match))) {
             return;
         }
-        if (!loginDBHelper.checkUser(textInputEditTextEmail.getText().toString().trim())) {
+        if (!authenticationDBHelper.checkUser(textInputEditTextEmail.getText().toString().trim())) {
 
-            user.setName(textInputEditTextName.getText().toString().trim());
-            user.setEmail(textInputEditTextEmail.getText().toString().trim());
-            user.setPassword(textInputEditTextPassword.getText().toString().trim());
+            userModel.setName(textInputEditTextName.getText().toString().trim());
+            userModel.setEmail(textInputEditTextEmail.getText().toString().trim());
+            userModel.setPassword(textInputEditTextPassword.getText().toString().trim());
 
-            loginDBHelper.addUser(user);
+            authenticationDBHelper.addUser(userModel);
 
             // Snack Bar to show success message that record saved successfully
             Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();

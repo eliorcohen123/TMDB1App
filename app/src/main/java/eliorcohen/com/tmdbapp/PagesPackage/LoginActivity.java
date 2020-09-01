@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.LoginPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -18,7 +18,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.SplashActivity;
+import eliorcohen.com.tmdbapp.OthersPackage.InputValidation;
+import eliorcohen.com.tmdbapp.DataAppPackage.AuthenticationDBHelper;
 import eliorcohen.com.tmdbapp.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -32,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private AppCompatButton appCompatButtonLogin;
     private AppCompatTextView textViewLinkRegister;
     private InputValidation inputValidation;
-    private LoginDBHelper loginDBHelper;
+    private AuthenticationDBHelper authenticationDBHelper;
     private LinearLayout container;
     private AnimationDrawable anim;
     private Button fingerPrintBtn;
@@ -91,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     // This method is to initialize objects to be used
     private void initObjects() {
-        loginDBHelper = new LoginDBHelper(activity);
+        authenticationDBHelper = new AuthenticationDBHelper(activity);
         inputValidation = new InputValidation(activity);
     }
 
@@ -133,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
             return;
         }
-        if (loginDBHelper.checkUser(textInputEditTextEmail.getText().toString().trim(), textInputEditTextPassword.getText().toString().trim())) {
+        if (authenticationDBHelper.checkUser(textInputEditTextEmail.getText().toString().trim(), textInputEditTextPassword.getText().toString().trim())) {
             sAddGood.start();  // Play sound
 
             Intent intentAddToMain = new Intent(LoginActivity.this, SplashActivity.class);

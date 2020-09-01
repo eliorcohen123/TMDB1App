@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".LoginPackage.FingerPrint">
+    tools:context=".PagesPackage.FingerPrint">
 
     <TextView
         android:id="@+id/headingLabel"

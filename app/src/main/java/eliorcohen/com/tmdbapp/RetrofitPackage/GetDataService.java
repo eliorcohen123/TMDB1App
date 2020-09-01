@@ -1,6 +1,6 @@
 package eliorcohen.com.tmdbapp.RetrofitPackage;
 
-import eliorcohen.com.tmdbapp.DataAppPackage.JSONResponse;
+import eliorcohen.com.tmdbapp.ModelsPackage.JSONResponseModel;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
 import rx.Observable;
@@ -8,5 +8,5 @@ import rx.Observable;
 public interface GetDataService {
 
     @GET()
-    Observable<JSONResponse> getAllMovies(@Url String url);
+    Observable<JSONResponseModel> getAllMovies(@Url String url);
 }

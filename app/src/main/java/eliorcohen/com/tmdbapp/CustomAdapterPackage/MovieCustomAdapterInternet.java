@@ -17,8 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
-import eliorcohen.com.tmdbapp.MoviesDataPackage.AddMovieFromInternet;
+import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.PagesPackage.AddMovieFromInternet;
 import eliorcohen.com.tmdbapp.R;
 
 public class MovieCustomAdapterInternet extends RecyclerView.Adapter<MovieCustomAdapterInternet.CustomViewHolder> {

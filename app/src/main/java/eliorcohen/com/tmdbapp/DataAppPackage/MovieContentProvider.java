@@ -5,7 +5,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
+import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
+import eliorcohen.com.tmdbapp.ViewModelPackege.MovieViewModelFavorites;
 
 public class MovieContentProvider extends ContentProvider {
 

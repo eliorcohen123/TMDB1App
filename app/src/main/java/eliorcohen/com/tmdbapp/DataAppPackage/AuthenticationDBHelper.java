@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.LoginPackage;
+package eliorcohen.com.tmdbapp.DataAppPackage;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,7 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginDBHelper extends SQLiteOpenHelper {
+import eliorcohen.com.tmdbapp.ModelsPackage.UserModel;
+
+public class AuthenticationDBHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "UserManager.db";
@@ -31,7 +33,7 @@ public class LoginDBHelper extends SQLiteOpenHelper {
      *
      * @param context
      */
-    LoginDBHelper(Context context) {
+    public AuthenticationDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -51,15 +53,15 @@ public class LoginDBHelper extends SQLiteOpenHelper {
     /**
      * This method is to create user record
      *
-     * @param user
+     * @param userModel
      */
-    void addUser(User user) {
+    public void addUser(UserModel userModel) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_NAME, user.getName());
-        values.put(COLUMN_USER_EMAIL, user.getEmail());
-        values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        values.put(COLUMN_USER_NAME, userModel.getName());
+        values.put(COLUMN_USER_EMAIL, userModel.getEmail());
+        values.put(COLUMN_USER_PASSWORD, userModel.getPassword());
 
         db.insert(TABLE_USER, null, values);
         db.close();
@@ -70,7 +72,7 @@ public class LoginDBHelper extends SQLiteOpenHelper {
      *
      * @return list
      */
-    List<User> getAllUser() {
+    public List<UserModel> getAllUser() {
         // array of columns to fetch
         String[] columns = {
                 COLUMN_USER_ID,
@@ -79,7 +81,7 @@ public class LoginDBHelper extends SQLiteOpenHelper {
                 COLUMN_USER_PASSWORD
         };
         String sortOrder = COLUMN_USER_NAME + " ASC";
-        List<User> userList = new ArrayList<User>();
+        List<UserModel> userModelList = new ArrayList<UserModel>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -100,45 +102,45 @@ public class LoginDBHelper extends SQLiteOpenHelper {
         // Traversing through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                User user = new User();
-                user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
-                user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
-                user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
-                user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
-                userList.add(user);
+                UserModel userModel = new UserModel();
+                userModel.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
+                userModel.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
+                userModel.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
+                userModel.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+                userModelList.add(userModel);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return userList;
+        return userModelList;
     }
 
     /**
      * This method to update user record
      *
-     * @param user
+     * @param userModel
      */
-    public void updateUser(User user) {
+    public void updateUser(UserModel userModel) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_NAME, user.getName());
-        values.put(COLUMN_USER_EMAIL, user.getEmail());
-        values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        values.put(COLUMN_USER_NAME, userModel.getName());
+        values.put(COLUMN_USER_EMAIL, userModel.getEmail());
+        values.put(COLUMN_USER_PASSWORD, userModel.getPassword());
 
-        db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?", new String[]{String.valueOf(user.getId())});
+        db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?", new String[]{String.valueOf(userModel.getId())});
         db.close();
     }
 
     /**
      * This method is to delete user record
      *
-     * @param user
+     * @param userModel
      */
-    public void deleteUser(User user) {
+    public void deleteUser(UserModel userModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         // delete user record by id
-        db.delete(TABLE_USER, COLUMN_USER_ID + " = ?", new String[]{String.valueOf(user.getId())});
+        db.delete(TABLE_USER, COLUMN_USER_ID + " = ?", new String[]{String.valueOf(userModel.getId())});
         db.close();
     }
 
@@ -148,7 +150,7 @@ public class LoginDBHelper extends SQLiteOpenHelper {
      * @param email
      * @return true/false
      */
-    boolean checkUser(String email) {
+    public boolean checkUser(String email) {
 
         // array of columns to fetch
         String[] columns = {
@@ -188,7 +190,7 @@ public class LoginDBHelper extends SQLiteOpenHelper {
      * @param password
      * @return true/false
      */
-    boolean checkUser(String email, String password) {
+    public boolean checkUser(String email, String password) {
 
         String[] columns = {
                 COLUMN_USER_ID

@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.DataAppPackage;
+package eliorcohen.com.tmdbapp.ModelsPackage;
 
 import android.text.TextUtils;
 
@@ -24,7 +24,7 @@ public class MovieModel implements Serializable {
     private int is_watch;
 
     // Subject class to the SQLiteHelper
-    MovieModel(String title, String overview, String poster_path, int is_watch) {
+    public MovieModel(String title, String overview, String poster_path, int is_watch) {
         this.title = title;
         this.overview = overview;
         this.poster_path = poster_path;

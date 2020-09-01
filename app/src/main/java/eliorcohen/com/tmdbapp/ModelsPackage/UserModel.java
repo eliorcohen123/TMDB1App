@@ -1,6 +1,6 @@
-package eliorcohen.com.tmdbapp.LoginPackage;
+package eliorcohen.com.tmdbapp.ModelsPackage;
 
-public class User {
+public class UserModel {
 
     private int id;
     private String name;
@@ -15,27 +15,27 @@ public class User {
         this.id = id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.LoginPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -39,7 +39,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.SplashActivity;
 import eliorcohen.com.tmdbapp.R;
 
 public class FingerPrint extends AppCompatActivity implements View.OnClickListener {

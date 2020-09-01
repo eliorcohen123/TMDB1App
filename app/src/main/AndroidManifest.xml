@@ -23,14 +23,14 @@
         android:protectionLevel="normal" />
 
     <application
-        android:name=".MainAndOtherPackage.ConApp"
+        android:name=".OthersPackage.ConApp"
         android:allowBackup="true"
         android:icon="@drawable/movie_icon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/movie_icon"
         android:supportsRtl="false"
         android:theme="@style/MyAppTheme">
-        <activity android:name=".LoginPackage.LoginActivity">
+        <activity android:name=".PagesPackage.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,21 +54,21 @@
             android:readPermission="eliorcohen.com.tmdbapp.READ_MOVIES"
             android:writePermission="eliorcohen.com.tmdbapp.WRITE_MOVIES" />
 
-        <activity android:name=".MoviesDataPackage.EditMovie" />
-        <activity android:name=".MoviesDataPackage.AddMovie" />
-        <activity android:name=".MoviesDataPackage.DeleteAllData" />
-        <activity android:name=".MoviesDataPackage.AddMovieFromInternet" />
-        <activity android:name=".MoviesDataPackage.DeleteMovie" />
-        <activity android:name=".MoviesDataPackage.DataOfMovie" />
-        <activity android:name=".MainAndOtherPackage.Credits" />
-        <activity android:name=".LoginPackage.FingerPrint" />
-        <activity android:name=".MainAndOtherPackage.MainActivity" />
-        <activity android:name=".LoginPackage.RegisterActivity" />
-        <activity android:name=".LoginPackage.UsersListActivity" />
-        <activity android:name=".MoviesDataPackage.SearchMovieFromInternet" />
-        <activity android:name=".MainAndOtherPackage.SplashActivity" />
+        <activity android:name=".PagesPackage.EditMovie" />
+        <activity android:name=".PagesPackage.AddMovie" />
+        <activity android:name=".PagesPackage.DeleteAllData" />
+        <activity android:name=".PagesPackage.AddMovieFromInternet" />
+        <activity android:name=".PagesPackage.DeleteMovie" />
+        <activity android:name=".PagesPackage.DataOfMovie" />
+        <activity android:name=".PagesPackage.Credits" />
+        <activity android:name=".PagesPackage.FingerPrint" />
+        <activity android:name=".PagesPackage.MainActivity" />
+        <activity android:name=".PagesPackage.RegisterActivity" />
+        <activity android:name=".PagesPackage.UsersListActivity" />
+        <activity android:name=".PagesPackage.SearchMovieFromInternet" />
+        <activity android:name=".PagesPackage.SplashActivity" />
 
-        <service android:name=".MainAndOtherPackage.MyFirebaseMessagingService">
+        <service android:name=".OthersPackage.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

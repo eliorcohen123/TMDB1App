@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.MoviesDataPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -12,9 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.MainActivity;
+import eliorcohen.com.tmdbapp.ViewModelPackege.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.R;
 
 public class AddMovie extends AppCompatActivity implements View.OnClickListener {

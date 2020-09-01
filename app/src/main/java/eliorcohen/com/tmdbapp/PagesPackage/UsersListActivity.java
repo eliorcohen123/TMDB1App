@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.LoginPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
@@ -17,6 +17,9 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
+import eliorcohen.com.tmdbapp.DataAppPackage.AuthenticationDBHelper;
+import eliorcohen.com.tmdbapp.CustomAdapterPackage.UsersRecyclerAdapter;
+import eliorcohen.com.tmdbapp.ModelsPackage.UserModel;
 import eliorcohen.com.tmdbapp.R;
 
 public class UsersListActivity extends AppCompatActivity implements View.OnClickListener {
@@ -24,9 +27,9 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
     private AppCompatActivity activity = UsersListActivity.this;
     private AppCompatTextView textViewName;
     private RecyclerView recyclerViewUsers;
-    private List<User> listUsers;
+    private List<UserModel> listUserModels;
     private UsersRecyclerAdapter usersRecyclerAdapter;
-    private LoginDBHelper loginDBHelper;
+    private AuthenticationDBHelper authenticationDBHelper;
     private Button btnBack;
     private MediaPlayer sBack;
 
@@ -60,15 +63,15 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
 
     // This method is to initialize objects to be used
     private void initObjects() {
-        listUsers = new ArrayList<>();
-        usersRecyclerAdapter = new UsersRecyclerAdapter(listUsers);
+        listUserModels = new ArrayList<>();
+        usersRecyclerAdapter = new UsersRecyclerAdapter(listUserModels);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewUsers.setLayoutManager(mLayoutManager);
         recyclerViewUsers.setItemAnimator(new DefaultItemAnimator());
         recyclerViewUsers.setHasFixedSize(true);
         recyclerViewUsers.setAdapter(usersRecyclerAdapter);
-        loginDBHelper = new LoginDBHelper(activity);
+        authenticationDBHelper = new AuthenticationDBHelper(activity);
 
         getDataFromSQLite();
     }
@@ -79,8 +82,8 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                listUsers.clear();
-                listUsers.addAll(loginDBHelper.getAllUser());
+                listUserModels.clear();
+                listUserModels.addAll(authenticationDBHelper.getAllUser());
                 return null;
             }
 

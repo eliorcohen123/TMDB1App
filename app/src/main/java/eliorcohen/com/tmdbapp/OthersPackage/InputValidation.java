@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.LoginPackage;
+package eliorcohen.com.tmdbapp.OthersPackage;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
-class InputValidation {
+public class InputValidation {
 
     private Context context;
 
@@ -17,7 +17,7 @@ class InputValidation {
      *
      * @param context
      */
-    InputValidation(Context context) {
+    public InputValidation(Context context) {
         this.context = context;
     }
 
@@ -29,7 +29,7 @@ class InputValidation {
      * @param message
      * @return
      */
-    boolean isInputEditTextFilled(TextInputEditText textInputEditText, TextInputLayout textInputLayout, String message) {
+    public boolean isInputEditTextFilled(TextInputEditText textInputEditText, TextInputLayout textInputLayout, String message) {
         String value = textInputEditText.getText().toString().trim();
         if (value.isEmpty()) {
             textInputLayout.setError(message);
@@ -49,7 +49,7 @@ class InputValidation {
      * @param message
      * @return
      */
-    boolean isInputEditTextEmail(TextInputEditText textInputEditText, TextInputLayout textInputLayout, String message) {
+    public boolean isInputEditTextEmail(TextInputEditText textInputEditText, TextInputLayout textInputLayout, String message) {
         String value = textInputEditText.getText().toString().trim();
         if (value.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
             textInputLayout.setError(message);
@@ -61,7 +61,7 @@ class InputValidation {
         return true;
     }
 
-    boolean isInputEditTextMatches(TextInputEditText textInputEditText1, TextInputEditText textInputEditText2, TextInputLayout textInputLayout, String message) {
+    public boolean isInputEditTextMatches(TextInputEditText textInputEditText1, TextInputEditText textInputEditText2, TextInputLayout textInputLayout, String message) {
         String value1 = textInputEditText1.getText().toString().trim();
         String value2 = textInputEditText2.getText().toString().trim();
         if (!value1.contentEquals(value2)) {

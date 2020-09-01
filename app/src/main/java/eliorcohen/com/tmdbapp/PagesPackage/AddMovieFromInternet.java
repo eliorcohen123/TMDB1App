@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.MoviesDataPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -15,10 +15,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieViewModelFavorites;
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.ConApp;
-import eliorcohen.com.tmdbapp.MainAndOtherPackage.MainActivity;
-import eliorcohen.com.tmdbapp.DataAppPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ViewModelPackege.MovieViewModelFavorites;
+import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
+import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
 import eliorcohen.com.tmdbapp.R;
 
 public class AddMovieFromInternet extends AppCompatActivity implements View.OnClickListener {

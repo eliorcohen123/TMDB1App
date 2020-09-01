@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.LoginPackage;
+package eliorcohen.com.tmdbapp.CustomAdapterPackage;
 
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,14 +9,15 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import eliorcohen.com.tmdbapp.ModelsPackage.UserModel;
 import eliorcohen.com.tmdbapp.R;
 
 public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder> {
 
-    private List<User> listUsers;
+    private List<UserModel> listUserModels;
 
-    UsersRecyclerAdapter(List<User> listUsers) {
-        this.listUsers = listUsers;
+    public UsersRecyclerAdapter(List<UserModel> listUserModels) {
+        this.listUserModels = listUserModels;
     }
 
     @Override
@@ -28,15 +29,15 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
-        holder.textViewName.setText(listUsers.get(position).getName());
-        holder.textViewEmail.setText(listUsers.get(position).getEmail());
-        holder.textViewPassword.setText(listUsers.get(position).getPassword());
+        holder.textViewName.setText(listUserModels.get(position).getName());
+        holder.textViewEmail.setText(listUserModels.get(position).getEmail());
+        holder.textViewPassword.setText(listUserModels.get(position).getPassword());
     }
 
     @Override
     public int getItemCount() {
-        Log.v(UsersRecyclerAdapter.class.getSimpleName(), "" + listUsers.size());
-        return listUsers.size();
+        Log.v(UsersRecyclerAdapter.class.getSimpleName(), "" + listUserModels.size());
+        return listUserModels.size();
     }
 
     // ViewHolder class

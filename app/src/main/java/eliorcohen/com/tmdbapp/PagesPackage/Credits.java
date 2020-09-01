@@ -1,4 +1,4 @@
-package eliorcohen.com.tmdbapp.MainAndOtherPackage;
+package eliorcohen.com.tmdbapp.PagesPackage;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
