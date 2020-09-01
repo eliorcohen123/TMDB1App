@@ -17,13 +17,13 @@ import com.squareup.picasso.Picasso;
 
 import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
-import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.R;
 
 public class AddMovieFromInternet extends AppCompatActivity implements View.OnClickListener {
 
     private MovieViewModelFavorites movieViewModelFavorites;
-    private MovieModel item;
+    private Results item;
     private TextView textViewOK, textViewShow;
     private EditText subject, body, URL;
     private Button btnBack;
@@ -42,7 +42,7 @@ public class AddMovieFromInternet extends AppCompatActivity implements View.OnCl
 
     private void initUI() {
         // GetSerializable for the texts
-        item = (MovieModel) getIntent().getExtras().getSerializable(getString(R.string.movie_add_from_internet));
+        item = (Results) getIntent().getExtras().getSerializable(getString(R.string.movie_add_from_internet));
 
         subject = findViewById(R.id.editTextSubject);  // ID of the subject
         body = findViewById(R.id.editTextBody);  // ID of the body

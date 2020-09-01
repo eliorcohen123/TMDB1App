@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.PagesPackage.DataOfMovie;
@@ -31,11 +31,11 @@ import eliorcohen.com.tmdbapp.R;
 public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdapterMain.CustomViewHolder> {
 
     private Context context;
-    private List<MovieModel> dataList;
+    private List<Results> dataList;
     private MovieViewModelFavorites movieViewModelFavorites;
     private MediaPlayer sMove;
 
-    public MovieCustomAdapterMain(Context context, List<MovieModel> dataList) {
+    public MovieCustomAdapterMain(Context context, List<Results> dataList) {
         this.context = context;
         this.dataList = dataList;
         sMove = MediaPlayer.create(context, R.raw.cancel_and_move_sound);
@@ -80,7 +80,7 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
         private final MenuItem.OnMenuItemClickListener onChange = new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                MovieModel current = dataList.get(getAdapterPosition());
+                Results current = dataList.get(getAdapterPosition());
                 switch (item.getItemId()) {
                     case 1:
                         sMove.start();  // Play sound
@@ -126,7 +126,7 @@ public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdap
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, final int position) {
-        MovieModel current = dataList.get(position);
+        Results current = dataList.get(position);
         holder.title1.setText(current.getTitle());
         holder.overview1.setText(current.getOverview());
         Picasso.get().load("https://image.tmdb.org/t/p/original" + current.getPoster_path()).into(holder.image1);

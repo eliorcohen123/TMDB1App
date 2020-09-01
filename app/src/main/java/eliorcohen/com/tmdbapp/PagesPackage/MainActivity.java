@@ -31,7 +31,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterMain;
-import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.OthersPackage.ItemDecoration;
@@ -50,7 +50,7 @@ import guy4444.smartrate.SmartRate;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<MovieModel> mMovieListMain;  // ArrayList of MovieModel
+    private ArrayList<Results> mMovieListMain;  // ArrayList of MovieModel
     private MovieCustomAdapterMain mAdapterMain;  // MovieCustomAdapterInternet of MainActivity
     private MovieViewModelFavorites movieViewModelFavorites;
     private SwipeRefreshLayout swipeRefreshLayout;  // SwipeRe freshLayout of MainActivity

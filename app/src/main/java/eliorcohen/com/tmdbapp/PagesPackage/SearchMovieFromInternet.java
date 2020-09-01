@@ -33,10 +33,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import eliorcohen.com.tmdbapp.CustomAdapterPackage.MovieCustomAdapterInternet;
-import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.OthersPackage.ItemDecoration;
 import eliorcohen.com.tmdbapp.RetrofitPackage.GetDataService;
-import eliorcohen.com.tmdbapp.ModelsPackage.Results;
+import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
 import eliorcohen.com.tmdbapp.R;
 import eliorcohen.com.tmdbapp.RetrofitPackage.RetrofitClientInstance;
 import rx.Observable;
@@ -46,7 +46,7 @@ import rx.schedulers.Schedulers;
 
 public class SearchMovieFromInternet extends AppCompatActivity implements SearchMovieInterface, View.OnClickListener {
 
-    private static ArrayList<MovieModel> mMovieListInternet;  // ArrayList of MovieModel
+    private static ArrayList<Results> mMovieListInternet;  // ArrayList of MovieModel
     private MovieCustomAdapterInternet mAdapterInternet;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
@@ -157,11 +157,11 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
 
     private void getMyData(String query, int page) {
         GetDataService apiService = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Observable<Results> observable = apiService.getAllMovies("/3/search/movie?/&query="
+        Observable<MovieModel> observable = apiService.getAllMovies("/3/search/movie?/&query="
                 + query +
                 "&api_key=" + getString(R.string.key_search) + "&language=en-US&page=" + page).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
-        observable.subscribe(new Observer<Results>() {
+        observable.subscribe(new Observer<MovieModel>() {
             @Override
             public void onCompleted() {
 
@@ -173,7 +173,7 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
             }
 
             @Override
-            public void onNext(Results products) {
+            public void onNext(MovieModel products) {
                 generateDataList(Arrays.asList(products.getResults()));
 
                 stopProgressDialog();
@@ -247,8 +247,8 @@ public class SearchMovieFromInternet extends AppCompatActivity implements Search
     }
 
     /*Method to generate List of data using RecyclerView with custom mAdapterInternet*/
-    private void generateDataList(List<MovieModel> photoList) {
-        mMovieListInternet = new ArrayList<MovieModel>(photoList);
+    private void generateDataList(List<Results> photoList) {
+        mMovieListInternet = new ArrayList<Results>(photoList);
         mAdapterInternet = new MovieCustomAdapterInternet(this, mMovieListInternet);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if (itemDecoration == null) {

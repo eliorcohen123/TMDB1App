@@ -19,14 +19,14 @@ import com.squareup.picasso.Picasso;
 
 import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
-import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.R;
 
 public class EditMovie extends AppCompatActivity implements View.OnClickListener {
 
     private MovieViewModelFavorites movieViewModelFavorites;
     private int id;
-    private MovieModel item;
+    private Results item;
     private RadioGroup rg1;
     private RadioButton rb1, rb2;
     private EditText subject, body, URL;
@@ -48,7 +48,7 @@ public class EditMovie extends AppCompatActivity implements View.OnClickListener
 
     private void initUI() {
         id = getIntent().getExtras().getInt(getString(R.string.movie_id)); // GetSerializable for the ID
-        item = (MovieModel) getIntent().getExtras().getSerializable(getString(R.string.movie_edit)); // GetSerializable for the texts
+        item = (Results) getIntent().getExtras().getSerializable(getString(R.string.movie_edit)); // GetSerializable for the texts
 
         rg1 = findViewById(R.id.radioGroup);  // ID of the RadioGroup of EditMovie
         rb1 = findViewById(R.id.radioButton1);  // ID of the RadioButton1 of EditMovie

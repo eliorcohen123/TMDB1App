@@ -17,17 +17,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.PagesPackage.AddMovieFromInternet;
 import eliorcohen.com.tmdbapp.R;
 
 public class MovieCustomAdapterInternet extends RecyclerView.Adapter<MovieCustomAdapterInternet.CustomViewHolder> {
 
     private Context context;
-    private List<MovieModel> dataList;
+    private List<Results> dataList;
     private MediaPlayer sMove;
 
-    public MovieCustomAdapterInternet(Context context, List<MovieModel> dataList) {
+    public MovieCustomAdapterInternet(Context context, List<Results> dataList) {
         this.context = context;
         this.dataList = dataList;
         sMove = MediaPlayer.create(context, R.raw.cancel_and_move_sound);

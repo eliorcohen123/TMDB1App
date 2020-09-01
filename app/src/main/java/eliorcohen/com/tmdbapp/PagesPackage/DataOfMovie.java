@@ -14,7 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
 import eliorcohen.com.tmdbapp.R;
@@ -22,7 +22,7 @@ import eliorcohen.com.tmdbapp.R;
 public class DataOfMovie extends AppCompatActivity implements View.OnClickListener {
 
     private MovieViewModelFavorites movieViewModelFavorites;
-    private MovieModel item;
+    private Results item;
     private RadioGroup rg1;
     private RadioButton rb1, rb2;
     private TextView subject, body, URL;
@@ -42,7 +42,7 @@ public class DataOfMovie extends AppCompatActivity implements View.OnClickListen
     }
 
     private void initUI() {
-        item = (MovieModel) getIntent().getExtras().getSerializable(getString(R.string.movie_edit)); // GetSerializable for the texts
+        item = (Results) getIntent().getExtras().getSerializable(getString(R.string.movie_edit)); // GetSerializable for the texts
 
         rg1 = findViewById(R.id.radioGroup);  // ID of the RadioGroup of DataOfMovie
         rb1 = findViewById(R.id.radioButton1);  // ID of the RadioButton1 of DataOfMovie

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 
 public class MovieDBHelper extends SQLiteOpenHelper {
 
@@ -106,20 +106,20 @@ public class MovieDBHelper extends SQLiteOpenHelper {
     }
 
     //Edit Movies RadioButton
-    public void updateMovieIsWatch(MovieModel movieModel_) {
+    public void updateMovieIsWatch(Results results_) {
 
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(MOVIE_TITLE, movieModel_.getTitle());
-        values.put(MOVIE_OVERVIEW, movieModel_.getOverview());
-        values.put(MOVIE_URL, movieModel_.getPoster_path());
-        values.put(IS_WATCH, movieModel_.getIs_watch());
+        values.put(MOVIE_TITLE, results_.getTitle());
+        values.put(MOVIE_OVERVIEW, results_.getOverview());
+        values.put(MOVIE_URL, results_.getPoster_path());
+        values.put(IS_WATCH, results_.getIs_watch());
 
-        int rowNumber2 = db.update(MOVIE_TABLE_NAME, values, MOVIE_ID + " = ?", new String[]{String.valueOf(movieModel_.getId())});
+        int rowNumber2 = db.update(MOVIE_TABLE_NAME, values, MOVIE_ID + " = ?", new String[]{String.valueOf(results_.getId())});
         try {
             Log.d("MovieDBHelper", "update new movie with id: " + rowNumber2 +
-                    ", Name: " + movieModel_);
+                    ", Name: " + results_);
         } catch (SQLiteException ex) {
             Log.e("movie", ex.getMessage());
             throw ex;
@@ -129,12 +129,12 @@ public class MovieDBHelper extends SQLiteOpenHelper {
     }
 
     // Delete movies
-    public void deleteMovie(MovieModel movieModel) {
+    public void deleteMovie(Results results) {
 
         SQLiteDatabase db = getWritableDatabase();
 
         String[] ids = new String[1];
-        ids[0] = movieModel.getId() + "";
+        ids[0] = results.getId() + "";
         try {
             db.delete(MOVIE_TABLE_NAME, MOVIE_ID + " =? ", ids);
         } catch (SQLiteException e) {
@@ -158,9 +158,9 @@ public class MovieDBHelper extends SQLiteOpenHelper {
     }
 
     // Get all movies
-    public ArrayList<MovieModel> getAllMovies() {
+    public ArrayList<Results> getAllMovies() {
 
-        ArrayList<MovieModel> movieModels = new ArrayList<>();
+        ArrayList<Results> results = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(MOVIE_TABLE_NAME, null, null, null, null, null, null, null);
         while (cursor.moveToNext()) {
@@ -170,12 +170,12 @@ public class MovieDBHelper extends SQLiteOpenHelper {
             String overview = cursor.getString(2);
             String poster_path = cursor.getString(3);
             int is_watch = cursor.getInt(4);
-            MovieModel movieModel = new MovieModel(title, overview, poster_path, is_watch);
-            movieModel.setId(id);
-            movieModels.add(movieModel);
+            Results result = new Results(title, overview, poster_path, is_watch);
+            result.setId(id);
+            results.add(result);
         }
         cursor.close();
-        return movieModels;
+        return results;
     }
 
     // Get all movies

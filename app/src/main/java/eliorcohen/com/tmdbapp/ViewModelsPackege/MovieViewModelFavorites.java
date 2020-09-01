@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import androidx.lifecycle.AndroidViewModel;
 
 import eliorcohen.com.tmdbapp.DataAppPackage.MovieDBHelper;
-import eliorcohen.com.tmdbapp.ModelsPackage.MovieModel;
+import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 
 public class MovieViewModelFavorites extends AndroidViewModel {
 
@@ -20,7 +20,7 @@ public class MovieViewModelFavorites extends AndroidViewModel {
         movieDBHelper = new MovieDBHelper(application);
     }
 
-    public ArrayList<MovieModel> getAllMovies() {
+    public ArrayList<Results> getAllMovies() {
         return movieDBHelper.getAllMovies();
     }
 
@@ -32,7 +32,7 @@ public class MovieViewModelFavorites extends AndroidViewModel {
         movieDBHelper.deleteData();
     }
 
-    public void deleteMovie(MovieModel places) {
+    public void deleteMovie(Results places) {
         movieDBHelper.deleteMovie(places);
     }
 
@@ -40,8 +40,8 @@ public class MovieViewModelFavorites extends AndroidViewModel {
         movieDBHelper.updateMovie(title, overview, url, id);
     }
 
-    public void updateMovieIsWatch(MovieModel movieModel_) {
-        movieDBHelper.updateMovieIsWatch(movieModel_);
+    public void updateMovieIsWatch(Results results_) {
+        movieDBHelper.updateMovieIsWatch(results_);
     }
 
     public Cursor getAllMoviesCursor() {
