@@ -1,14 +1,16 @@
 package eliorcohen.com.tmdbapp.ModelsPackage;
 
+import java.util.List;
+
 public class MovieModel {
 
-    private Results[] results;
+    private List<Results> results;
 
-    public Results[] getResults() {
+    public List<Results> getResults() {
         return results;
     }
 
-    public void setResults(Results[] results) {
+    public void setResults(List<Results> results) {
         this.results = results;
     }
 

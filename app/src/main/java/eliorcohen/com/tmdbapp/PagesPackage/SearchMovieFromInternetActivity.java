@@ -175,7 +175,7 @@ public class SearchMovieFromInternetActivity extends AppCompatActivity implement
 
             @Override
             public void onNext(MovieModel products) {
-                generateDataList(Arrays.asList(products.getResults()));
+                generateDataList(products.getResults());
 
                 stopProgressDialog();
             }
