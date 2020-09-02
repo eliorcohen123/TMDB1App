@@ -47,7 +47,7 @@ import rx.schedulers.Schedulers;
 
 public class SearchMovieFromInternetActivity extends AppCompatActivity implements SearchMovieInterface, View.OnClickListener {
 
-    private static ArrayList<Results> mMovieListInternet;  // ArrayList of MovieModel
+    private ArrayList<Results> mMovieListInternet;  // ArrayList of MovieModel
     private CustomAdapterInternet mAdapterInternet;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
