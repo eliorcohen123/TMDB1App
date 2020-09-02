@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import eliorcohen.com.tmdbapp.CustomAdaptersPackage.MovieCustomAdapterMain;
+import eliorcohen.com.tmdbapp.CustomAdaptersPackage.CustomAdapterMain;
 import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.ViewModelsPackege.MovieViewModelFavorites;
 import eliorcohen.com.tmdbapp.OthersPackage.ConApp;
@@ -51,7 +51,7 @@ import guy4444.smartrate.SmartRate;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Results> mMovieListMain;  // ArrayList of MovieModel
-    private MovieCustomAdapterMain mAdapterMain;  // MovieCustomAdapterInternet of MainActivity
+    private CustomAdapterMain mAdapterMain;  // MovieCustomAdapterInternet of MainActivity
     private MovieViewModelFavorites movieViewModelFavorites;
     private SwipeRefreshLayout swipeRefreshLayout;  // SwipeRe freshLayout of MainActivity
     private RecyclerView recyclerView;
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void myRecyclerView() {
-        mAdapterMain = new MovieCustomAdapterMain(this, mMovieListMain);
+        mAdapterMain = new CustomAdapterMain(this, mMovieListMain);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if (itemDecoration == null) {
             itemDecoration = new ItemDecoration(20);

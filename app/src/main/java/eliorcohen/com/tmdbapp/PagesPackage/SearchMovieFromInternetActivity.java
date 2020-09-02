@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import eliorcohen.com.tmdbapp.CustomAdaptersPackage.MovieCustomAdapterInternet;
+import eliorcohen.com.tmdbapp.CustomAdaptersPackage.CustomAdapterInternet;
 import eliorcohen.com.tmdbapp.InterfacesPackage.SearchMovieInterface;
 import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.OthersPackage.ItemDecoration;
@@ -48,7 +48,7 @@ import rx.schedulers.Schedulers;
 public class SearchMovieFromInternetActivity extends AppCompatActivity implements SearchMovieInterface, View.OnClickListener {
 
     private static ArrayList<Results> mMovieListInternet;  // ArrayList of MovieModel
-    private MovieCustomAdapterInternet mAdapterInternet;
+    private CustomAdapterInternet mAdapterInternet;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
     private ItemDecoration itemDecoration;
@@ -250,7 +250,7 @@ public class SearchMovieFromInternetActivity extends AppCompatActivity implement
     /*Method to generate List of data using RecyclerView with custom mAdapterInternet*/
     private void generateDataList(List<Results> photoList) {
         mMovieListInternet = new ArrayList<Results>(photoList);
-        mAdapterInternet = new MovieCustomAdapterInternet(this, mMovieListInternet);
+        mAdapterInternet = new CustomAdapterInternet(this, mMovieListInternet);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if (itemDecoration == null) {
             itemDecoration = new ItemDecoration(20);

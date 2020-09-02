@@ -28,14 +28,14 @@ import eliorcohen.com.tmdbapp.PagesPackage.DeleteMovieActivity;
 import eliorcohen.com.tmdbapp.PagesPackage.EditMovieActivity;
 import eliorcohen.com.tmdbapp.R;
 
-public class MovieCustomAdapterMain extends RecyclerView.Adapter<MovieCustomAdapterMain.CustomViewHolder> {
+public class CustomAdapterMain extends RecyclerView.Adapter<CustomAdapterMain.CustomViewHolder> {
 
     private Context context;
     private List<Results> dataList;
     private MovieViewModelFavorites movieViewModelFavorites;
     private MediaPlayer sMove;
 
-    public MovieCustomAdapterMain(Context context, List<Results> dataList) {
+    public CustomAdapterMain(Context context, List<Results> dataList) {
         this.context = context;
         this.dataList = dataList;
         sMove = MediaPlayer.create(context, R.raw.cancel_and_move_sound);

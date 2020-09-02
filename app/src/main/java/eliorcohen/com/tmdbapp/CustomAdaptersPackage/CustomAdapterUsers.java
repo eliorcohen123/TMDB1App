@@ -12,11 +12,11 @@ import java.util.List;
 import eliorcohen.com.tmdbapp.ModelsPackage.UserModel;
 import eliorcohen.com.tmdbapp.R;
 
-public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder> {
+public class CustomAdapterUsers extends RecyclerView.Adapter<CustomAdapterUsers.UserViewHolder> {
 
     private List<UserModel> listUserModels;
 
-    public UsersRecyclerAdapter(List<UserModel> listUserModels) {
+    public CustomAdapterUsers(List<UserModel> listUserModels) {
         this.listUserModels = listUserModels;
     }
 
@@ -36,7 +36,7 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
 
     @Override
     public int getItemCount() {
-        Log.v(UsersRecyclerAdapter.class.getSimpleName(), "" + listUserModels.size());
+        Log.v(CustomAdapterUsers.class.getSimpleName(), "" + listUserModels.size());
         return listUserModels.size();
     }
 

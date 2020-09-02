@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eliorcohen.com.tmdbapp.DataAppPackage.AuthenticationDBHelper;
-import eliorcohen.com.tmdbapp.CustomAdaptersPackage.UsersRecyclerAdapter;
+import eliorcohen.com.tmdbapp.CustomAdaptersPackage.CustomAdapterUsers;
 import eliorcohen.com.tmdbapp.ModelsPackage.UserModel;
 import eliorcohen.com.tmdbapp.R;
 
@@ -28,7 +28,7 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
     private AppCompatTextView textViewName;
     private RecyclerView recyclerViewUsers;
     private List<UserModel> listUserModels;
-    private UsersRecyclerAdapter usersRecyclerAdapter;
+    private CustomAdapterUsers customAdapterUsers;
     private AuthenticationDBHelper authenticationDBHelper;
     private Button btnBack;
     private MediaPlayer sBack;
@@ -64,13 +64,13 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
     // This method is to initialize objects to be used
     private void initObjects() {
         listUserModels = new ArrayList<>();
-        usersRecyclerAdapter = new UsersRecyclerAdapter(listUserModels);
+        customAdapterUsers = new CustomAdapterUsers(listUserModels);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewUsers.setLayoutManager(mLayoutManager);
         recyclerViewUsers.setItemAnimator(new DefaultItemAnimator());
         recyclerViewUsers.setHasFixedSize(true);
-        recyclerViewUsers.setAdapter(usersRecyclerAdapter);
+        recyclerViewUsers.setAdapter(customAdapterUsers);
         authenticationDBHelper = new AuthenticationDBHelper(activity);
 
         getDataFromSQLite();
@@ -90,7 +90,7 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                usersRecyclerAdapter.notifyDataSetChanged();
+                customAdapterUsers.notifyDataSetChanged();
             }
         }.execute();
     }

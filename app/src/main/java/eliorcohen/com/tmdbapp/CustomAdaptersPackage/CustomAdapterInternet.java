@@ -21,13 +21,13 @@ import eliorcohen.com.tmdbapp.ModelsPackage.Results;
 import eliorcohen.com.tmdbapp.PagesPackage.AddMovieFromInternetActivity;
 import eliorcohen.com.tmdbapp.R;
 
-public class MovieCustomAdapterInternet extends RecyclerView.Adapter<MovieCustomAdapterInternet.CustomViewHolder> {
+public class CustomAdapterInternet extends RecyclerView.Adapter<CustomAdapterInternet.CustomViewHolder> {
 
     private Context context;
     private List<Results> dataList;
     private MediaPlayer sMove;
 
-    public MovieCustomAdapterInternet(Context context, List<Results> dataList) {
+    public CustomAdapterInternet(Context context, List<Results> dataList) {
         this.context = context;
         this.dataList = dataList;
         sMove = MediaPlayer.create(context, R.raw.cancel_and_move_sound);
