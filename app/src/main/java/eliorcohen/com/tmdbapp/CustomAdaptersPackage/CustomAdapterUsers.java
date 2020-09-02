@@ -49,6 +49,7 @@ public class CustomAdapterUsers extends RecyclerView.Adapter<CustomAdapterUsers.
 
         UserViewHolder(View view) {
             super(view);
+
             textViewName = view.findViewById(R.id.textViewName);
             textViewEmail = view.findViewById(R.id.textViewEmail);
             textViewPassword = view.findViewById(R.id.textViewPassword);
