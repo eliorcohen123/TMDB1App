@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);    // Removes title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);    // Removes notification bar
 
-        setContentView(R.layout.splash_screen);  //your layout with the picture
+        setContentView(R.layout.activity_splash);  //your layout with the picture
 
         // Start timer and launch main activity
         IntentLauncher launcher = new IntentLauncher();

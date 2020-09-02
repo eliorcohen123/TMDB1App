@@ -23,7 +23,7 @@ public class CustomAdapterUsers extends RecyclerView.Adapter<CustomAdapterUsers.
     @Override
     public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // inflating recycler item view
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user_recycler, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_user, parent, false);
         return new UserViewHolder(itemView);
     }
 

@@ -55,7 +55,7 @@ public class CustomAdapterInternet extends RecyclerView.Adapter<CustomAdapterInt
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.movie_item_row_total, parent, false);
+        View view = layoutInflater.inflate(R.layout.adapter_movie, parent, false);
         return new CustomViewHolder(view);
     }
 

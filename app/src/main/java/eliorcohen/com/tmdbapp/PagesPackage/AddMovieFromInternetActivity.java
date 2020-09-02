@@ -33,7 +33,7 @@ public class AddMovieFromInternetActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_movie_from_internet);
+        setContentView(R.layout.activity_add_movie_from_internet);
 
         initUI();
         getData();

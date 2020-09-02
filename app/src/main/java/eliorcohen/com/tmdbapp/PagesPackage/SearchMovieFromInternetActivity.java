@@ -29,7 +29,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import eliorcohen.com.tmdbapp.CustomAdaptersPackage.CustomAdapterInternet;
@@ -61,7 +60,7 @@ public class SearchMovieFromInternetActivity extends AppCompatActivity implement
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_movie_internet);
+        setContentView(R.layout.activity_add_movie_internet);
 
         initUI();
         initListeners();
@@ -91,11 +90,11 @@ public class SearchMovieFromInternetActivity extends AppCompatActivity implement
         imagePreFirst.setOnClickListener(this);
     }
 
-    // Sets off the menu of activity_menu
+    // Sets off the menu of menu_main
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_menu_internet, menu);
+        inflater.inflate(R.menu.menu_internet, menu);
 
         // SearchView of SearchMovieFromInternet
         final MenuItem menuItem = menu.findItem(R.id.action_search);
@@ -232,7 +231,7 @@ public class SearchMovieFromInternetActivity extends AppCompatActivity implement
         }
     }
 
-    // Options in the activity_menu
+    // Options in the menu_main
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

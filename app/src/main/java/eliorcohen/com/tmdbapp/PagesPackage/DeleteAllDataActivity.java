@@ -25,7 +25,7 @@ public class DeleteAllDataActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.delete_all_data);
+        setContentView(R.layout.activity_delete_all_data);
 
         initUI();
         initListeners();

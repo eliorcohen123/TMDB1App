@@ -162,15 +162,15 @@ public class MainActivity extends AppCompatActivity {
         }.execute();
     }
 
-    // Sets off the menu of activity_menu
+    // Sets off the menu of menu_main
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_menu, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    // Options in the activity_menu
+    // Options in the menu_main
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

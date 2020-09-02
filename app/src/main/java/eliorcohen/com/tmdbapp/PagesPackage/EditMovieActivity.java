@@ -38,7 +38,7 @@ public class EditMovieActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_movie);
+        setContentView(R.layout.activity_edit_movie);
 
         initUI();
         initListeners();

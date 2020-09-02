@@ -19,7 +19,7 @@ public class DeleteMovieActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.delete_movie);
+        setContentView(R.layout.activity_delete_movie);
 
         initUI();
         initListeners();

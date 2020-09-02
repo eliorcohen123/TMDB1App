@@ -33,7 +33,7 @@ public class DataOfMovieActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.data_of_movie);
+        setContentView(R.layout.activity_data_of_movie);
 
         initUI();
         initListeners();
