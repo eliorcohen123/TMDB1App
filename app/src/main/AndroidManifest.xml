@@ -16,10 +16,10 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <permission
-        android:name="eliorcohen.com.tmdbapp.READ_MOVIES"
+        android:name="eliorcohen.com.tmdbapp.provider.READ_MOVIES"
         android:protectionLevel="normal" />
     <permission
-        android:name="eliorcohen.com.tmdbapp.WRITE_MOVIES"
+        android:name="eliorcohen.com.tmdbapp.provider.WRITE_MOVIES"
         android:protectionLevel="normal" />
 
     <application
@@ -49,10 +49,11 @@
         </activity>
         <provider
             android:name=".DataAppPackage.MovieContentProvider"
-            android:authorities="eliorcohen.com.tmdbapp.MovieContentProvider"
+            android:authorities="eliorcohen.com.tmdbapp.provider"
+            android:enabled="true"
             android:exported="true"
-            android:readPermission="eliorcohen.com.tmdbapp.READ_MOVIES"
-            android:writePermission="eliorcohen.com.tmdbapp.WRITE_MOVIES" />
+            android:readPermission="eliorcohen.com.tmdbapp.provider.READ_MOVIES"
+            android:writePermission="eliorcohen.com.tmdbapp.provider.WRITE_MOVIES" />
 
         <activity android:name=".PagesPackage.EditMovieActivity" />
         <activity android:name=".PagesPackage.AddMovieActivity" />
